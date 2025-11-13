@@ -109,9 +109,7 @@ subprojects/packagecache/
 
 Premake (if used)
 *.make
-*.sln
-*.vcxproj
-*.vcxproj.filters
+
 
 ------------------------------
 IDEs / Editors
@@ -220,6 +218,11 @@ SFML/build/
 SFML/_build/
 SFML/bin/
 SFML/lib/
+
+Build/
+build/
+Debug/
+deubug/
 
 ------------------------------
 Tests / coverage
