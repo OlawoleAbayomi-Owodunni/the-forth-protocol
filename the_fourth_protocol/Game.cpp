@@ -48,11 +48,22 @@ void Game::init()
 	for(int row = 0; row < m_gridRows; ++row) {
 		// please remember that this is only being done here becuase there's only 1 column per player. If this increases for any reason, create a new nested loop
 		setupGrid(m_p1Grid, row, 0, 1, cellSizeXY, x0 - cellSizeXY - 75.0f, y0, Color::Red);
+		setupPieces(m_p1Pieces, row, cellSizeXY, m_p1Grid[row].getPosition(), true);
+
 		setupGrid(m_p2Grid, row, 0, 1, cellSizeXY, x0 + gridSizeXY + 75.0f, y0, Color::Blue);
+		setupPieces(m_p2Pieces, row, cellSizeXY, m_p2Grid[row].getPosition(), false);
+
 		for(int col = 0; col < m_gridCols; ++col) {
 			setupGrid(m_grid, row, col, m_gridCols, cellSizeXY, x0, y0, Color::White);
 		}
 	}
+}
+
+void Game::setupPieces(vector<Piece>& pieces, int row, const float cellSize, Vector2f startPos, bool isP1)
+{
+	if (row == 0) pieces.push_back(Piece(Piece::Type::Frog, m_frogTexture, cellSize, startPos, isP1));
+	else if (row == 1) pieces.push_back(Piece(Piece::Type::Snake, m_snakeTexture, cellSize, startPos, isP1));
+	else pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
 }
 
 #pragma region NEVER GONNA TOUCH 
@@ -146,6 +157,12 @@ void Game::render()
 		m_window.draw(cell);
 	for (const auto& cell : m_p2Grid)
 		m_window.draw(cell);
+
+	for (const auto& piece : m_p1Pieces)
+		piece.draw(m_window);
+	for (const auto& piece : m_p2Pieces)
+		piece.draw(m_window);
+
 
 #pragma region Always On Top
 #ifdef TEST_FPS

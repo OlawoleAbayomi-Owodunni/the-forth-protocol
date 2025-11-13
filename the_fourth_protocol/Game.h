@@ -8,6 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "Piece.h"
 
 using namespace std;
 using namespace sf;
@@ -105,7 +106,10 @@ protected:
 #pragma endregion
 
 private:
+	/// @brief Sets up a grid of RectangleShapes
 	void setupGrid(vector<RectangleShape>& grid, int row, int col, int numCols, const float cellSizeXY, const float x0, const float y0, sf::Color outlineColour);
+	/// @brief Sets up pieces for a player
+	void setupPieces(vector<Piece>& pieces, int row, const float cellSizeXY, Vector2f startPos, bool isP1);
 
 	vector<RectangleShape> m_grid;
 	int m_gridRows{ 5 };
@@ -113,4 +117,11 @@ private:
 
 	vector<RectangleShape> m_p1Grid;
 	vector<RectangleShape> m_p2Grid;
+
+	Texture m_frogTexture{ "ASSETS/IMAGES/frog.png" };
+	Texture m_snakeTexture{ "ASSETS/IMAGES/snake.png" };
+	Texture m_donkeyTexture{ "ASSETS/IMAGES/donkey.png" };
+
+	vector<Piece> m_p1Pieces;
+	vector<Piece> m_p2Pieces;
 };
