@@ -8,7 +8,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 #include "Piece.h"
+#include "AI.h"
 
 using namespace std;
 using namespace sf;
@@ -21,12 +23,10 @@ using namespace sf;
 /// </summary>
 
 /// <summary>
-/// @brief Main class for the SFML Playground project.
+/// @brief Main class for The Fourth Protocol game.
 /// 
-/// This will be a single class framework for learning about SFML. 
-/// Example usage:
-///		Game game;
-///		game.run();
+/// This implements a 5x5 grid-based game where players place pieces
+/// and move them to get 4 in a row.
 /// </summary>
 
 struct ScreenSize
@@ -40,6 +40,12 @@ public:
 class Game
 {
 public:
+	enum class GamePhase {
+		Placement,		// Players placing pieces
+		Movement,		// Players moving pieces
+		GameOver		// Game finished
+	};
+
 	/// <summary>
 	/// @brief Default constructor that initialises the SFML window, 
 	///   and sets vertical sync enabled. 
@@ -59,7 +65,7 @@ public:
 	/// </summary>
 	void run();
 
-#pragma region protocted
+#pragma region protected
 
 protected:
 	/// <summary>
@@ -113,6 +119,22 @@ private:
 
 	void snapToGrid(Vector2f mousePos);
 
+	// Game logic methods
+	bool isValidPlacement(int row, int col);
+	bool placePiece(Piece* piece, int row, int col);
+	bool movePiece(Piece* piece, int fromRow, int fromCol, int toRow, int toCol);
+	void endTurn();
+	bool checkWinCondition(bool isPlayer1);
+	Piece* getPieceAtGridPosition(int row, int col);
+	void updateBoard();
+
+	// AI methods
+	void executeAIMove();
+	void applyAIMove(const Move& move);
+
+	// Board state
+	vector<vector<Piece*>> m_board;
+
 	vector<RectangleShape> m_grid;
 	int m_gridRows{ 5 };
 	int m_gridCols{ 5 };
@@ -131,4 +153,28 @@ private:
 	Vector2f m_dragOffset;
 	bool m_isDragging = false;
 
+	// Game state
+	GamePhase m_gamePhase = GamePhase::Placement;
+	bool m_isPlayer1Turn = true;  // Player 1 starts
+	int m_p1PiecesPlaced = 0;
+	int m_p2PiecesPlaced = 0;
+	Piece* m_winner = nullptr;
+
+	sf::Text m_statusText{ m_arialFont };
+	sf::Text m_instructionText{ m_arialFont };
+
+	// Main menu
+	sf::RectangleShape m_btnPvAI;
+	sf::RectangleShape m_btnPvP;
+	sf::Text m_btnPvAIText{ m_arialFont };
+	sf::Text m_btnPvPText{ m_arialFont };
+	bool m_showMenu = true;
+
+	// AI
+	AI m_ai;
+	bool m_isAIGame = true;  // false = PvP, true = PvAI
+	bool m_aiThinking = false;
+	double m_aiThinkTime = 0.0;
+	double m_aiThinkDuration = 1.0;  // 1 second think time for AI
 };
+
