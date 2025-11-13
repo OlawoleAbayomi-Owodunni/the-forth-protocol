@@ -136,6 +136,65 @@ void Game::processGameEvents(const sf::Event& event)
 			break;
 		}
 	}
+	if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>())
+	{
+		if (mousePressed->button == sf::Mouse::Button::Left)
+		{
+			Vector2f mousePos = m_window.mapPixelToCoords(
+				Vector2i(mousePressed->position.x, mousePressed->position.y)
+			);
+
+			for (auto& piece : m_p1Pieces) {
+				if (piece.contains(mousePos)) {
+					m_selectedPiece = &piece;
+					m_isDragging = true;
+					m_dragOffset = piece.getPosition() - mousePos;
+					piece.setSelected(true);
+					piece.saveOriginalPosition();
+					return;
+				}
+			}
+
+			for (auto& piece : m_p2Pieces) {
+				if (piece.contains(mousePos)) {
+					m_selectedPiece = &piece;
+					m_isDragging = true;
+					m_dragOffset = piece.getPosition() - mousePos;
+					piece.setSelected(true);
+					return;
+				}
+			}
+		}
+	}
+
+	if (const auto* mouseReleased = event.getIf<sf::Event::MouseButtonReleased>())
+	{
+		if (mouseReleased->button == sf::Mouse::Button::Left && m_isDragging)
+		{
+			Vector2f mousePos = m_window.mapPixelToCoords(
+				Vector2i(mouseReleased->position.x, mouseReleased->position.y)
+			);
+
+			snapToGrid(mousePos);
+
+			if (m_selectedPiece) {
+				m_selectedPiece->setSelected(false);
+			}
+			m_selectedPiece = nullptr;
+			m_isDragging = false;
+		}
+	}
+
+	if (const auto* mouseMoved = event.getIf<sf::Event::MouseMoved>())
+	{
+		if (m_isDragging && m_selectedPiece)
+		{
+			Vector2f mousePos = m_window.mapPixelToCoords(
+				Vector2i(mouseMoved->position.x, mouseMoved->position.y)
+			);
+			m_selectedPiece->setPosition(mousePos + m_dragOffset);
+		}
+	}
 }
 #pragma endregion
 
@@ -188,5 +247,28 @@ void Game::setupGrid(vector<RectangleShape>& grid, int row, int col, int numCols
 		y0 + static_cast<float>(row * cellSizeXY)
 	));
 }
+
+void Game::snapToGrid(Vector2f mousePos)
+{
+	if (!m_selectedPiece) return;
+
+	bool foundValidCell = false;
+
+	for (const auto& cell : m_grid)
+	{
+		if (cell.getGlobalBounds().contains(mousePos))
+		{
+			Vector2f cellPos = cell.getPosition();
+			m_selectedPiece->setPosition(cellPos);
+			m_selectedPiece->saveOriginalPosition();
+			foundValidCell = true;
+			return;
+		}
+	}
+	if (!foundValidCell) {
+		m_selectedPiece->restoreOriginalPosition();
+	}
+}
+
 #pragma endregion
 

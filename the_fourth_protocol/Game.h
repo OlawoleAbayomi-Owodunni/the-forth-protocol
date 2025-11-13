@@ -111,6 +111,8 @@ private:
 	/// @brief Sets up pieces for a player
 	void setupPieces(vector<Piece>& pieces, int row, const float cellSizeXY, Vector2f startPos, bool isP1);
 
+	void snapToGrid(Vector2f mousePos);
+
 	vector<RectangleShape> m_grid;
 	int m_gridRows{ 5 };
 	int m_gridCols{ 5 };
@@ -124,4 +126,9 @@ private:
 
 	vector<Piece> m_p1Pieces;
 	vector<Piece> m_p2Pieces;
+
+	Piece* m_selectedPiece = nullptr;
+	Vector2f m_dragOffset;
+	bool m_isDragging = false;
+
 };
