@@ -14,6 +14,9 @@ Game::Game()
 ////////////////////////////////////////////////////////////
 void Game::init()
 {
+#pragma region NOT GOING TO NEED TO SEE THESE
+
+
 	// Really only necessary is our target FPS is greater than 60.
 	m_window.setVerticalSyncEnabled(true);
 	
@@ -32,8 +35,27 @@ void Game::init()
 	x_drawFPS.setCharacterSize(24);
 	x_drawFPS.setFillColor(sf::Color::White);
 #endif
+#pragma endregion
+
+	const float cellSizeXY = 100.0f;
+	const int gridSizeXY = m_gridRows * cellSizeXY;
+	const float x0 = 0.5f * (static_cast<float>(ScreenSize::s_width) - gridSizeXY); // grid x origin pos
+	const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY); // grid y origin pos
+
+	m_grid.resize(m_gridRows * m_gridCols);
+	m_p1Grid.resize(5);
+	m_p2Grid.resize(m_gridRows * 1);
+	for(int row = 0; row < m_gridRows; ++row) {
+		// please remember that this is only being done here becuase there's only 1 column per player. If this increases for any reason, create a new nested loop
+		setupGrid(m_p1Grid, row, 0, 1, cellSizeXY, x0 - cellSizeXY - 75.0f, y0, Color::Red);
+		setupGrid(m_p2Grid, row, 0, 1, cellSizeXY, x0 + gridSizeXY + 75.0f, y0, Color::Blue);
+		for(int col = 0; col < m_gridCols; ++col) {
+			setupGrid(m_grid, row, col, m_gridCols, cellSizeXY, x0, y0, Color::White);
+		}
+	}
 }
 
+#pragma region NEVER GONNA TOUCH 
 ////////////////////////////////////////////////////////////
 void Game::run()
 {
@@ -104,6 +126,7 @@ void Game::processGameEvents(const sf::Event& event)
 		}
 	}
 }
+#pragma endregion
 
 
 ////////////////////////////////////////////////////////////
@@ -116,14 +139,37 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0, 0));
+
+	for (const auto& cell : m_grid)
+		m_window.draw(cell);
+	for (const auto& cell : m_p1Grid) 
+		m_window.draw(cell);
+	for (const auto& cell : m_p2Grid)
+		m_window.draw(cell);
+
+#pragma region Always On Top
 #ifdef TEST_FPS
 	m_window.draw(x_updateFPS); //ups is 60 and dps is 61
 	m_window.draw(x_drawFPS);
 #endif
+
+#pragma endregion
+
 	m_window.display();
 }
 
 
-
-
+#pragma region Helpers
+void Game::setupGrid(vector<RectangleShape>& grid, int row, int col, int numCols, const float cellSizeXY, const float x0, const float y0, sf::Color outlineColour)
+{
+	grid[row * numCols + col].setSize(Vector2f(cellSizeXY, cellSizeXY));
+	grid[row * numCols + col].setOutlineColor(outlineColour);
+	grid[row * numCols + col].setFillColor(sf::Color::Black);
+	grid[row * numCols + col].setOutlineThickness(2.0f);
+	grid[row * numCols + col].setPosition(Vector2f(
+		x0 + static_cast<float>(col * cellSizeXY),
+		y0 + static_cast<float>(row * cellSizeXY)
+	));
+}
+#pragma endregion
 

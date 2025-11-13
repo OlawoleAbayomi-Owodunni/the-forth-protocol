@@ -58,6 +58,8 @@ public:
 	/// </summary>
 	void run();
 
+#pragma region protocted
+
 protected:
 	/// <summary>
 	/// @brief Once-off game initialisation code
@@ -100,5 +102,15 @@ protected:
 	int x_updateFrameCount{ 0 };						// updates per second counter.
 	int x_drawFrameCount{ 0 };							// draws per second counter.
 #endif // TEST_FPS
+#pragma endregion
 
+private:
+	void setupGrid(vector<RectangleShape>& grid, int row, int col, int numCols, const float cellSizeXY, const float x0, const float y0, sf::Color outlineColour);
+
+	vector<RectangleShape> m_grid;
+	int m_gridRows{ 5 };
+	int m_gridCols{ 5 };
+
+	vector<RectangleShape> m_p1Grid;
+	vector<RectangleShape> m_p2Grid;
 };
