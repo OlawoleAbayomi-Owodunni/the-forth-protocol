@@ -1,0 +1,557 @@
+\doxysection{Piece Class Reference}
+\hypertarget{class_piece}{}\label{class_piece}\index{Piece@{Piece}}
+
+
+Represents a game piece that can be placed and moved on the board.  
+
+
+
+
+{\ttfamily \#include $<$Piece.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Type}} \{ \mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09a239243b6cfcaef84a6d7004f21b7af6f}{Frog}}
+, \mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09adfa90f1b4eb3affbd3b46af34ed2477c}{Snake}}
+, \mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09a046d93852f6419ac27a74b4ebcaa32e4}{Donkey}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of different piece types with unique movement rules. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_piece_ad4d4365268b71e8588cb881ea1ff365d}{Piece}} (\mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Type}} type, const sf\+::\+Texture \&texture, float size, Vector2f start\+Pos, bool p1)
+\begin{DoxyCompactList}\small\item\em Constructor to create a new piece. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Type}} \mbox{\hyperlink{class_piece_a45677eed127a69d2940fafdaa16fb782}{get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the type of this piece. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_piece_abf546008ca38fe334c86ce6e2986a916}{is\+Player1}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this piece belongs to Player 1. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_piece_a527f078de68fe17ed4aa99fb75c483c1}{get\+Grid\+Row}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current grid row position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_piece_a881c71c4c1c6d989eb3f0c8adbf275da}{get\+Grid\+Col}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current grid column position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_a1e2b71cf32a60693c8574c0f297be72f}{draw}} (Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Draws the piece to the render window. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_piece_a9660de6decbb2de5094e5b8fc4cce2e2}{contains}} (Vector2f point) const
+\begin{DoxyCompactList}\small\item\em Checks if a point is contained within this piece\textquotesingle{}s bounds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_ac934da506a0e4337f394d9e540103157}{set\+Position}} (Vector2f pos)
+\begin{DoxyCompactList}\small\item\em Sets the visual position of the piece. \end{DoxyCompactList}\item 
+Vector2f \mbox{\hyperlink{class_piece_a4912040f1bd8e5e3650880153b8fadb0}{get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current visual position of the piece. \end{DoxyCompactList}\item 
+Float\+Rect \mbox{\hyperlink{class_piece_a7406a95fecad9397318ee5f4a9ed1a16}{get\+Bounds}} () const
+\begin{DoxyCompactList}\small\item\em Gets the bounding rectangle of the piece. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_a1a99ed916be27beeb33677c4bf4c5ab0}{set\+Selected}} (bool selected)
+\begin{DoxyCompactList}\small\item\em Sets the visual selection state of the piece. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_a322e85deb0b06e2595e5c131488be1d9}{save\+Original\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Saves the current position for potential restoration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_a1206d2236f34b5fe790b099be7d5dc2d}{restore\+Original\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Restores the piece to its previously saved position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_piece_a3f70dc50a599677082277ae8997a55ee}{set\+Grid\+Position}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Sets the logical grid position of the piece. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_piece_a41da91283b255d4645a717ed399f10c8}{is\+Valid\+Move}} (int target\+Row, int target\+Col, const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&board, int grid\+Size)
+\begin{DoxyCompactList}\small\item\em Check if a move to the target position is valid for this piece. \end{DoxyCompactList}\item 
+vector$<$ pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_piece_a11018e7df702fd17f3547f6ee87a27cd}{get\+Valid\+Moves}} (const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&board, int grid\+Size)
+\begin{DoxyCompactList}\small\item\em Get all valid moves available for this piece from its current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a game piece that can be placed and moved on the board. 
+
+This class manages individual pieces in The Fourth Protocol game, including their type, position, movement validation, and rendering properties. 
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00024}{24}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{class_piece_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_piece_abcd044975b3657962abfd2ded9194b09}\index{Piece@{Piece}!Type@{Type}}
+\index{Type@{Type}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{class_piece_abcd044975b3657962abfd2ded9194b09} 
+enum class \mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Piece\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enumeration of different piece types with unique movement rules. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Frog@{Frog}!Piece@{Piece}}\index{Piece@{Piece}!Frog@{Frog}}}\Hypertarget{class_piece_abcd044975b3657962abfd2ded9194b09a239243b6cfcaef84a6d7004f21b7af6f}\label{class_piece_abcd044975b3657962abfd2ded9194b09a239243b6cfcaef84a6d7004f21b7af6f} 
+Frog&Can jump over other pieces. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Snake@{Snake}!Piece@{Piece}}\index{Piece@{Piece}!Snake@{Snake}}}\Hypertarget{class_piece_abcd044975b3657962abfd2ded9194b09adfa90f1b4eb3affbd3b46af34ed2477c}\label{class_piece_abcd044975b3657962abfd2ded9194b09adfa90f1b4eb3affbd3b46af34ed2477c} 
+Snake&Moves in straight lines only. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Donkey@{Donkey}!Piece@{Piece}}\index{Piece@{Piece}!Donkey@{Donkey}}}\Hypertarget{class_piece_abcd044975b3657962abfd2ded9194b09a046d93852f6419ac27a74b4ebcaa32e4}\label{class_piece_abcd044975b3657962abfd2ded9194b09a046d93852f6419ac27a74b4ebcaa32e4} 
+Donkey&Basic movement piece. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00028}{28}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Frog,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Snake,\ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ Donkey\ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{doc-constructors}
+\Hypertarget{class_piece_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_piece_ad4d4365268b71e8588cb881ea1ff365d}\index{Piece@{Piece}!Piece@{Piece}}
+\index{Piece@{Piece}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{Piece()}{Piece()}}
+{\footnotesize\ttfamily \label{class_piece_ad4d4365268b71e8588cb881ea1ff365d} 
+Piece\+::\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Type}}}]{type}{, }\item[{const sf\+::\+Texture \&}]{texture}{, }\item[{float}]{size}{, }\item[{Vector2f}]{start\+Pos}{, }\item[{bool}]{p1}{}\end{DoxyParamCaption})}
+
+
+
+Constructor to create a new piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of piece (Frog, Snake, or Donkey) \\
+\hline
+{\em texture} & Reference to the texture to use for rendering \\
+\hline
+{\em size} & Size of the piece in pixels \\
+\hline
+{\em start\+Pos} & Initial position of the piece \\
+\hline
+{\em p1} & True if this piece belongs to Player 1, false for Player 2 \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00005}{5}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ \ \ \ \ :\ m\_type(type),\ m\_isPlayer1(p1) }
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ m\_rect.setTexture(\&texture);}
+\DoxyCodeLine{00009\ \ \ \ \ m\_rect.setSize(Vector2f(size,\ size));}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordflow}{if}\ (p1)\ m\_rect.setFillColor(Color::Red);}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordflow}{else}\ m\_rect.setFillColor(Color::Blue);}
+\DoxyCodeLine{00012\ \ \ \ \ m\_rect.setPosition(startPos);}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_piece_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_piece_a9660de6decbb2de5094e5b8fc4cce2e2}\index{Piece@{Piece}!contains@{contains}}
+\index{contains@{contains}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily \label{class_piece_a9660de6decbb2de5094e5b8fc4cce2e2} 
+bool Piece\+::contains (\begin{DoxyParamCaption}\item[{Vector2f}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a point is contained within this piece\textquotesingle{}s bounds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to test for containment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if point is inside the piece, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_rect.getGlobalBounds().contains(point);}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a1e2b71cf32a60693c8574c0f297be72f}\index{Piece@{Piece}!draw@{draw}}
+\index{draw@{draw}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_piece_a1e2b71cf32a60693c8574c0f297be72f} 
+void Piece\+::draw (\begin{DoxyParamCaption}\item[{Render\+Window \&}]{window}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draws the piece to the render window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & Reference to the SFML render window \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00060}{60}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \{\ window.draw(m\_rect);\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a7406a95fecad9397318ee5f4a9ed1a16}\index{Piece@{Piece}!getBounds@{getBounds}}
+\index{getBounds@{getBounds}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getBounds()}{getBounds()}}
+{\footnotesize\ttfamily \label{class_piece_a7406a95fecad9397318ee5f4a9ed1a16} 
+Float\+Rect Piece\+::get\+Bounds (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the bounding rectangle of the piece. 
+
+\begin{DoxyReturn}{Returns}
+Float\+Rect representing the piece\textquotesingle{}s bounds 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00077}{77}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00077\ \{\ \textcolor{keywordflow}{return}\ m\_rect.getGlobalBounds();\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a881c71c4c1c6d989eb3f0c8adbf275da}\index{Piece@{Piece}!getGridCol@{getGridCol}}
+\index{getGridCol@{getGridCol}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getGridCol()}{getGridCol()}}
+{\footnotesize\ttfamily \label{class_piece_a881c71c4c1c6d989eb3f0c8adbf275da} 
+int Piece\+::get\+Grid\+Col (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current grid column position. 
+
+\begin{DoxyReturn}{Returns}
+Current column on the game board (-\/1 if not placed) 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00056}{56}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \{\ \textcolor{keywordflow}{return}\ m\_gridCol;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a527f078de68fe17ed4aa99fb75c483c1}\index{Piece@{Piece}!getGridRow@{getGridRow}}
+\index{getGridRow@{getGridRow}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getGridRow()}{getGridRow()}}
+{\footnotesize\ttfamily \label{class_piece_a527f078de68fe17ed4aa99fb75c483c1} 
+int Piece\+::get\+Grid\+Row (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current grid row position. 
+
+\begin{DoxyReturn}{Returns}
+Current row on the game board (-\/1 if not placed) 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00052}{52}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \{\ \textcolor{keywordflow}{return}\ m\_gridRow;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a4912040f1bd8e5e3650880153b8fadb0}\index{Piece@{Piece}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily \label{class_piece_a4912040f1bd8e5e3650880153b8fadb0} 
+Vector2f Piece\+::get\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current visual position of the piece. 
+
+\begin{DoxyReturn}{Returns}
+Current position of the piece 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00073}{73}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \{\ \textcolor{keywordflow}{return}\ m\_rect.getPosition();\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a45677eed127a69d2940fafdaa16fb782}\index{Piece@{Piece}!getType@{getType}}
+\index{getType@{getType}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily \label{class_piece_a45677eed127a69d2940fafdaa16fb782} 
+\mbox{\hyperlink{class_piece_abcd044975b3657962abfd2ded9194b09}{Type}} Piece\+::get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the type of this piece. 
+
+\begin{DoxyReturn}{Returns}
+The piece type (Frog, Snake, or Donkey) 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00044}{44}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \{\ \textcolor{keywordflow}{return}\ m\_type;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a11018e7df702fd17f3547f6ee87a27cd}\index{Piece@{Piece}!getValidMoves@{getValidMoves}}
+\index{getValidMoves@{getValidMoves}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{getValidMoves()}{getValidMoves()}}
+{\footnotesize\ttfamily \label{class_piece_a11018e7df702fd17f3547f6ee87a27cd} 
+vector$<$ pair$<$ int, int $>$ $>$ Piece\+::get\+Valid\+Moves (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{board}{, }\item[{int}]{grid\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Get all valid moves available for this piece from its current position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & Current board state with piece positions \\
+\hline
+{\em grid\+Size} & Size of the game grid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of coordinate pairs representing all valid target positions 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00143}{143}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ vector<pair<int,\ int>>\ validMoves;}
+\DoxyCodeLine{00145\ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ Check\ all\ cells\ on\ the\ board}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ gridSize;\ ++row)\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ gridSize;\ ++col)\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ ==\ m\_gridRow\ \&\&\ col\ ==\ m\_gridCol)\ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Skip\ current\ position}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_piece_a41da91283b255d4645a717ed399f10c8}{isValidMove}}(row,\ col,\ board,\ gridSize))\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ validMoves.push\_back(make\_pair(row,\ col));}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \ \ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{return}\ validMoves;}
+\DoxyCodeLine{00158\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_abf546008ca38fe334c86ce6e2986a916}\index{Piece@{Piece}!isPlayer1@{isPlayer1}}
+\index{isPlayer1@{isPlayer1}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{isPlayer1()}{isPlayer1()}}
+{\footnotesize\ttfamily \label{class_piece_abf546008ca38fe334c86ce6e2986a916} 
+bool Piece\+::is\+Player1 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this piece belongs to Player 1. 
+
+\begin{DoxyReturn}{Returns}
+True if Player 1\textquotesingle{}s piece, false if Player 2\textquotesingle{}s piece 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00048}{48}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \{\ \textcolor{keywordflow}{return}\ m\_isPlayer1;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a41da91283b255d4645a717ed399f10c8}\index{Piece@{Piece}!isValidMove@{isValidMove}}
+\index{isValidMove@{isValidMove}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{isValidMove()}{isValidMove()}}
+{\footnotesize\ttfamily \label{class_piece_a41da91283b255d4645a717ed399f10c8} 
+bool Piece\+::is\+Valid\+Move (\begin{DoxyParamCaption}\item[{int}]{target\+Row}{, }\item[{int}]{target\+Col}{, }\item[{const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{board}{, }\item[{int}]{grid\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Check if a move to the target position is valid for this piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Row} & Target grid row \\
+\hline
+{\em target\+Col} & Target grid column \\
+\hline
+{\em board} & Current board state with piece positions \\
+\hline
+{\em grid\+Size} & Size of the game grid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if move is valid according to piece movement rules, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00131}{131}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (canMoveTo(targetRow,\ targetCol,\ board,\ gridSize))\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (canJump(targetRow,\ targetCol,\ board,\ gridSize))\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00141\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a1206d2236f34b5fe790b099be7d5dc2d}\index{Piece@{Piece}!restoreOriginalPosition@{restoreOriginalPosition}}
+\index{restoreOriginalPosition@{restoreOriginalPosition}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{restoreOriginalPosition()}{restoreOriginalPosition()}}
+{\footnotesize\ttfamily \label{class_piece_a1206d2236f34b5fe790b099be7d5dc2d} 
+void Piece\+::restore\+Original\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Restores the piece to its previously saved position. 
+
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ m\_rect.setPosition(m\_originalPosition);}
+\DoxyCodeLine{00036\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a322e85deb0b06e2595e5c131488be1d9}\index{Piece@{Piece}!saveOriginalPosition@{saveOriginalPosition}}
+\index{saveOriginalPosition@{saveOriginalPosition}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{saveOriginalPosition()}{saveOriginalPosition()}}
+{\footnotesize\ttfamily \label{class_piece_a322e85deb0b06e2595e5c131488be1d9} 
+void Piece\+::save\+Original\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Saves the current position for potential restoration. 
+
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00030}{30}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ m\_originalPosition\ =\ m\_rect.getPosition();}
+\DoxyCodeLine{00032\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a3f70dc50a599677082277ae8997a55ee}\index{Piece@{Piece}!setGridPosition@{setGridPosition}}
+\index{setGridPosition@{setGridPosition}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{setGridPosition()}{setGridPosition()}}
+{\footnotesize\ttfamily \label{class_piece_a3f70dc50a599677082277ae8997a55ee} 
+void Piece\+::set\+Grid\+Position (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the logical grid position of the piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Grid row position \\
+\hline
+{\em col} & Grid column position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00092}{92}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00092\ \{\ m\_gridRow\ =\ row;\ m\_gridCol\ =\ col;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_ac934da506a0e4337f394d9e540103157}\index{Piece@{Piece}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily \label{class_piece_ac934da506a0e4337f394d9e540103157} 
+void Piece\+::set\+Position (\begin{DoxyParamCaption}\item[{Vector2f}]{pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the visual position of the piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & New position for the piece \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_piece_8h_source_l00069}{69}} of file \mbox{\hyperlink{_piece_8h_source}{Piece.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \{\ m\_rect.setPosition(pos);\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_piece_a1a99ed916be27beeb33677c4bf4c5ab0}\index{Piece@{Piece}!setSelected@{setSelected}}
+\index{setSelected@{setSelected}!Piece@{Piece}}
+\doxysubsubsection{\texorpdfstring{setSelected()}{setSelected()}}
+{\footnotesize\ttfamily \label{class_piece_a1a99ed916be27beeb33677c4bf4c5ab0} 
+void Piece\+::set\+Selected (\begin{DoxyParamCaption}\item[{bool}]{selected}{}\end{DoxyParamCaption})}
+
+
+
+Sets the visual selection state of the piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em selected} & True to show as selected, false for normal appearance \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_piece_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{_piece_8cpp_source}{Piece.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ m\_isSelected\ =\ selected;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (selected)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ m\_rect.setOutlineThickness(3.0f);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ m\_rect.setOutlineColor(Color::Yellow);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ m\_rect.setOutlineThickness(0.0f);}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_piece_8h}{Piece.\+h}}\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_piece_8cpp}{Piece.\+cpp}}\end{DoxyCompactItemize}

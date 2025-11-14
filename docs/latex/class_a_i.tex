@@ -1,0 +1,134 @@
+\doxysection{AI Class Reference}
+\hypertarget{class_a_i}{}\label{class_a_i}\index{AI@{AI}}
+
+
+\doxylink{class_a_i}{AI} player implementation using minimax algorithm with alpha-\/beta pruning.  
+
+
+
+
+{\ttfamily \#include $<$AI.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_i_a64ec60281e9eb8496f16525615db54b7}{AI}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_a_i}{AI} player. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_move}{Move}} \mbox{\hyperlink{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc}{find\+Best\+Move}} (const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&board, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p2\+Pieces, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p1\+Pieces, int grid\+Size, bool is\+Placement\+Phase, int depth=3)
+\begin{DoxyCompactList}\small\item\em Find the best move for Player 2 (\doxylink{class_a_i}{AI}) using minimax algorithm with alpha-\/beta pruning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_a_i}{AI} player implementation using minimax algorithm with alpha-\/beta pruning. 
+
+This class provides artificial intelligence for The Fourth Protocol game, using game tree search to find optimal moves for the computer player. 
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00053}{53}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_a_i_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_a_i_a64ec60281e9eb8496f16525615db54b7}\index{AI@{AI}!AI@{AI}}
+\index{AI@{AI}!AI@{AI}}
+\doxysubsubsection{\texorpdfstring{AI()}{AI()}}
+{\footnotesize\ttfamily \label{class_a_i_a64ec60281e9eb8496f16525615db54b7} 
+AI\+::\+AI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for \doxylink{class_a_i}{AI} player. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_a_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc}\index{AI@{AI}!findBestMove@{findBestMove}}
+\index{findBestMove@{findBestMove}!AI@{AI}}
+\doxysubsubsection{\texorpdfstring{findBestMove()}{findBestMove()}}
+{\footnotesize\ttfamily \label{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc} 
+\mbox{\hyperlink{struct_move}{Move}} AI\+::find\+Best\+Move (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{board}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p2\+Pieces}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p1\+Pieces}{, }\item[{int}]{grid\+Size}{, }\item[{bool}]{is\+Placement\+Phase}{, }\item[{int}]{depth}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Find the best move for Player 2 (\doxylink{class_a_i}{AI}) using minimax algorithm with alpha-\/beta pruning. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & Current state of the game board \\
+\hline
+{\em p2\+Pieces} & Reference to Player 2\textquotesingle{}s pieces (\doxylink{class_a_i}{AI}\textquotesingle{}s pieces) \\
+\hline
+{\em p1\+Pieces} & Reference to Player 1\textquotesingle{}s pieces (human player\textquotesingle{}s pieces) \\
+\hline
+{\em grid\+Size} & Size of the game grid \\
+\hline
+{\em is\+Placement\+Phase} & True if in placement phase, false if in movement phase \\
+\hline
+{\em depth} & Maximum search depth for the minimax algorithm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_move}{Move} object representing the best move found 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ vector<vector<Piece*>>\ boardCopy\ =\ board;}
+\DoxyCodeLine{00014\ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ bestScore\ =\ INT\_MIN;}
+\DoxyCodeLine{00016\ \ \ \ \ Move\ bestMove;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ alpha\ =\ INT\_MIN;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ beta\ =\ INT\_MAX;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ vector<Move>\ possibleMoves\ =\ generateMoves(boardCopy,\ p2Pieces,\ gridSize,\ isPlacementPhase);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ possibleMoves)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Piece*\ piece\ =\ \&p2Pieces[move.pieceIndex];}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ applyMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ this\ move\ wins\ immediately}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hasWon(boardCopy,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ score\ =\ minimax(boardCopy,\ p2Pieces,\ p1Pieces,\ gridSize,\ depth\ -\/\ 1,\ \textcolor{keyword}{false},\ isPlacementPhase,\ alpha,\ beta);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Undo\ the\ move}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ >\ bestScore)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ bestScore\ =\ score;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ alpha\ =\ max(alpha,\ bestScore);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ bestMove;}
+\DoxyCodeLine{00046\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_a_i_8h}{AI.\+h}}\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_a_i_8cpp}{AI.\+cpp}}\end{DoxyCompactItemize}

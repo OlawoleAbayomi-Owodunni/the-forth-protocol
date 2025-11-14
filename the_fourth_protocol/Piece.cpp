@@ -36,7 +36,6 @@ void Piece::restoreOriginalPosition() {
 }
 
 bool Piece::isInLine(int fromRow, int fromCol, int toRow, int toCol) {
-	// Check if target is in same row, column, or diagonal
 	if (fromRow == toRow || fromCol == toCol) return true; // horizontal or vertical
 	if (abs(fromRow - toRow) == abs(fromCol - toCol)) return true; // diagonal
 	return false;
@@ -64,16 +63,13 @@ bool Piece::isPathClear(int fromRow, int fromCol, int toRow, int toCol, const ve
 }
 
 bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>& board, int gridSize) {
-	// Target must be within bounds
 	if (targetRow < 0 || targetRow >= gridSize || targetCol < 0 || targetCol >= gridSize) return false;
 	
 	// Target must be empty
 	if (board[targetRow][targetCol] != nullptr) return false;
 	
-	// Must be in line (row, col, or diagonal)
 	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
 	
-	// Based on piece type, validate movement rules
 	if (m_type == Type::Donkey) {
 		// Donkey: only one space in any direction, NOT diagonally
 		int rowDist = abs(targetRow - m_gridRow);
@@ -85,23 +81,12 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 		}
 		return false;
 	}
-	else if (m_type == Type::Snake) {
-		// Snake: only one space in any direction INCLUDING diagonally
+	else if (m_type == Type::Snake || m_type == Type::Frog) {
+		// Snake and Frog: only one space in any direction INCLUDING diagonally
 		int rowDist = abs(targetRow - m_gridRow);
 		int colDist = abs(targetCol - m_gridCol);
 		
 		// Must move exactly 1 space (can be diagonal)
-		if (rowDist <= 1 && colDist <= 1 && (rowDist + colDist > 0)) {
-			return true;
-		}
-		return false;
-	}
-	else if (m_type == Type::Frog) {
-		// Frog: one space in any direction INCLUDING diagonally
-		int rowDist = abs(targetRow - m_gridRow);
-		int colDist = abs(targetCol - m_gridCol);
-		
-		// Normal move: exactly 1 space
 		if (rowDist <= 1 && colDist <= 1 && (rowDist + colDist > 0)) {
 			return true;
 		}
@@ -112,18 +97,14 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 }
 
 bool Piece::canJump(int targetRow, int targetCol, const vector<vector<Piece*>>& board, int gridSize) {
-	// Only Frog can jump
 	if (m_type != Type::Frog) return false;
 	
 	// Target must be within bounds and empty
 	if (targetRow < 0 || targetRow >= gridSize || targetCol < 0 || targetCol >= gridSize) return false;
 	if (board[targetRow][targetCol] != nullptr) return false;
 	
-	// Must be in line
 	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
 	
-	// Must have at least one piece in between to jump over
-	// and path must be clear after the pieces
 	bool foundPiece = false;
 	
 	int rowDir = 0, colDir = 0;
@@ -148,12 +129,10 @@ bool Piece::canJump(int targetRow, int targetCol, const vector<vector<Piece*>>& 
 }
 
 bool Piece::isValidMove(int targetRow, int targetCol, const vector<vector<Piece*>>& board, int gridSize) {
-	// Check normal move
 	if (canMoveTo(targetRow, targetCol, board, gridSize)) {
 		return true;
 	}
 	
-	// Check jump (only for Frog)
 	if (canJump(targetRow, targetCol, board, gridSize)) {
 		return true;
 	}

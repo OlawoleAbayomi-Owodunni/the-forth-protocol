@@ -118,7 +118,6 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 	for (int row = 0; row < 5; ++row) {
 		for (int col = 0; col < 5; ++col) {
 			if (board[row][col] && !board[row][col]->isPlayer1()) {
-				// Check lines of AI pieces
 				int lineCount = 0;
 
 				// Horizontal
@@ -129,11 +128,11 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 				lineCount = countInLine(board, row, col, 1, 0, false);
 				score += lineCount * lineCount * 10;
 
-				// Diagonal \
+				// Diagonal (\)
 				lineCount = countInLine(board, row, col, 1, 1, false);
 				score += lineCount * lineCount * 10;
 
-				// Diagonal /
+				// Diagonal (/)
 				lineCount = countInLine(board, row, col, 1, -1, false);
 				score += lineCount * lineCount * 10;
 			}
@@ -155,11 +154,11 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 				lineCount = countInLine(board, row, col, 1, 0, true);
 				score -= lineCount * lineCount * 10;
 
-				// Diagonal \
+				// Diagonal (\)
 				lineCount = countInLine(board, row, col, 1, 1, true);
 				score -= lineCount * lineCount * 10;
 
-				// Diagonal /
+				// Diagonal (/)
 				lineCount = countInLine(board, row, col, 1, -1, true);
 				score -= lineCount * lineCount * 10;
 			}

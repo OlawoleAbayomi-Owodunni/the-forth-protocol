@@ -1,0 +1,176 @@
+\doxysection{Move Struct Reference}
+\hypertarget{struct_move}{}\label{struct_move}\index{Move@{Move}}
+
+
+Represents a move in the game (piece index and target position)  
+
+
+
+
+{\ttfamily \#include $<$AI.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_move_a4b1acc3a67d30c385ad9a6000526393a}{Move}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor creating an invalid move. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_move_ae8ebc1332a54bb2437f5f08c6a77ec65}{Move}} (int pi, int fr, int fc, int tr, int tc)
+\begin{DoxyCompactList}\small\item\em Parameterized constructor to create a specific move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{struct_move_ab26bb348fb25d87a71fb5c39984e9634}{piece\+Index}}
+\begin{DoxyCompactList}\small\item\em Index of the piece in the player\textquotesingle{}s piece collection. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_move_a97ae514386969281ce185e3388039762}{from\+Row}}
+\begin{DoxyCompactList}\small\item\em Source grid row position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_move_a498108ed17d7bb8eebdaa6fce7870d72}{from\+Col}}
+\begin{DoxyCompactList}\small\item\em Source grid column position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_move_a4fc5440750d884293f660012dd00d8c5}{to\+Row}}
+\begin{DoxyCompactList}\small\item\em Target grid row position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_move_a426434326fddb8bdda8d165f774d2b8d}{to\+Col}}
+\begin{DoxyCompactList}\small\item\em Target grid column position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a move in the game (piece index and target position) 
+
+This structure encapsulates all information needed to represent a single move in the game, including the piece to move and its source/target positions. 
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00024}{24}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{struct_move_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_move_a4b1acc3a67d30c385ad9a6000526393a}\index{Move@{Move}!Move@{Move}}
+\index{Move@{Move}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_move_a4b1acc3a67d30c385ad9a6000526393a} 
+Move\+::\+Move (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor creating an invalid move. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00037}{37}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ :\ \mbox{\hyperlink{struct_move_ab26bb348fb25d87a71fb5c39984e9634}{pieceIndex}}(-\/1),\ \mbox{\hyperlink{struct_move_a97ae514386969281ce185e3388039762}{fromRow}}(-\/1),\ \mbox{\hyperlink{struct_move_a498108ed17d7bb8eebdaa6fce7870d72}{fromCol}}(-\/1),\ \mbox{\hyperlink{struct_move_a4fc5440750d884293f660012dd00d8c5}{toRow}}(-\/1),\ \mbox{\hyperlink{struct_move_a426434326fddb8bdda8d165f774d2b8d}{toCol}}(-\/1)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{struct_move_ae8ebc1332a54bb2437f5f08c6a77ec65}\index{Move@{Move}!Move@{Move}}
+\index{Move@{Move}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_move_ae8ebc1332a54bb2437f5f08c6a77ec65} 
+Move\+::\+Move (\begin{DoxyParamCaption}\item[{int}]{pi}{, }\item[{int}]{fr}{, }\item[{int}]{fc}{, }\item[{int}]{tr}{, }\item[{int}]{tc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parameterized constructor to create a specific move. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pi} & \doxylink{class_piece}{Piece} index in the collection \\
+\hline
+{\em fr} & Source row \\
+\hline
+{\em fc} & Source column \\
+\hline
+{\em tr} & Target row \\
+\hline
+{\em tc} & Target column \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00045}{45}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_move_ab26bb348fb25d87a71fb5c39984e9634}{pieceIndex}}(pi),\ \mbox{\hyperlink{struct_move_a97ae514386969281ce185e3388039762}{fromRow}}(fr),\ \mbox{\hyperlink{struct_move_a498108ed17d7bb8eebdaa6fce7870d72}{fromCol}}(fc),\ \mbox{\hyperlink{struct_move_a4fc5440750d884293f660012dd00d8c5}{toRow}}(tr),\ \mbox{\hyperlink{struct_move_a426434326fddb8bdda8d165f774d2b8d}{toCol}}(tc)\ \{\}}
+
+\end{DoxyCode}
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_move_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_move_a498108ed17d7bb8eebdaa6fce7870d72}\index{Move@{Move}!fromCol@{fromCol}}
+\index{fromCol@{fromCol}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{fromCol}{fromCol}}
+{\footnotesize\ttfamily \label{struct_move_a498108ed17d7bb8eebdaa6fce7870d72} 
+int Move\+::from\+Col}
+
+
+
+Source grid column position. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00030}{30}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+\Hypertarget{struct_move_a97ae514386969281ce185e3388039762}\index{Move@{Move}!fromRow@{fromRow}}
+\index{fromRow@{fromRow}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{fromRow}{fromRow}}
+{\footnotesize\ttfamily \label{struct_move_a97ae514386969281ce185e3388039762} 
+int Move\+::from\+Row}
+
+
+
+Source grid row position. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00028}{28}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+\Hypertarget{struct_move_ab26bb348fb25d87a71fb5c39984e9634}\index{Move@{Move}!pieceIndex@{pieceIndex}}
+\index{pieceIndex@{pieceIndex}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{pieceIndex}{pieceIndex}}
+{\footnotesize\ttfamily \label{struct_move_ab26bb348fb25d87a71fb5c39984e9634} 
+int Move\+::piece\+Index}
+
+
+
+Index of the piece in the player\textquotesingle{}s piece collection. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00026}{26}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+\Hypertarget{struct_move_a426434326fddb8bdda8d165f774d2b8d}\index{Move@{Move}!toCol@{toCol}}
+\index{toCol@{toCol}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{toCol}{toCol}}
+{\footnotesize\ttfamily \label{struct_move_a426434326fddb8bdda8d165f774d2b8d} 
+int Move\+::to\+Col}
+
+
+
+Target grid column position. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00034}{34}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+\Hypertarget{struct_move_a4fc5440750d884293f660012dd00d8c5}\index{Move@{Move}!toRow@{toRow}}
+\index{toRow@{toRow}!Move@{Move}}
+\doxysubsubsection{\texorpdfstring{toRow}{toRow}}
+{\footnotesize\ttfamily \label{struct_move_a4fc5440750d884293f660012dd00d8c5} 
+int Move\+::to\+Row}
+
+
+
+Target grid row position. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00032}{32}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_a_i_8h}{AI.\+h}}\end{DoxyCompactItemize}

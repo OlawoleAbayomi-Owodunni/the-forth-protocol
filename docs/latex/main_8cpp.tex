@@ -1,0 +1,69 @@
+\doxysection{the\+\_\+fourth\+\_\+protocol/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{the\_fourth\_protocol/main.cpp@{the\_fourth\_protocol/main.cpp}}
+
+
+Entry point for The Fourth Protocol game.  
+
+
+{\ttfamily \#include "{}Game.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_a97b0fa62b7b0972875f5f589322c4c24}{main}} (int, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Entry point for all C++ programs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry point for The Fourth Protocol game. 
+
+\begin{DoxyAuthor}{Author}
+OA-\/O 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+November 2025 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+This file contains the main function that initializes and runs The Fourth Protocol game using SFML libraries. 
+
+Definition in file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a97b0fa62b7b0972875f5f589322c4c24}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_a97b0fa62b7b0972875f5f589322c4c24} 
+int main (\begin{DoxyParamCaption}\item[{int}]{}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Entry point for all C++ programs. 
+
+Creates a \doxylink{class_game}{Game} object and starts the main game loop. This function initializes the game and runs until the player exits.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argv} & Array of command line arguments (unused) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Exit status (0 for successful completion) 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_game}{Game}}\ game;}
+\DoxyCodeLine{00043\ \ \ \ \ game.\mbox{\hyperlink{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}{run}}();}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}

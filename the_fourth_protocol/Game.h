@@ -1,3 +1,14 @@
+/**
+ * @file Game.h
+ * @brief Main game class for The Fourth Protocol
+ * @author OA-O
+ * @date November 2025
+ * @version 1.0
+ *
+ * This file contains the Game class which manages the main game loop,
+ * player interactions, AI opponent, and game state for The Fourth Protocol.
+ */
+
 #pragma once
 
 // If VS Debug build is enabled, then any block of code enclosed within 
@@ -29,21 +40,29 @@ using namespace sf;
 /// and move them to get 4 in a row.
 /// </summary>
 
+/// <summary>
+/// @brief Screen dimensions structure for the game window.
+/// 
+/// Contains static constants defining the default window size for the game.
+/// </summary>
 struct ScreenSize
 {
 public:
+	/// @brief Game window width in pixels
 	static const int s_width{ 1440 };
 
+	/// @brief Game window height in pixels
 	static const int s_height{ 900 };
 };
 
 class Game
 {
 public:
+	/// @brief Enumeration representing different phases of the game
 	enum class GamePhase {
-		Placement,		// Players placing pieces
-		Movement,		// Players moving pieces
-		GameOver		// Game finished
+		Placement,		///< Players placing pieces on the board
+		Movement,		///< Players moving pieces already on the board  
+		GameOver		///< Game has finished with a winner
 	};
 
 	/// <summary>
@@ -75,7 +94,7 @@ protected:
 	/// <summary>
 	/// @brief Placeholder to perform updates to all game objects.
 	/// </summary>
-	/// <param name="time">update delta time</param>
+	/// <param name="dt">Update delta time in seconds</param>
 	void update(double dt);
 
 	/// <summary>
@@ -97,84 +116,171 @@ protected:
 	/// <param name="event">system event</param>
 	void processGameEvents(const sf::Event&);
 
-	// Font used for all text
+	/// @brief Font used for all text rendering in the game
 	sf::Font m_arialFont{ "ASSETS/FONTS/ariblk.ttf" };
-	// main window
+	/// @brief Main SFML render window for the game
 	sf::RenderWindow m_window;
 
 #ifdef TEST_FPS
-	sf::Text x_updateFPS{ m_arialFont };	// text used to display updates per second.
-	sf::Text x_drawFPS{  m_arialFont };	// text used to display draw calls per second.
-	sf::Time x_secondTime{ sf::Time::Zero };			// counter used to establish when a second has passed.
-	int x_updateFrameCount{ 0 };						// updates per second counter.
-	int x_drawFrameCount{ 0 };							// draws per second counter.
+	/// @brief Text object displaying updates per second (debug only)
+	sf::Text x_updateFPS{ m_arialFont };
+	/// @brief Text object displaying draw calls per second (debug only)
+	sf::Text x_drawFPS{  m_arialFont };
+	/// @brief Timer to track when a second has passed (debug only)
+	sf::Time x_secondTime{ sf::Time::Zero };
+	/// @brief Counter for updates per second (debug only)
+	int x_updateFrameCount{ 0 };
+	/// @brief Counter for draws per second (debug only)
+	int x_drawFrameCount{ 0 };
 #endif // TEST_FPS
 #pragma endregion
 
 private:
-	/// @brief Sets up a grid of RectangleShapes
+	/// @brief Sets up a grid of RectangleShapes for the game board
+	/// @param grid Vector of RectangleShape objects to populate
+	/// @param row Starting row position for the grid
+	/// @param col Starting column position for the grid  
+	/// @param numCols Number of columns in the grid
+	/// @param cellSizeXY Size of each grid cell in pixels
+	/// @param x0 X-coordinate offset for grid positioning
+	/// @param y0 Y-coordinate offset for grid positioning
+	/// @param outlineColour Color for the grid cell outlines
 	void setupGrid(vector<RectangleShape>& grid, int row, int col, int numCols, const float cellSizeXY, const float x0, const float y0, sf::Color outlineColour);
-	/// @brief Sets up pieces for a player
+	
+	/// @brief Sets up pieces for a player at game start
+	/// @param pieces Vector of Piece objects to initialize
+	/// @param row Starting row for piece placement
+	/// @param cellSizeXY Size of each cell for piece sizing
+	/// @param startPos Starting position for piece placement
+	/// @param isP1 True if setting up Player 1 pieces, false for Player 2
 	void setupPieces(vector<Piece>& pieces, int row, const float cellSizeXY, Vector2f startPos, bool isP1);
 
+	/// @brief Snaps a piece position to the nearest valid grid location
+	/// @param mousePos Current mouse position to snap to grid
 	void snapToGrid(Vector2f mousePos);
 
 	// Game logic methods
+	/// @brief Checks if a piece placement at the given position is valid
+	/// @param row Grid row to check
+	/// @param col Grid column to check
+	/// @return True if placement is valid, false otherwise
 	bool isValidPlacement(int row, int col);
+	
+	/// @brief Places a piece at the specified grid position
+	/// @param piece Pointer to the piece to place
+	/// @param row Target grid row
+	/// @param col Target grid column
+	/// @return True if placement was successful, false otherwise
 	bool placePiece(Piece* piece, int row, int col);
+	
+	/// @brief Moves a piece from one grid position to another
+	/// @param piece Pointer to the piece to move
+	/// @param fromRow Source grid row
+	/// @param fromCol Source grid column
+	/// @param toRow Target grid row
+	/// @param toCol Target grid column
+	/// @return True if move was successful, false otherwise
 	bool movePiece(Piece* piece, int fromRow, int fromCol, int toRow, int toCol);
+	
+	/// @brief Ends the current player's turn and switches to the other player
 	void endTurn();
+	
+	/// @brief Checks if the specified player has achieved a win condition (4 in a row)
+	/// @param isPlayer1 True to check Player 1's win condition, false for Player 2
+	/// @return True if player has won, false otherwise
 	bool checkWinCondition(bool isPlayer1);
+	
+	/// @brief Gets a pointer to the piece at the specified grid position
+	/// @param row Grid row to check
+	/// @param col Grid column to check
+	/// @return Pointer to piece at position, or nullptr if empty
 	Piece* getPieceAtGridPosition(int row, int col);
+	
+	/// @brief Updates the internal board state representation
 	void updateBoard();
 
 	// AI methods
+	/// @brief Executes an AI move during the AI player's turn
 	void executeAIMove();
+	
+	/// @brief Applies the given move to the game state
+	/// @param move The Move object containing move details to apply
 	void applyAIMove(const Move& move);
 
 	// Board state
+	/// @brief 2D vector representing the game board state with piece pointers
 	vector<vector<Piece*>> m_board;
 
+	/// @brief Grid rectangles for the main game board visualization
 	vector<RectangleShape> m_grid;
+	/// @brief Number of rows in the game grid
 	int m_gridRows{ 5 };
+	/// @brief Number of columns in the game grid
 	int m_gridCols{ 5 };
 
+	/// @brief Grid rectangles for Player 1's piece area
 	vector<RectangleShape> m_p1Grid;
+	/// @brief Grid rectangles for Player 2's piece area
 	vector<RectangleShape> m_p2Grid;
 
+	/// @brief Texture for frog pieces
 	Texture m_frogTexture{ "ASSETS/IMAGES/frog.png" };
+	/// @brief Texture for snake pieces
 	Texture m_snakeTexture{ "ASSETS/IMAGES/snake.png" };
+	/// @brief Texture for donkey pieces
 	Texture m_donkeyTexture{ "ASSETS/IMAGES/donkey.png" };
 
+	/// @brief Collection of Player 1's pieces
 	vector<Piece> m_p1Pieces;
+	/// @brief Collection of Player 2's pieces
 	vector<Piece> m_p2Pieces;
 
+	/// @brief Pointer to the currently selected piece for dragging
 	Piece* m_selectedPiece = nullptr;
+	/// @brief Offset for smooth piece dragging
 	Vector2f m_dragOffset;
+	/// @brief Flag indicating if a piece is currently being dragged
 	bool m_isDragging = false;
 
 	// Game state
+	/// @brief Current phase of the game (placement, movement, or game over)
 	GamePhase m_gamePhase = GamePhase::Placement;
+	/// @brief Flag indicating if it's currently Player 1's turn
 	bool m_isPlayer1Turn = true;  // Player 1 starts
+	/// @brief Number of pieces Player 1 has placed on the board
 	int m_p1PiecesPlaced = 0;
+	/// @brief Number of pieces Player 2 has placed on the board
 	int m_p2PiecesPlaced = 0;
+	/// @brief Pointer to the winning piece (nullptr if no winner yet)
 	Piece* m_winner = nullptr;
 
+	/// @brief Text object displaying current game status
 	sf::Text m_statusText{ m_arialFont };
+	/// @brief Text object displaying game instructions
 	sf::Text m_instructionText{ m_arialFont };
 
 	// Main menu
+	/// @brief Button rectangle for Player vs AI option
 	sf::RectangleShape m_btnPvAI;
+	/// @brief Button rectangle for Player vs Player option
 	sf::RectangleShape m_btnPvP;
+	/// @brief Text label for Player vs AI button
 	sf::Text m_btnPvAIText{ m_arialFont };
+	/// @brief Text label for Player vs Player button
 	sf::Text m_btnPvPText{ m_arialFont };
+	/// @brief Flag indicating if the main menu should be displayed
 	bool m_showMenu = true;
 
 	// AI
+	/// @brief AI player instance for computer opponent
 	AI m_ai;
+	/// @brief Flag indicating if this is an AI game (false = PvP, true = PvAI)
 	bool m_isAIGame = true;  // false = PvP, true = PvAI
+	/// @brief Flag indicating if AI is currently thinking/calculating
 	bool m_aiThinking = false;
+	/// @brief Elapsed time for AI thinking animation
 	double m_aiThinkTime = 0.0;
+	/// @brief Duration for AI to "think" before making a move (for realism)
 	double m_aiThinkDuration = 1.0;  // 1 second think time for AI
 };
 

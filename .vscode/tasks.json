@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate Doxygen Documentation",
+      "type": "shell",
+      "command": "doxygen",
+      "args": ["Doxyfile"],
+      "group": "build",
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

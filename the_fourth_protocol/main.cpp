@@ -1,3 +1,14 @@
+/**
+ * @file main.cpp
+ * @brief Entry point for The Fourth Protocol game
+ * @author OA-O
+ * @date November 2025
+ * @version 1.0
+ *
+ * This file contains the main function that initializes and runs
+ * The Fourth Protocol game using SFML libraries.
+ */
+
 #ifdef _DEBUG 
 #pragma comment(lib,"sfml-graphics-d.lib") 
 #pragma comment(lib,"sfml-audio-d.lib") 
@@ -17,18 +28,18 @@
 
 #include "Game.h"
 
-/// <summary>
-/// @brief starting point for all C++ programs.
-/// 
-/// Create a game object and run it.
-/// </summary>
-/// <param name=""></param>
-/// <param name="argv"></param>
-/// <returns></returns>
+/**
+ * @brief Entry point for all C++ programs
+ * 
+ * Creates a Game object and starts the main game loop.
+ * This function initializes the game and runs until the player exits.
+ * 
+ * @param argv Array of command line arguments (unused)
+ * @return int Exit status (0 for successful completion)
+ */
 int main(int, char* argv[])
 {
 	Game game;
 	game.run();
+	return 0;
 }
-
-// Comment
