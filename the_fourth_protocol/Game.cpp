@@ -89,8 +89,8 @@ void Game::init()
 
 		m_btnPvP.setSize({ btnW, btnH });
 		m_btnPvAI.setSize({ btnW, btnH });
-		m_btnPvP.setPosition({ centerX - btnW - 10.0f, btnY });
-		m_btnPvAI.setPosition({ centerX + 10.0f, btnY });
+		m_btnPvAI.setPosition({ centerX - btnW - 10.0f, btnY });
+		m_btnPvP.setPosition({ centerX + 10.0f, btnY });
 		m_btnPvP.setFillColor(sf::Color(100, 149, 237));
 		m_btnPvAI.setFillColor(sf::Color(70, 130, 180));
 		m_btnPvP.setOutlineThickness(2.0f);
@@ -104,8 +104,8 @@ void Game::init()
 		m_btnPvAIText.setCharacterSize(20);
 		m_btnPvPText.setFillColor(sf::Color::White);
 		m_btnPvAIText.setFillColor(sf::Color::White);
-		m_btnPvPText.setString("Player");
-		m_btnPvAIText.setString("AI");
+		m_btnPvPText.setString("2 Player");
+		m_btnPvAIText.setString("1 Player");
 
 		// center texts inside buttons
 		auto pb = m_btnPvPText.getLocalBounds();
@@ -121,10 +121,10 @@ void Game::init()
 #pragma endregion
 
 	{
-		float panelWidth = 550.0f;
-		float panelHeight = 350.0f;
-		float panelX = ScreenSize::s_width - panelWidth - 30.0f;
-		float panelY = ScreenSize::s_height - panelHeight - 30.0f;
+		float panelWidth = 500.0f;
+		float panelHeight = 320.0f;
+		float panelX = ScreenSize::s_width - panelWidth - 20.0f;
+		float panelY = 20.0f;
 
 		m_aiAnalyzerPanel.setSize({ panelWidth, panelHeight });
 		m_aiAnalyzerPanel.setPosition({ panelX, panelY });
