@@ -67,6 +67,18 @@ public:
 	Move findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Pieces, 
 		vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth = 3);
 
+	/// @brief Get the number of moves considered in the last decision
+	/// @return Number of possible moves evaluated
+	int getMovesConsidered() const { return m_movesConsidered; }
+	
+	/// @brief Get the score of the best move found
+	/// @return Evaluation score of the selected move
+	int getBestScore() const { return m_bestScore; }
+	
+	/// @brief Get the best move from the last search
+	/// @return The Move object that was selected
+	Move getSelectedMove() const { return m_selectedMove; }
+
 private:
 	/// @brief Maximum search depth for the minimax algorithm
 	static const int MAX_DEPTH = 3;
@@ -74,6 +86,13 @@ private:
 	static const int WINNING_SCORE = 10000;
 	/// @brief Score value representing a losing position
 	static const int LOSING_SCORE = -10000;
+
+	/// @brief Number of moves considered in last search
+	int m_movesConsidered = 0;
+	/// @brief Score of the best move found
+	int m_bestScore = 0;
+	/// @brief The selected move from last search
+	Move m_selectedMove;
 
 	/// @brief Minimax algorithm implementation with alpha-beta pruning
 	/// @param board Current board state (modified during search)

@@ -49,10 +49,10 @@ struct ScreenSize
 {
 public:
 	/// @brief Game window width in pixels
-	static const int s_width{ 1440 };
+	static const int s_width{ 1920 };
 
 	/// @brief Game window height in pixels
-	static const int s_height{ 900 };
+	static const int s_height{ 1080 };
 };
 
 class Game
@@ -258,6 +258,34 @@ private:
 	sf::Text m_statusText{ m_arialFont };
 	/// @brief Text object displaying game instructions
 	sf::Text m_instructionText{ m_arialFont };
+
+	// AI Analyzer Display
+	/// @brief Background panel for AI analyzer
+	sf::RectangleShape m_aiAnalyzerPanel;
+	/// @brief Title text for AI analyzer
+	sf::Text m_aiAnalyzerTitle{ m_arialFont };
+	/// @brief Text showing number of moves considered
+	sf::Text m_aiMovesConsideredText{ m_arialFont };
+	/// @brief Text showing the best move selected
+	sf::Text m_aiBestMoveText{ m_arialFont };
+	/// @brief Text showing the evaluation score
+	sf::Text m_aiScoreText{ m_arialFont };
+	/// @brief Text showing search depth
+	sf::Text m_aiDepthText{ m_arialFont };
+	/// @brief Text showing time taken to calculate
+	sf::Text m_aiTimeText{ m_arialFont };
+	/// @brief Visual indicator for AI's last move (from position)
+	sf::RectangleShape m_aiMoveFromIndicator;
+	/// @brief Visual indicator for AI's last move (to position)
+	sf::RectangleShape m_aiMoveToIndicator;
+	/// @brief Flag to show/hide AI analyzer
+	bool m_showAIAnalyzer = true;
+	/// @brief Flag to track if AI has made at least one move
+	bool m_aiHasMoved = false;
+	/// @brief Timer for tracking AI calculation time
+	sf::Clock m_aiCalculationClock;
+	/// @brief Last AI calculation time in milliseconds
+	float m_lastAICalculationTime = 0.0f;
 
 	// Main menu
 	/// @brief Button rectangle for Player vs AI option

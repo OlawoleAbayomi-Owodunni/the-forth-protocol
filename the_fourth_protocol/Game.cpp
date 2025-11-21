@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 // Our target FPS
 static double const FPS{ 60.0f };
@@ -118,6 +119,56 @@ void Game::init()
 		m_showMenu = true;
 	}
 #pragma endregion
+
+	{
+		float panelWidth = 550.0f;
+		float panelHeight = 350.0f;
+		float panelX = ScreenSize::s_width - panelWidth - 30.0f;
+		float panelY = ScreenSize::s_height - panelHeight - 30.0f;
+
+		m_aiAnalyzerPanel.setSize({ panelWidth, panelHeight });
+		m_aiAnalyzerPanel.setPosition({ panelX, panelY });
+		m_aiAnalyzerPanel.setFillColor(sf::Color(30, 30, 30, 220));
+		m_aiAnalyzerPanel.setOutlineThickness(3.0f);
+		m_aiAnalyzerPanel.setOutlineColor(sf::Color(100, 200, 255));
+
+		m_aiAnalyzerTitle.setCharacterSize(22);
+		m_aiAnalyzerTitle.setFillColor(sf::Color(100, 200, 255));
+		m_aiAnalyzerTitle.setString("AI Decision Analyzer (Press A to toggle)");
+		m_aiAnalyzerTitle.setPosition({ panelX + 15.0f, panelY + 15.0f });
+
+		m_aiMovesConsideredText.setCharacterSize(18);
+		m_aiMovesConsideredText.setFillColor(sf::Color::White);
+		m_aiMovesConsideredText.setPosition({ panelX + 15.0f, panelY + 60.0f });
+
+		m_aiBestMoveText.setCharacterSize(18);
+		m_aiBestMoveText.setFillColor(sf::Color::White);
+		m_aiBestMoveText.setPosition({ panelX + 15.0f, panelY + 110.0f });
+
+		m_aiScoreText.setCharacterSize(18);
+		m_aiScoreText.setFillColor(sf::Color::White);
+		m_aiScoreText.setPosition({ panelX + 15.0f, panelY + 180.0f });
+
+		m_aiDepthText.setCharacterSize(18);
+		m_aiDepthText.setFillColor(sf::Color::White);
+		m_aiDepthText.setPosition({ panelX + 15.0f, panelY + 230.0f });
+
+		m_aiTimeText.setCharacterSize(18);
+		m_aiTimeText.setFillColor(sf::Color::White);
+		m_aiTimeText.setPosition({ panelX + 15.0f, panelY + 280.0f });
+
+		m_aiMoveFromIndicator.setSize({ cellSizeXY, cellSizeXY });
+		m_aiMoveFromIndicator.setFillColor(sf::Color::Transparent);
+		m_aiMoveFromIndicator.setOutlineThickness(4.0f);
+		m_aiMoveFromIndicator.setOutlineColor(sf::Color(255, 165, 0, 200));
+		m_aiMoveFromIndicator.setPosition({ -1000.0f, -1000.0f });
+
+		m_aiMoveToIndicator.setSize({ cellSizeXY, cellSizeXY });
+		m_aiMoveToIndicator.setFillColor(sf::Color::Transparent);
+		m_aiMoveToIndicator.setOutlineThickness(4.0f);
+		m_aiMoveToIndicator.setOutlineColor(sf::Color(0, 255, 0, 200));
+		m_aiMoveToIndicator.setPosition({ -1000.0f, -1000.0f });
+	}
 
 }
 
@@ -341,6 +392,10 @@ void Game::processGameEvents(const sf::Event& event)
 			m_window.close();
 			return;
 		}
+		if (keyPressed->scancode == sf::Keyboard::Scancode::A) {
+			m_showAIAnalyzer = !m_showAIAnalyzer;
+			return;
+		}
 	}
 
 	// If the main menu is visible, handle menu clicks and ignore other game events
@@ -356,6 +411,7 @@ void Game::processGameEvents(const sf::Event& event)
 				if (m_btnPvAI.getGlobalBounds().contains(mousePos)) {
 					m_isAIGame = true;
 					m_showMenu = false;
+					m_aiHasMoved = false;  
 					m_statusText.setString("Player 1 - PLACEMENT PHASE");
 					m_instructionText.setString("Click and drag pieces to place them on the board");
 					return;
@@ -363,6 +419,7 @@ void Game::processGameEvents(const sf::Event& event)
 				if (m_btnPvP.getGlobalBounds().contains(mousePos)) {
 					m_isAIGame = false;
 					m_showMenu = false;
+					m_aiHasMoved = false; 
 					m_statusText.setString("Player 1 - PLACEMENT PHASE");
 					m_instructionText.setString("Click and drag pieces to place them on the board");
 					return;
@@ -491,6 +548,11 @@ void Game::render()
 	for (const auto& cell : m_p2Grid)
 		m_window.draw(cell);
 
+	if (m_showAIAnalyzer && m_isAIGame && !m_showMenu && m_aiHasMoved) {
+		m_window.draw(m_aiMoveFromIndicator);
+		m_window.draw(m_aiMoveToIndicator);
+	}
+
 	for (const auto& piece : m_p1Pieces)
 		piece.draw(m_window);
 	for (const auto& piece : m_p2Pieces)
@@ -520,6 +582,21 @@ void Game::render()
 		m_window.draw(m_btnPvAIText);
 	}
 
+	if (m_showAIAnalyzer && m_isAIGame && !m_showMenu) {
+		if (m_aiHasMoved) {
+			m_window.draw(m_aiMoveFromIndicator);
+			m_window.draw(m_aiMoveToIndicator);
+		}
+		
+		m_window.draw(m_aiAnalyzerPanel);
+		m_window.draw(m_aiAnalyzerTitle);
+		m_window.draw(m_aiMovesConsideredText);
+		m_window.draw(m_aiBestMoveText);
+		m_window.draw(m_aiScoreText);
+		m_window.draw(m_aiDepthText);
+		m_window.draw(m_aiTimeText);
+	}
+
 	m_window.display();
 }
 #pragma region AI
@@ -528,10 +605,66 @@ void Game::executeAIMove()
 {
 	if (m_gamePhase == GamePhase::GameOver) return;
 
+	// Start timing the AI calculation
+	m_aiCalculationClock.restart();
+
 	Move aiMove = m_ai.findBestMove(m_board, m_p2Pieces, m_p1Pieces, m_gridRows, 
 		m_gamePhase == GamePhase::Placement);
 
+	// Record calculation time
+	m_lastAICalculationTime = m_aiCalculationClock.getElapsedTime().asMilliseconds();
+
 	if (aiMove.pieceIndex >= 0 && aiMove.pieceIndex < m_p2Pieces.size()) {
+		m_aiHasMoved = true;
+		
+		std::ostringstream oss;
+		oss << "Moves Considered: " << m_ai.getMovesConsidered();
+		m_aiMovesConsideredText.setString(oss.str());
+
+		oss.str("");
+		if (m_gamePhase == GamePhase::Placement) {
+			oss << "Best Move:\nPlace piece at (" 
+				<< aiMove.toRow << ", " << aiMove.toCol << ")";
+		} else {
+			oss << "Best Move:\nFrom (" << aiMove.fromRow << ", " << aiMove.fromCol 
+				<< ") to (" << aiMove.toRow << ", " << aiMove.toCol << ")";
+		}
+		m_aiBestMoveText.setString(oss.str());
+
+		oss.str("");
+		oss << "Evaluation Score: " << m_ai.getBestScore();
+		m_aiScoreText.setString(oss.str());
+
+		oss.str("");
+		oss << "Search Depth: 3 levels";
+		m_aiDepthText.setString(oss.str());
+
+		oss.str("");
+		oss << "Calculation Time: " << std::fixed << std::setprecision(1) 
+			<< m_lastAICalculationTime << "ms";
+		m_aiTimeText.setString(oss.str());
+
+		const float cellSizeXY = 100.0f;
+		const float gridSizeXY = m_gridRows * cellSizeXY;
+		const float x0 = 0.5f * (static_cast<float>(ScreenSize::s_width) - gridSizeXY);
+		const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY);
+
+		if (m_gamePhase == GamePhase::Movement && aiMove.fromRow >= 0 && aiMove.fromCol >= 0) {
+			Vector2f fromPos = {
+				x0 + static_cast<float>(aiMove.fromCol * cellSizeXY),
+				y0 + static_cast<float>(aiMove.fromRow * cellSizeXY)
+			};
+			m_aiMoveFromIndicator.setPosition(fromPos);
+		} else {
+			m_aiMoveFromIndicator.setPosition({ -1000.0f, -1000.0f });
+		}
+
+		Vector2f toPos = {
+			x0 + static_cast<float>(aiMove.toCol * cellSizeXY),
+			y0 + static_cast<float>(aiMove.toRow * cellSizeXY)
+		};
+		m_aiMoveToIndicator.setPosition(toPos);
+
 		applyAIMove(aiMove);
 	}
 }

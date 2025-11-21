@@ -18,6 +18,8 @@ Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Piec
 	int beta = INT_MAX;
 
 	vector<Move> possibleMoves = generateMoves(boardCopy, p2Pieces, gridSize, isPlacementPhase);
+	
+	m_movesConsidered = possibleMoves.size();
 
 	for (const auto& move : possibleMoves) {
 		Piece* piece = &p2Pieces[move.pieceIndex];
@@ -26,6 +28,7 @@ Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Piec
 		// Check if this move wins immediately
 		if (hasWon(boardCopy, false)) {
 			bestMove = move;
+			bestScore = WINNING_SCORE;
 			undoMove(boardCopy, piece, move.fromRow, move.fromCol, move.toRow, move.toCol);
 			break;
 		}
@@ -41,6 +44,9 @@ Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Piec
 			alpha = max(alpha, bestScore);
 		}
 	}
+
+	m_bestScore = bestScore;
+	m_selectedMove = bestMove;
 
 	return bestMove;
 }
