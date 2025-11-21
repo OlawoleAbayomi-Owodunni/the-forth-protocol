@@ -214,9 +214,9 @@ private:
 	/// @brief Grid rectangles for the main game board visualization
 	vector<RectangleShape> m_grid;
 	/// @brief Number of rows in the game grid
-	int m_gridRows{ 5 };
+	int m_gridRows{ 8 };
 	/// @brief Number of columns in the game grid
-	int m_gridCols{ 5 };
+	int m_gridCols{ 8 };
 
 	/// @brief Grid rectangles for Player 1's piece area
 	vector<RectangleShape> m_p1Grid;
@@ -229,6 +229,12 @@ private:
 	Texture m_snakeTexture{ "ASSETS/IMAGES/snake.png" };
 	/// @brief Texture for donkey pieces
 	Texture m_donkeyTexture{ "ASSETS/IMAGES/donkey.png" };
+	/// @brief Texture for fox pieces
+	Texture m_foxTexture{ "ASSETS/IMAGES/fox.png" };
+	/// @brief Texture for owl pieces
+	Texture m_owlTexture{ "ASSETS/IMAGES/owl.png" };
+	/// @brief Texture for lion pieces
+	Texture m_lionTexture{ "ASSETS/IMAGES/lion.png" };
 
 	/// @brief Collection of Player 1's pieces
 	vector<Piece> m_p1Pieces;

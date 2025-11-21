@@ -49,7 +49,7 @@ void Game::init()
 	const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY); // grid y origin pos
 
 	m_grid.resize(m_gridRows * m_gridCols);
-	m_p1Grid.resize(5);
+	m_p1Grid.resize(8);
 	m_p2Grid.resize(m_gridRows * 1);
 	for(int row = 0; row < m_gridRows; ++row) {
 		// please remember that this is only being done here becuase there's only 1 column per player. If this increases for any reason, create a new nested loop
@@ -176,7 +176,12 @@ void Game::setupPieces(vector<Piece>& pieces, int row, const float cellSize, Vec
 {
 	if (row == 0) pieces.push_back(Piece(Piece::Type::Frog, m_frogTexture, cellSize, startPos, isP1));
 	else if (row == 1) pieces.push_back(Piece(Piece::Type::Snake, m_snakeTexture, cellSize, startPos, isP1));
-	else pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
+	else if (row == 2) pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
+	else if (row == 3) pieces.push_back(Piece(Piece::Type::Fox, m_foxTexture, cellSize, startPos, isP1));
+	else if (row == 4) pieces.push_back(Piece(Piece::Type::Owl, m_owlTexture, cellSize, startPos, isP1));
+	else if (row == 5) pieces.push_back(Piece(Piece::Type::Lion, m_lionTexture, cellSize, startPos, isP1));
+	else if (row == 6) pieces.push_back(Piece(Piece::Type::Fox, m_foxTexture, cellSize, startPos, isP1));
+	else if (row == 7) pieces.push_back(Piece(Piece::Type::Owl, m_owlTexture, cellSize, startPos, isP1));
 }
 
 void Game::updateBoard() {
@@ -321,7 +326,7 @@ void Game::endTurn() {
 		m_instructionText.setString("AI is thinking...");
 	}
 
-	if (m_gamePhase == GamePhase::Placement && m_p1PiecesPlaced == 5 && m_p2PiecesPlaced == 5) {
+	if (m_gamePhase == GamePhase::Placement && m_p1PiecesPlaced == 8 && m_p2PiecesPlaced == 8) {
 		m_gamePhase = GamePhase::Movement;
 		m_isPlayer1Turn = true;
 		m_statusText.setString("Player 1 - MOVEMENT PHASE");

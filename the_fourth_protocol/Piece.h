@@ -27,8 +27,11 @@ class Piece
 	/// @brief Enumeration of different piece types with unique movement rules
 	enum class Type {
 		Frog,		///< Can jump over other pieces
-		Snake,		///< Moves in straight lines only
-		Donkey		///< Basic movement piece
+		Snake,		///< Moves one space in any direction including diagonally
+		Donkey,		///< Moves one space horizontally or vertically (not diagonally)
+		Fox,		///< Moves in L-shape (2+1 pattern) - cunning tactical strikes
+		Owl,		///< Moves diagonally any distance - wise hunter from above
+		Lion		///< Moves horizontally or vertically any distance - powerful charges
 	};
 
     /// @brief Constructor to create a new piece

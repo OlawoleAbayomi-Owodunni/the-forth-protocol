@@ -119,10 +119,11 @@ int AI::minimax(vector<vector<Piece*>>& board, vector<Piece>& p2Pieces,
 int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase)
 {
 	int score = 0;
+	int gridSize = board.size();
 
 	// Score for AI (Player 2)
-	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col < 5; ++col) {
+	for (int row = 0; row < gridSize; ++row) {
+		for (int col = 0; col < gridSize; ++col) {
 			if (board[row][col] && !board[row][col]->isPlayer1()) {
 				int lineCount = 0;
 
@@ -146,8 +147,8 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 	}
 
 	// Subtract score for Player 1
-	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col < 5; ++col) {
+	for (int row = 0; row < gridSize; ++row) {
+		for (int col = 0; col < gridSize; ++col) {
 			if (board[row][col] && board[row][col]->isPlayer1()) {
 				// Check lines of player 1 pieces
 				int lineCount = 0;
@@ -177,11 +178,12 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 int AI::countInLine(const vector<vector<Piece*>>& board, int row, int col, int dRow, int dCol, bool isPlayer1)
 {
 	int count = 1;
+	int gridSize = board.size();
 
 	// Count in positive direction
 	int r = row + dRow;
 	int c = col + dCol;
-	while (r >= 0 && r < 5 && c >= 0 && c < 5 && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
+	while (r >= 0 && r < gridSize && c >= 0 && c < gridSize && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
 		count++;
 		r += dRow;
 		c += dCol;
@@ -190,7 +192,7 @@ int AI::countInLine(const vector<vector<Piece*>>& board, int row, int col, int d
 	// Count in negative direction
 	r = row - dRow;
 	c = col - dCol;
-	while (r >= 0 && r < 5 && c >= 0 && c < 5 && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
+	while (r >= 0 && r < gridSize && c >= 0 && c < gridSize && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
 		count++;
 		r -= dRow;
 		c -= dCol;
@@ -252,55 +254,66 @@ void AI::undoMove(vector<vector<Piece*>>& board, Piece* piece, int fromRow, int 
 
 bool AI::hasWon(const vector<vector<Piece*>>& board, bool isPlayer1)
 {
+	int gridSize = board.size();
+	int winLength = 4; // Still need 4 in a row to win
+	
 	// Check horizontal
-	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col <= 1; ++col) {
-			if (board[row][col] && board[row][col]->isPlayer1() == isPlayer1 &&
-				board[row][col + 1] && board[row][col + 1]->isPlayer1() == isPlayer1 &&
-				board[row][col + 2] && board[row][col + 2]->isPlayer1() == isPlayer1 &&
-				board[row][col + 3] && board[row][col + 3]->isPlayer1() == isPlayer1) {
-				return true;
+	for (int row = 0; row < gridSize; ++row) {
+		for (int col = 0; col <= gridSize - winLength; ++col) {
+			bool win = true;
+			for (int i = 0; i < winLength; ++i) {
+				if (!board[row][col + i] || board[row][col + i]->isPlayer1() != isPlayer1) {
+					win = false;
+					break;
+				}
 			}
+			if (win) return true;
 		}
 	}
 
 	// Check vertical
-	for (int col = 0; col < 5; ++col) {
-		for (int row = 0; row <= 1; ++row) {
-			if (board[row][col] && board[row][col]->isPlayer1() == isPlayer1 &&
-				board[row + 1][col] && board[row + 1][col]->isPlayer1() == isPlayer1 &&
-				board[row + 2][col] && board[row + 2][col]->isPlayer1() == isPlayer1 &&
-				board[row + 3][col] && board[row + 3][col]->isPlayer1() == isPlayer1) {
-				return true;
+	for (int col = 0; col < gridSize; ++col) {
+		for (int row = 0; row <= gridSize - winLength; ++row) {
+			bool win = true;
+			for (int i = 0; i < winLength; ++i) {
+				if (!board[row + i][col] || board[row + i][col]->isPlayer1() != isPlayer1) {
+					win = false;
+					break;
+				}
 			}
+			if (win) return true;
 		}
 	}
 
-	// Check diagonal 
-	for (int row = 0; row <= 1; ++row) {
-		for (int col = 0; col <= 1; ++col) {
-			if (board[row][col] && board[row][col]->isPlayer1() == isPlayer1 &&
-				board[row + 1][col + 1] && board[row + 1][col + 1]->isPlayer1() == isPlayer1 &&
-				board[row + 2][col + 2] && board[row + 2][col + 2]->isPlayer1() == isPlayer1 &&
-				board[row + 3][col + 3] && board[row + 3][col + 3]->isPlayer1() == isPlayer1) {
-				return true;
+	// Check diagonal (\)
+	for (int row = 0; row <= gridSize - winLength; ++row) {
+		for (int col = 0; col <= gridSize - winLength; ++col) {
+			bool win = true;
+			for (int i = 0; i < winLength; ++i) {
+				if (!board[row + i][col + i] || board[row + i][col + i]->isPlayer1() != isPlayer1) {
+					win = false;
+					break;
+				}
 			}
+			if (win) return true;
 		}
 	}
 
-	// Check diagonal 
-	for (int row = 0; row <= 1; ++row) {
-		for (int col = 3; col < 5; ++col) {
-			if (board[row][col] && board[row][col]->isPlayer1() == isPlayer1 &&
-				board[row + 1][col - 1] && board[row + 1][col - 1]->isPlayer1() == isPlayer1 &&
-				board[row + 2][col - 2] && board[row + 2][col - 2]->isPlayer1() == isPlayer1 &&
-				board[row + 3][col - 3] && board[row + 3][col - 3]->isPlayer1() == isPlayer1) {
-				return true;
+	// Check diagonal (/)
+	for (int row = 0; row <= gridSize - winLength; ++row) {
+		for (int col = winLength - 1; col < gridSize; ++col) {
+			bool win = true;
+			for (int i = 0; i < winLength; ++i) {
+				if (!board[row + i][col - i] || board[row + i][col - i]->isPlayer1() != isPlayer1) {
+					win = false;
+					break;
+				}
 			}
+			if (win) return true;
 		}
 	}
 
-return false;
+	return false;
 }
 
 vector<pair<int, int>> AI::getEmptyCells(const vector<vector<Piece*>>& board, int gridSize)

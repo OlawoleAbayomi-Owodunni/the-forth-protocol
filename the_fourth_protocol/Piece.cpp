@@ -68,14 +68,11 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 	// Target must be empty
 	if (board[targetRow][targetCol] != nullptr) return false;
 	
-	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
+	int rowDist = abs(targetRow - m_gridRow);
+	int colDist = abs(targetCol - m_gridCol);
 	
 	if (m_type == Type::Donkey) {
-		// Donkey: only one space in any direction, NOT diagonally
-		int rowDist = abs(targetRow - m_gridRow);
-		int colDist = abs(targetCol - m_gridCol);
-		
-		// Must move exactly 1 space in one direction (not diagonal)
+		// Donkey: only one space horizontally or vertically, NOT diagonally
 		if ((rowDist == 1 && colDist == 0) || (rowDist == 0 && colDist == 1)) {
 			return true;
 		}
@@ -83,12 +80,32 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 	}
 	else if (m_type == Type::Snake || m_type == Type::Frog) {
 		// Snake and Frog: only one space in any direction INCLUDING diagonally
-		int rowDist = abs(targetRow - m_gridRow);
-		int colDist = abs(targetCol - m_gridCol);
-		
-		// Must move exactly 1 space (can be diagonal)
 		if (rowDist <= 1 && colDist <= 1 && (rowDist + colDist > 0)) {
 			return true;
+		}
+		return false;
+	}
+	else if (m_type == Type::Fox) {
+		// Fox: L-shaped moves like a chess knight (2+1 pattern)
+		if ((rowDist == 2 && colDist == 1) || (rowDist == 1 && colDist == 2)) {
+			return true;
+		}
+		return false;
+	}
+	else if (m_type == Type::Owl) {
+		// Owl: moves diagonally any distance
+		if (rowDist == colDist && rowDist > 0) {
+			// Check if path is clear
+			return isPathClear(m_gridRow, m_gridCol, targetRow, targetCol, board);
+		}
+		return false;
+	}
+	else if (m_type == Type::Lion) {
+		// Lion: moves horizontally or vertically any distance
+		if ((targetRow == m_gridRow && targetCol != m_gridCol) || 
+		    (targetRow != m_gridRow && targetCol == m_gridCol)) {
+			// Check if path is clear
+			return isPathClear(m_gridRow, m_gridCol, targetRow, targetCol, board);
 		}
 		return false;
 	}
