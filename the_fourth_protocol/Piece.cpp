@@ -105,8 +105,6 @@ bool Piece::canJump(int targetRow, int targetCol, const vector<vector<Piece*>>& 
 	
 	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
 	
-	bool foundPiece = false;
-	
 	int rowDir = 0, colDir = 0;
 	if (targetRow > m_gridRow) rowDir = 1;
 	else if (targetRow < m_gridRow) rowDir = -1;
@@ -116,16 +114,27 @@ bool Piece::canJump(int targetRow, int targetCol, const vector<vector<Piece*>>& 
 	int curRow = m_gridRow + rowDir;
 	int curCol = m_gridCol + colDir;
 	
-	// Check that there's at least one piece to jump over
+	int lastPieceRow = -1;
+	int lastPieceCol = -1;
+	bool foundAnyPiece = false;
+	
 	while (curRow != targetRow || curCol != targetCol) {
 		if (board[curRow][curCol] != nullptr) {
-			foundPiece = true;
+			lastPieceRow = curRow;
+			lastPieceCol = curCol;
+			foundAnyPiece = true;
+		} else if (foundAnyPiece) {
+			return (curRow == targetRow && curCol == targetCol);
 		}
 		curRow += rowDir;
 		curCol += colDir;
 	}
 	
-	return foundPiece;
+	if (foundAnyPiece) {
+		return (targetRow == lastPieceRow + rowDir && targetCol == lastPieceCol + colDir);
+	}
+	
+	return false;
 }
 
 bool Piece::isValidMove(int targetRow, int targetCol, const vector<vector<Piece*>>& board, int gridSize) {

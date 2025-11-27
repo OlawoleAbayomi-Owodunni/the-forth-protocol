@@ -242,6 +242,9 @@ private:
 	/// @brief Flag indicating if a piece is currently being dragged
 	bool m_isDragging = false;
 
+	/// @brief Visual indicators for valid moves when a piece is selected
+	vector<RectangleShape> m_validMoveIndicators;
+
 	// Game state
 	/// @brief Current phase of the game (placement, movement, or game over)
 	GamePhase m_gamePhase = GamePhase::Placement;
