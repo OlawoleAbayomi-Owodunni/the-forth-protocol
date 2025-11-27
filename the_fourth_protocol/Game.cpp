@@ -465,6 +465,30 @@ void Game::processGameEvents(const sf::Event& event)
 						m_dragOffset = piece.getPosition() - mousePos;
 						piece.setSelected(true);
 						piece.saveOriginalPosition();
+						
+						// Show valid move previews if in movement phase and piece is on board
+						if (m_gamePhase == GamePhase::Movement && piece.getGridRow() >= 0) {
+							auto validMoves = piece.getValidMoves(m_board, m_gridRows);
+							m_validMoveIndicators.clear();
+							
+							const float cellSizeXY = 100.0f;
+							const float gridSizeXY = m_gridRows * cellSizeXY;
+							const float x0 = 0.5f * (static_cast<float>(ScreenSize::s_width) - gridSizeXY);
+							const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY);
+							
+							for (const auto& move : validMoves) {
+								RectangleShape indicator;
+								indicator.setSize({ cellSizeXY, cellSizeXY });
+								indicator.setFillColor(sf::Color(0, 255, 0, 80));
+								indicator.setOutlineThickness(2.0f);
+								indicator.setOutlineColor(sf::Color(0, 255, 0, 150));
+								indicator.setPosition({
+									x0 + static_cast<float>(move.second * cellSizeXY),
+									y0 + static_cast<float>(move.first * cellSizeXY)
+								});
+								m_validMoveIndicators.push_back(indicator);
+							}
+						}
 						return;
 					}
 				}
@@ -476,6 +500,30 @@ void Game::processGameEvents(const sf::Event& event)
 						m_dragOffset = piece.getPosition() - mousePos;
 						piece.setSelected(true);
 						piece.saveOriginalPosition();
+						
+						// Show valid move previews if in movement phase and piece is on board
+						if (m_gamePhase == GamePhase::Movement && piece.getGridRow() >= 0) {
+							auto validMoves = piece.getValidMoves(m_board, m_gridRows);
+							m_validMoveIndicators.clear();
+							
+							const float cellSizeXY = 100.0f;
+							const float gridSizeXY = m_gridRows * cellSizeXY;
+							const float x0 = 0.5f * (static_cast<float>(ScreenSize::s_width) - gridSizeXY);
+							const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY);
+							
+							for (const auto& move : validMoves) {
+								RectangleShape indicator;
+								indicator.setSize({ cellSizeXY, cellSizeXY });
+								indicator.setFillColor(sf::Color(0, 255, 0, 80));
+								indicator.setOutlineThickness(2.0f);
+								indicator.setOutlineColor(sf::Color(0, 255, 0, 150));
+								indicator.setPosition({
+									x0 + static_cast<float>(move.second * cellSizeXY),
+									y0 + static_cast<float>(move.first * cellSizeXY)
+								});
+								m_validMoveIndicators.push_back(indicator);
+							}
+						}
 						return;
 					}
 				}
@@ -498,6 +546,7 @@ void Game::processGameEvents(const sf::Event& event)
 			}
 			m_selectedPiece = nullptr;
 			m_isDragging = false;
+			m_validMoveIndicators.clear();
 		}
 	}
 
@@ -547,6 +596,10 @@ void Game::render()
 		m_window.draw(cell);
 	for (const auto& cell : m_p2Grid)
 		m_window.draw(cell);
+
+	// Draw valid move indicators
+	for (const auto& indicator : m_validMoveIndicators)
+		m_window.draw(indicator);
 
 	if (m_showAIAnalyzer && m_isAIGame && !m_showMenu && m_aiHasMoved) {
 		m_window.draw(m_aiMoveFromIndicator);
