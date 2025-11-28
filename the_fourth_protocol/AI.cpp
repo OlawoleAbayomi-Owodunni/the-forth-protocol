@@ -119,54 +119,49 @@ int AI::minimax(vector<vector<Piece*>>& board, vector<Piece>& p2Pieces,
 int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase)
 {
 	int score = 0;
-
-	// Score for AI (Player 2)
+	
 	for (int row = 0; row < 5; ++row) {
 		for (int col = 0; col < 5; ++col) {
-			if (board[row][col] && !board[row][col]->isPlayer1()) {
+			if (board[row][col]) {
 				int lineCount = 0;
+				if (!board[row][col]->isPlayer1())
+				{
+					score += scoreCloserToCenter(row, col, 5);
+					// Horizontal
+					lineCount = countInLine(board, row, col, 0, 1, false);
+					score += lineCount * lineCount * 10; // Quadratic scoring for longer lines
 
-				// Horizontal
-				lineCount = countInLine(board, row, col, 0, 1, false);
-				score += lineCount * lineCount * 10; // Quadratic scoring for longer lines
+					// Vertical
+					lineCount = countInLine(board, row, col, 1, 0, false);
+					score += lineCount * lineCount * 10;
 
-				// Vertical
-				lineCount = countInLine(board, row, col, 1, 0, false);
-				score += lineCount * lineCount * 10;
+					// Diagonal (\)
+					lineCount = countInLine(board, row, col, 1, 1, false);
+					score += lineCount * lineCount * 10;
 
-				// Diagonal (\)
-				lineCount = countInLine(board, row, col, 1, 1, false);
-				score += lineCount * lineCount * 10;
+					// Diagonal (/)
+					lineCount = countInLine(board, row, col, 1, -1, false);
+					score += lineCount * lineCount * 10;
+				}
+				else
+				{
+					score -= scoreCloserToCenter(row, col, 5);
+					// Horizontal
+					lineCount = countInLine(board, row, col, 0, 1, true);
+					score -= lineCount * lineCount * 10;
 
-				// Diagonal (/)
-				lineCount = countInLine(board, row, col, 1, -1, false);
-				score += lineCount * lineCount * 10;
-			}
-		}
-	}
+					// Vertical
+					lineCount = countInLine(board, row, col, 1, 0, true);
+					score -= lineCount * lineCount * 10;
 
-	// Subtract score for Player 1
-	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col < 5; ++col) {
-			if (board[row][col] && board[row][col]->isPlayer1()) {
-				// Check lines of player 1 pieces
-				int lineCount = 0;
+					// Diagonal (\)
+					lineCount = countInLine(board, row, col, 1, 1, true);
+					score -= lineCount * lineCount * 10;
 
-				// Horizontal
-				lineCount = countInLine(board, row, col, 0, 1, true);
-				score -= lineCount * lineCount * 10;
-
-				// Vertical
-				lineCount = countInLine(board, row, col, 1, 0, true);
-				score -= lineCount * lineCount * 10;
-
-				// Diagonal (\)
-				lineCount = countInLine(board, row, col, 1, 1, true);
-				score -= lineCount * lineCount * 10;
-
-				// Diagonal (/)
-				lineCount = countInLine(board, row, col, 1, -1, true);
-				score -= lineCount * lineCount * 10;
+					// Diagonal (/)
+					lineCount = countInLine(board, row, col, 1, -1, true);
+					score -= lineCount * lineCount * 10;
+				}
 			}
 		}
 	}
@@ -314,4 +309,11 @@ vector<pair<int, int>> AI::getEmptyCells(const vector<vector<Piece*>>& board, in
 		}
 	}
 	return emptyCells;
+}
+
+int AI::scoreCloserToCenter(int row, int col, int gridSize)
+{
+	int scoreRow = gridSize % (row + 1);
+	int scoreCol = gridSize % (col + 1);
+	return scoreRow + scoreCol;
 }

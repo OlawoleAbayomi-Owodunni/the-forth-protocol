@@ -163,4 +163,6 @@ private:
 	/// @param gridSize Size of the game grid
 	/// @return Vector of coordinate pairs representing empty positions
 	vector<pair<int, int>> getEmptyCells(const vector<vector<Piece*>>& board, int gridSize);
+
+	int scoreCloserToCenter(int row, int col, int gridSize);
 };
