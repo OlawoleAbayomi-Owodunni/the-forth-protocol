@@ -21,9 +21,12 @@ void Game::init()
 	// Really only necessary is our target FPS is greater than 60.
 	m_window.setVerticalSyncEnabled(true);
 	
-	if (!m_arialFont.openFromFile("ASSETS/FONTS/ariblk.ttf"))
-	{
-		std::cout << "Error loading font file";
+	if (!m_arialFont.getInfo().family.size()) {
+		// only try to open if font is not already loaded
+		if (!m_arialFont.openFromFile("ASSETS/FONTS/ariblk.ttf"))
+		{
+			std::cout << "Error loading font file";
+		}
 	}
 
 #ifdef TEST_FPS
@@ -38,10 +41,18 @@ void Game::init()
 #endif
 #pragma endregion
 
+	// reset board and state
+	m_board.clear();
 	m_board.resize(m_gridRows);
 	for (int i = 0; i < m_gridRows; ++i) {
 		m_board[i].resize(m_gridCols, nullptr);
 	}
+
+	m_grid.clear();
+	m_p1Grid.clear();
+	m_p2Grid.clear();
+	m_p1Pieces.clear();
+	m_p2Pieces.clear();
 
 	const float cellSizeXY = 100.0f;
 	const int gridSizeXY = m_gridRows * cellSizeXY;
@@ -283,7 +294,7 @@ bool Game::placePiece(Piece* piece, int row, int col) {
 		m_gamePhase = GamePhase::GameOver;
 		m_winner = piece;
 		std::string winnerText = piece->isPlayer1() ? "Player 1 Wins!" : "Player 2 Wins!";
-		m_statusText.setString(winnerText + " - 4 in a row!");
+		m_statusText.setString(winnerText + " - 4 in a row!\n\nPress R to restart");
 		m_instructionText.setString("Close window to exit");
 		return true;
 	}
@@ -306,7 +317,7 @@ bool Game::movePiece(Piece* piece, int fromRow, int fromCol, int toRow, int toCo
 		m_gamePhase = GamePhase::GameOver;
 		m_winner = piece;
 		std::string winnerText = piece->isPlayer1() ? "Player 1 Wins!" : "Player 2 Wins!";
-		m_statusText.setString(winnerText + " - 4 in a row!");
+		m_statusText.setString(winnerText + " - 4 in a row!\n\nPress R to restart");
 		m_instructionText.setString("Close window to exit");
 		return true;
 	}
@@ -434,7 +445,16 @@ void Game::processGameEvents(const sf::Event& event)
 		return; // ignore other events while in menu
 	}
 
-	if (m_gamePhase == GamePhase::GameOver) return;
+	// Restart game when R pressed after GameOver
+	if (m_gamePhase == GamePhase::GameOver) {
+		if (const auto* keyPressedR = event.getIf<sf::Event::KeyPressed>()) {
+			if (keyPressedR->scancode == sf::Keyboard::Scancode::R) {
+				init(); // restart without showing menu
+				return;
+			}
+		}
+		return;
+	}
 
 	if (m_isAIGame && !m_isPlayer1Turn && (m_gamePhase == GamePhase::Placement || m_gamePhase == GamePhase::Movement)) {
 		return;
@@ -739,8 +759,8 @@ void Game::applyAIMove(const Move& move)
 			const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY);
 
 			Vector2f cellPos = {
-				x0 + static_cast<float>(move.toCol * cellSizeXY),
-				y0 + static_cast<float>(move.toRow * cellSizeXY)
+			x0 + static_cast<float>(move.toCol * cellSizeXY),
+			y0 + static_cast<float>(move.toRow * cellSizeXY)
 			};
 			piece->setPosition(cellPos);
 			endTurn();
@@ -753,8 +773,8 @@ void Game::applyAIMove(const Move& move)
 			const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY);
 
 			Vector2f cellPos = {
-				x0 + static_cast<float>(move.toCol * cellSizeXY),
-				y0 + static_cast<float>(move.toRow * cellSizeXY)
+			x0 + static_cast<float>(move.toCol * cellSizeXY),
+			y0 + static_cast<float>(move.toRow * cellSizeXY)
 			};
 			piece->setPosition(cellPos);
 			updateBoard();
@@ -790,7 +810,7 @@ void Game::snapToGrid(Vector2f mousePos)
 			{
 				int prevRow = m_selectedPiece->getGridRow();
 				int prevCol = m_selectedPiece->getGridCol();
-
+			
 				if (m_gamePhase == GamePhase::Placement) {
 					if (placePiece(m_selectedPiece, row, col)) {
 						Vector2f cellPos = cell.getPosition();

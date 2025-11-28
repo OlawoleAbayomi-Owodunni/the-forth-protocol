@@ -89,7 +89,7 @@ public:
 protected:
 	/// <summary>
 	/// @brief Once-off game initialisation code
-	/// </summary>	
+	/// </summary>    
 	void init();
 	/// <summary>
 	/// @brief Placeholder to perform updates to all game objects.
