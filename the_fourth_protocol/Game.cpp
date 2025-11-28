@@ -177,8 +177,10 @@ void Game::init()
 
 void Game::setupPieces(vector<Piece>& pieces, int row, const float cellSize, Vector2f startPos, bool isP1)
 {
-	if (row == 0) pieces.push_back(Piece(Piece::Type::Antelope, m_antelopeTexture, cellSize, startPos, isP1));
+	if (row == 0) pieces.push_back(Piece(Piece::Type::Frog, m_frogTexture, cellSize, startPos, isP1));
 	else if (row == 1) pieces.push_back(Piece(Piece::Type::Snake, m_snakeTexture, cellSize, startPos, isP1));
+	else if (row == 2) pieces.push_back(Piece(Piece::Type::Antelope, m_antelopeTexture, cellSize, startPos, isP1));
+	else if (row == 3) pieces.push_back(Piece(Piece::Type::Lion, m_lionTexture, cellSize, startPos, isP1));
 	else pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
 }
 

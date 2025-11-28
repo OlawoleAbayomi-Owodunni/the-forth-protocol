@@ -29,7 +29,8 @@ class Piece
 		Frog,		///< Can jump over other pieces
 		Snake,		///< Moves in straight lines only
 		Donkey,		///< Basic movement piece
-		Antelope	///< Moves L-shape like a knight in chess
+		Antelope,	///< Moves L-shape like a knight in chess
+		Lion		///< Moves ONLY to 2 spaces in any direction
 	};
 
     /// @brief Constructor to create a new piece

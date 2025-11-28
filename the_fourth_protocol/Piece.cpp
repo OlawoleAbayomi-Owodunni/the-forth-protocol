@@ -77,6 +77,21 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 			return true;
 		}
 	}
+	else if (m_type == Type::Lion) {
+		// Lion: Moves ONLY to 2 spaces in any direction
+		int rowDist = abs(targetRow - m_gridRow);
+		int colDist = abs(targetCol - m_gridCol);
+
+		if ((rowDist == 2 && colDist == 0) || // vertical
+			(rowDist == 0 && colDist == 2) || // horizontal
+			(rowDist == 2 && colDist == 2) ||	// diagonal
+			(rowDist == 2 && colDist == 1) || (rowDist == 1 && colDist == 2) // everything else
+			) {
+			return true;
+		}
+
+		return false;
+	}
 
 	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
 	
