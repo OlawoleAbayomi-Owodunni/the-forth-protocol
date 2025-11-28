@@ -317,5 +317,8 @@ private:
 	double m_aiThinkTime = 0.0;
 	/// @brief Duration for AI to "think" before making a move (for realism)
 	double m_aiThinkDuration = 1.0;  // 1 second think time for AI
-};
 
+	//Economy
+	int m_playerCashText = 0;
+	Text m_playerCashText{ m_arialFont };
+};

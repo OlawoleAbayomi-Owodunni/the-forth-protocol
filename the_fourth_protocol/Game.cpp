@@ -94,6 +94,11 @@ void Game::init()
 	m_statusText.setString("Player 1 - PLACEMENT PHASE");
 	m_instructionText.setString("Click and drag pieces to place them on the board");
 
+	m_playerCashText.setFont(m_arialFont);
+	m_playerCashText.setCharacterSize(18);
+	m_playerCashText.setFillColor(Color::Yellow);
+	m_playerCashText.setPosition({ 0.0f,0.0f });
+
 	// Setup main menu buttons (positioned relative to grid origin)
 	{
 		float btnW = 220.0f;
