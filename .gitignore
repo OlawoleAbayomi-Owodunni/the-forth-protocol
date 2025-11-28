@@ -271,3 +271,5 @@ Archives
 *.tgz
 *.bz2
 *.rar
+
+.vscode/

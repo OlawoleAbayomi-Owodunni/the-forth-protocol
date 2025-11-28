@@ -50,14 +50,17 @@ void Game::init()
 
 	m_grid.resize(m_gridRows * m_gridCols);
 	m_p1Grid.resize(5);
-	m_p2Grid.resize(m_gridRows * 1);
+	m_p2Grid.resize(5);
 	for(int row = 0; row < m_gridRows; ++row) {
 		// please remember that this is only being done here becuase there's only 1 column per player. If this increases for any reason, create a new nested loop
-		setupGrid(m_p1Grid, row, 0, 1, cellSizeXY, x0 - cellSizeXY - 75.0f, y0, Color::Red);
-		setupPieces(m_p1Pieces, row, cellSizeXY, m_p1Grid[row].getPosition(), true);
+		
+		if (row < 5) {	// piece grids
+			setupGrid(m_p1Grid, row, 0, 1, cellSizeXY, x0 - cellSizeXY - 75.0f, y0, Color::Red);
+			setupPieces(m_p1Pieces, row, cellSizeXY, m_p1Grid[row].getPosition(), true);
 
-		setupGrid(m_p2Grid, row, 0, 1, cellSizeXY, x0 + gridSizeXY + 75.0f, y0, Color::Blue);
-		setupPieces(m_p2Pieces, row, cellSizeXY, m_p2Grid[row].getPosition(), false);
+			setupGrid(m_p2Grid, row, 0, 1, cellSizeXY, x0 + gridSizeXY + 75.0f, y0, Color::Blue);
+			setupPieces(m_p2Pieces, row, cellSizeXY, m_p2Grid[row].getPosition(), false);
+		}
 
 		for(int col = 0; col < m_gridCols; ++col) {
 			setupGrid(m_grid, row, col, m_gridCols, cellSizeXY, x0, y0, Color::White);
@@ -174,7 +177,7 @@ void Game::init()
 
 void Game::setupPieces(vector<Piece>& pieces, int row, const float cellSize, Vector2f startPos, bool isP1)
 {
-	if (row == 0) pieces.push_back(Piece(Piece::Type::Frog, m_frogTexture, cellSize, startPos, isP1));
+	if (row == 0) pieces.push_back(Piece(Piece::Type::Antelope, m_antelopeTexture, cellSize, startPos, isP1));
 	else if (row == 1) pieces.push_back(Piece(Piece::Type::Snake, m_snakeTexture, cellSize, startPos, isP1));
 	else pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
 }

@@ -68,6 +68,16 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 	// Target must be empty
 	if (board[targetRow][targetCol] != nullptr) return false;
 	
+	if (m_type == Type::Antelope) {
+		// Antelope: L-shape move like a knight in chess
+		int rowDist = abs(targetRow - m_gridRow);
+		int colDist = abs(targetCol - m_gridCol);
+
+		if ((rowDist == 2 && colDist == 1) || (rowDist == 1 && colDist == 2)) {
+			return true;
+		}
+	}
+
 	if (!isInLine(m_gridRow, m_gridCol, targetRow, targetCol)) return false;
 	
 	if (m_type == Type::Donkey) {
@@ -92,7 +102,6 @@ bool Piece::canMoveTo(int targetRow, int targetCol, const vector<vector<Piece*>>
 		}
 		return false;
 	}
-	
 	return false;
 }
 

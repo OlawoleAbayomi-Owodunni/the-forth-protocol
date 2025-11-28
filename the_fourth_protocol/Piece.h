@@ -28,7 +28,8 @@ class Piece
 	enum class Type {
 		Frog,		///< Can jump over other pieces
 		Snake,		///< Moves in straight lines only
-		Donkey		///< Basic movement piece
+		Donkey,		///< Basic movement piece
+		Antelope	///< Moves L-shape like a knight in chess
 	};
 
     /// @brief Constructor to create a new piece

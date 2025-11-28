@@ -229,6 +229,8 @@ private:
 	Texture m_snakeTexture{ "ASSETS/IMAGES/snake.png" };
 	/// @brief Texture for donkey pieces
 	Texture m_donkeyTexture{ "ASSETS/IMAGES/donkey.png" };
+	/// @brief Texture for antelope pieces
+	Texture m_antelopeTexture{ "ASSETS/IMAGES/frog.png" };
 
 	/// @brief Collection of Player 1's pieces
 	vector<Piece> m_p1Pieces;
