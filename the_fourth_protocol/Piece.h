@@ -1,7 +1,7 @@
 /**
  * @file Piece.h
  * @brief Game piece class for The Fourth Protocol
- * @author OA-O  
+ * @author OA-O and RCH
  * @date November 2025
  * @version 1.0
  *

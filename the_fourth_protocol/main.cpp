@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @brief Entry point for The Fourth Protocol game
- * @author OA-O
+ * @author OA-O and RCH
  * @date November 2025
  * @version 1.0
  *

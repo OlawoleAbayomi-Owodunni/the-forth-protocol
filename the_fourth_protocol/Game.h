@@ -1,7 +1,7 @@
 /**
  * @file Game.h
  * @brief Main game class for The Fourth Protocol
- * @author OA-O
+ * @author OA-O and RCH
  * @date November 2025
  * @version 1.0
  *
@@ -22,6 +22,7 @@
 #include <vector>
 #include "Piece.h"
 #include "AI.h"
+#include "Menu.h"
 
 using namespace std;
 using namespace sf;
@@ -171,9 +172,13 @@ private:
 	/// @param row Target grid row
 	/// @param col Target grid column
 	/// @return True if placement was successful, false otherwise
-	bool placePiece(Piece* piece, int row, int col);
-	
-	/// @brief Moves a piece from one grid position to another
+    bool placePiece(Piece *piece, int row, int col);
+
+	/// @brief Handles the logic to be executed when a win condition is met in the game.
+	/// @param piece Pointer to the Piece object that caused the win condition.
+    void handleWinLogic(Piece *piece);
+
+    /// @brief Moves a piece from one grid position to another
 	/// @param piece Pointer to the piece to move
 	/// @param fromRow Source grid row
 	/// @param fromCol Source grid column
@@ -206,6 +211,9 @@ private:
 	/// @brief Applies the given move to the game state
 	/// @param move The Move object containing move details to apply
 	void applyAIMove(const Move& move);
+
+	/// @brief Configure grid size and pieces based on difficulty
+	void configureDifficulty();
 
 	// Board state
 	/// @brief 2D vector representing the game board state with piece pointers
@@ -295,27 +303,25 @@ private:
 	float m_lastAICalculationTime = 0.0f;
 
 	// Main menu
-	/// @brief Button rectangle for Player vs AI option
-	sf::RectangleShape m_btnPvAI;
-	/// @brief Button rectangle for Player vs Player option
-	sf::RectangleShape m_btnPvP;
-	/// @brief Text label for Player vs AI button
-	sf::Text m_btnPvAIText{ m_arialFont };
-	/// @brief Text label for Player vs Player button
-	sf::Text m_btnPvPText{ m_arialFont };
-	/// @brief Flag indicating if the main menu should be displayed
-	bool m_showMenu = true;
+	/// @brief Menu system instance for game mode and difficulty selection
+	Menu m_menu;
+	/// @brief Current difficulty level for AI opponent
+	Difficulty m_difficulty = Difficulty::Medium;
 
 	// AI
 	/// @brief AI player instance for computer opponent
 	AI m_ai;
-	/// @brief Flag indicating if this is an AI game (false = PvP, true = PvAI)
-	bool m_isAIGame = true;  // false = PvP, true = PvAI
+	/// @brief Flag indicating if this is an AI game (false = PvP, true = PvAI or AIvsAI)
+	bool m_isAIGame = true;
+	/// @brief Flag indicating if both players are AI (AI vs AI mode)
+	bool m_isAIvsAI = false;
 	/// @brief Flag indicating if AI is currently thinking/calculating
 	bool m_aiThinking = false;
 	/// @brief Elapsed time for AI thinking animation
 	double m_aiThinkTime = 0.0;
 	/// @brief Duration for AI to "think" before making a move (for realism)
 	double m_aiThinkDuration = 1.0;  // 1 second think time for AI
+	/// @brief Last move made (to prevent immediate undo)
+	Move m_lastMove;
 };
 

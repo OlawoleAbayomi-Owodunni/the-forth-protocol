@@ -8,7 +8,8 @@ static double const FPS{ 60.0f };
 
 ////////////////////////////////////////////////////////////
 Game::Game()
-	: m_window(sf::VideoMode(sf::Vector2u(ScreenSize::s_width, ScreenSize::s_height), 32), "The Fourth Protocol", sf::Style::Default)
+	: m_window(sf::VideoMode(sf::Vector2u(ScreenSize::s_width, ScreenSize::s_height), 32), "The Fourth Protocol", sf::Style::Default),
+	m_menu(m_arialFont, sf::Vector2f(static_cast<float>(ScreenSize::s_width), static_cast<float>(ScreenSize::s_height)))
 {
 	init();
 }
@@ -41,6 +42,8 @@ void Game::init()
 #endif
 #pragma endregion
 
+	configureDifficulty();
+
 	// reset board and state
 	m_board.clear();
 	m_board.resize(m_gridRows);
@@ -54,18 +57,32 @@ void Game::init()
 	m_p1Pieces.clear();
 	m_p2Pieces.clear();
 
+	// Reset game state variables
+	m_gamePhase = GamePhase::Placement;
+	m_isPlayer1Turn = true;
+	m_p1PiecesPlaced = 0;
+	m_p2PiecesPlaced = 0;
+	m_winner = nullptr;
+	m_selectedPiece = nullptr;
+	m_isDragging = false;
+	m_validMoveIndicators.clear();
+	m_aiThinking = false;
+	m_aiThinkTime = 0.0;
+	m_lastMove = Move();
+
 	const float cellSizeXY = 100.0f;
 	const int gridSizeXY = m_gridRows * cellSizeXY;
 	const float x0 = 0.5f * (static_cast<float>(ScreenSize::s_width) - gridSizeXY); // grid x origin pos
 	const float y0 = 0.5f * (static_cast<float>(ScreenSize::s_height) - gridSizeXY); // grid y origin pos
 
 	m_grid.resize(m_gridRows * m_gridCols);
-	m_p1Grid.resize(5);
-	m_p2Grid.resize(5);
+	
+	int numPieces = (m_difficulty == Difficulty::Hard) ? 7 : 5;
+	m_p1Grid.resize(numPieces);
+	m_p2Grid.resize(numPieces);
+	
 	for(int row = 0; row < m_gridRows; ++row) {
-		// please remember that this is only being done here becuase there's only 1 column per player. If this increases for any reason, create a new nested loop
-		
-		if (row < 5) {	// piece grids
+		if (row < numPieces) {
 			setupGrid(m_p1Grid, row, 0, 1, cellSizeXY, x0 - cellSizeXY - 75.0f, y0, Color::Red);
 			setupPieces(m_p1Pieces, row, cellSizeXY, m_p1Grid[row].getPosition(), true);
 
@@ -93,46 +110,6 @@ void Game::init()
 
 	m_statusText.setString("Player 1 - PLACEMENT PHASE");
 	m_instructionText.setString("Click and drag pieces to place them on the board");
-
-	// Setup main menu buttons (positioned relative to grid origin)
-	{
-		float btnW = 220.0f;
-		float btnH = 64.0f;
-		float centerX = x0 + 0.5f * static_cast<float>(gridSizeXY);
-		float btnY = y0 - 120.0f;
-
-		m_btnPvP.setSize({ btnW, btnH });
-		m_btnPvAI.setSize({ btnW, btnH });
-		m_btnPvAI.setPosition({ centerX - btnW - 10.0f, btnY });
-		m_btnPvP.setPosition({ centerX + 10.0f, btnY });
-		m_btnPvP.setFillColor(sf::Color(100, 149, 237));
-		m_btnPvAI.setFillColor(sf::Color(70, 130, 180));
-		m_btnPvP.setOutlineThickness(2.0f);
-		m_btnPvAI.setOutlineThickness(2.0f);
-		m_btnPvP.setOutlineColor(sf::Color::White);
-		m_btnPvAI.setOutlineColor(sf::Color::White);
-
-		m_btnPvPText.setFont(m_arialFont);
-		m_btnPvAIText.setFont(m_arialFont);
-		m_btnPvPText.setCharacterSize(20);
-		m_btnPvAIText.setCharacterSize(20);
-		m_btnPvPText.setFillColor(sf::Color::White);
-		m_btnPvAIText.setFillColor(sf::Color::White);
-		m_btnPvPText.setString("2 Player");
-		m_btnPvAIText.setString("1 Player");
-
-		// center texts inside buttons
-		auto pb = m_btnPvPText.getLocalBounds();
-		auto pa = m_btnPvAIText.getLocalBounds();
-	
-	auto posP = m_btnPvP.getPosition();
-		auto posA = m_btnPvAI.getPosition();
-		m_btnPvPText.setPosition({ posP.x + (btnW - pb.size.x) / 2.0f - pb.position.x, posP.y + (btnH - pb.size.y) / 2.0f - pb.position.y });
-		m_btnPvAIText.setPosition({ posA.x + (btnW - pa.size.x) / 2.0f - pa.position.x, posA.y + (btnH - pa.size.y) / 2.0f - pa.position.y });
-
-		m_showMenu = true;
-	}
-#pragma endregion
 
 	{
 		float panelWidth = 500.0f;
@@ -190,9 +167,15 @@ void Game::setupPieces(vector<Piece>& pieces, int row, const float cellSize, Vec
 {
 	if (row == 0) pieces.push_back(Piece(Piece::Type::Frog, m_frogTexture, cellSize, startPos, isP1));
 	else if (row == 1) pieces.push_back(Piece(Piece::Type::Snake, m_snakeTexture, cellSize, startPos, isP1));
-	//else if (row == 2) pieces.push_back(Piece(Piece::Type::Antelope, m_antelopeTexture, cellSize, startPos, isP1));
-	//else if (row == 3) pieces.push_back(Piece(Piece::Type::Lion, m_lionTexture, cellSize, startPos, isP1));
-	else pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
+	else if (row == 2 || row == 3 || row == 4) {
+		pieces.push_back(Piece(Piece::Type::Donkey, m_donkeyTexture, cellSize, startPos, isP1));
+	}
+	else if (row == 5 && m_difficulty == Difficulty::Hard) {
+		pieces.push_back(Piece(Piece::Type::Antelope, m_antelopeTexture, cellSize, startPos, isP1));
+	}
+	else if (row == 6 && m_difficulty == Difficulty::Hard) {
+		pieces.push_back(Piece(Piece::Type::Lion, m_lionTexture, cellSize, startPos, isP1));
+	}
 }
 
 void Game::updateBoard() {
@@ -291,15 +274,27 @@ bool Game::placePiece(Piece* piece, int row, int col) {
 	}
 
 	if (checkWinCondition(piece->isPlayer1())) {
-		m_gamePhase = GamePhase::GameOver;
-		m_winner = piece;
-		std::string winnerText = piece->isPlayer1() ? "Player 1 Wins!" : "Player 2 Wins!";
-		m_statusText.setString(winnerText + " - 4 in a row!\n\nPress R to restart");
-		m_instructionText.setString("Close window to exit");
-		return true;
+        handleWinLogic(piece);
+        return true;
 	}
 
 	return true;
+}
+
+void Game::handleWinLogic(Piece *piece)
+{
+    m_gamePhase = GamePhase::GameOver;
+    m_winner = piece;
+    std::string winnerText;
+    if (m_isAIvsAI)
+    {
+        winnerText = piece->isPlayer1() ? "AI 1 (Red) Wins!" : "AI 2 (Blue) Wins!";
+    }
+    else
+    {
+        winnerText = piece->isPlayer1() ? "Player 1 Wins!" : (m_isAIGame ? "AI Wins!" : "Player 2 Wins!");
+    }
+    m_menu.showGameOver(winnerText + " - 4 in a row!");
 }
 
 bool Game::movePiece(Piece* piece, int fromRow, int fromCol, int toRow, int toCol) {
@@ -314,11 +309,7 @@ bool Game::movePiece(Piece* piece, int fromRow, int fromCol, int toRow, int toCo
 
 	// Check for win
 	if (checkWinCondition(piece->isPlayer1())) {
-		m_gamePhase = GamePhase::GameOver;
-		m_winner = piece;
-		std::string winnerText = piece->isPlayer1() ? "Player 1 Wins!" : "Player 2 Wins!";
-		m_statusText.setString(winnerText + " - 4 in a row!\n\nPress R to restart");
-		m_instructionText.setString("Close window to exit");
+		handleWinLogic(piece);
 		return true;
 	}
 
@@ -330,18 +321,36 @@ void Game::endTurn() {
 	m_isPlayer1Turn = !m_isPlayer1Turn;
 
 	std::string phaseText = m_gamePhase == GamePhase::Placement ? "PLACEMENT" : "MOVEMENT";
-	std::string playerText = m_isPlayer1Turn ? "Player 1" : (m_isAIGame ? "AI (Player 2)" : "Player 2");
+	std::string playerText;
+	
+	if (m_isAIvsAI) {
+		playerText = m_isPlayer1Turn ? "AI 1" : "AI 2";
+	} else {
+		playerText = m_isPlayer1Turn ? "Player 1" : (m_isAIGame ? "AI (Player 2)" : "Player 2");
+	}
+	
 	m_statusText.setString(playerText + " - " + phaseText + " PHASE");
 
-	if (m_isAIGame && !m_isPlayer1Turn && m_gamePhase == GamePhase::Movement) {
+	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && m_gamePhase == GamePhase::Movement) {
 		m_instructionText.setString("AI is thinking...");
+	} else if (m_isAIvsAI) {
+		m_instructionText.setString("AI vs AI - Watch the game unfold!");
 	}
 
-	if (m_gamePhase == GamePhase::Placement && m_p1PiecesPlaced == 5 && m_p2PiecesPlaced == 5) {
+	int totalPieces = (m_difficulty == Difficulty::Hard) ? 7 : 5;
+	if (m_gamePhase == GamePhase::Placement && m_p1PiecesPlaced == totalPieces && m_p2PiecesPlaced == totalPieces) {
 		m_gamePhase = GamePhase::Movement;
 		m_isPlayer1Turn = true;
-		m_statusText.setString("Player 1 - MOVEMENT PHASE");
-		m_instructionText.setString("Click and drag pieces to move them");
+		
+		if (m_isAIvsAI) {
+			m_statusText.setString("AI 1 - MOVEMENT PHASE");
+		} else {
+			m_statusText.setString("Player 1 - MOVEMENT PHASE");
+		}
+		
+		if (!m_isAIvsAI) {
+			m_instructionText.setString("Click and drag pieces to move them");
+		}
 	}
 }
 
@@ -415,7 +424,7 @@ void Game::processGameEvents(const sf::Event& event)
 	}
 
 	// If the main menu is visible, handle menu clicks and ignore other game events
-	if (m_showMenu)
+	if (m_menu.getState() != Menu::State::Hidden)
 	{
 		if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>())
 		{
@@ -424,21 +433,32 @@ void Game::processGameEvents(const sf::Event& event)
 				Vector2f mousePos = m_window.mapPixelToCoords(
 					Vector2i(mousePressed->position.x, mousePressed->position.y)
 				);
-				if (m_btnPvAI.getGlobalBounds().contains(mousePos)) {
-					m_isAIGame = true;
-					m_showMenu = false;
-					m_aiHasMoved = false;  
-					m_statusText.setString("Player 1 - PLACEMENT PHASE");
-					m_instructionText.setString("Click and drag pieces to place them on the board");
-					return;
-				}
-				if (m_btnPvP.getGlobalBounds().contains(mousePos)) {
-					m_isAIGame = false;
-					m_showMenu = false;
-					m_aiHasMoved = false; 
-					m_statusText.setString("Player 1 - PLACEMENT PHASE");
-					m_instructionText.setString("Click and drag pieces to place them on the board");
-					return;
+				
+				if (m_menu.handleClick(mousePos)) {
+					if (m_menu.shouldStartGame()) {
+						m_menu.clearStartFlag();
+						m_menu.setState(Menu::State::Hidden);
+						
+						if (m_menu.isPvAISelected()) {
+							m_isAIGame = true;
+							m_isAIvsAI = false;
+							m_difficulty = m_menu.getDifficulty();
+						} else if (m_menu.isAIvsAISelected()) {
+							m_isAIGame = true;
+							m_isAIvsAI = true;
+							m_difficulty = m_menu.getDifficulty();
+						} else if (m_menu.isPvPSelected()) {
+							m_isAIGame = false;
+							m_isAIvsAI = false;
+						}
+						init();
+						m_aiHasMoved = false;
+						return;
+					}
+					if (m_menu.shouldExitGame()) {
+						m_window.close();
+						return;
+					}
 				}
 			}
 		}
@@ -447,17 +467,46 @@ void Game::processGameEvents(const sf::Event& event)
 
 	// Restart game when R pressed after GameOver
 	if (m_gamePhase == GamePhase::GameOver) {
+		// Handle game over menu button clicks
+		if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>()) {
+			if (mousePressed->button == sf::Mouse::Button::Left) {
+				Vector2f mousePos = m_window.mapPixelToCoords(
+					Vector2i(mousePressed->position.x, mousePressed->position.y)
+				);
+				
+				if (m_menu.handleClick(mousePos)) {
+					if (m_menu.shouldStartGame()) {
+						m_menu.clearStartFlag();
+						init(); // restart game
+						m_menu.setState(Menu::State::Hidden);
+						return;
+					}
+				}
+			}
+		}
+		
+		// Also allow keyboard shortcuts
 		if (const auto* keyPressedR = event.getIf<sf::Event::KeyPressed>()) {
 			if (keyPressedR->scancode == sf::Keyboard::Scancode::R) {
 				init(); // restart without showing menu
+				m_menu.setState(Menu::State::Hidden);
+				return;
+			}
+			if (keyPressedR->scancode == sf::Keyboard::Scancode::M) {
+				init();
+				m_menu.reset();
 				return;
 			}
 		}
 		return;
 	}
 
-	if (m_isAIGame && !m_isPlayer1Turn && (m_gamePhase == GamePhase::Placement || m_gamePhase == GamePhase::Movement)) {
-		return;
+	if (m_isAIvsAI && (m_gamePhase == GamePhase::Placement || m_gamePhase == GamePhase::Movement)) {
+		return; // In AI vs AI mode, block all player input during game
+	}
+	
+	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && (m_gamePhase == GamePhase::Placement || m_gamePhase == GamePhase::Movement)) {
+		return; // In PvAI mode, block input during AI turn
 	}
 
 	if (const auto* keyPressed2 = event.getIf<sf::Event::KeyPressed>())
@@ -485,6 +534,11 @@ void Game::processGameEvents(const sf::Event& event)
 			if (m_isPlayer1Turn) {
 				for (auto& piece : m_p1Pieces) {
 					if (piece.contains(mousePos)) {
+						// In placement phase, only allow dragging pieces not yet on the board
+						if (m_gamePhase == GamePhase::Placement && piece.getGridRow() >= 0) {
+							continue;
+						}
+						
 						m_selectedPiece = &piece;
 						m_isDragging = true;
 						m_dragOffset = piece.getPosition() - mousePos;
@@ -520,6 +574,11 @@ void Game::processGameEvents(const sf::Event& event)
 			} else if (!m_isAIGame) {
 				for (auto& piece : m_p2Pieces) {
 					if (piece.contains(mousePos)) {
+						// In placement phase, only allow dragging pieces not yet on the board
+						if (m_gamePhase == GamePhase::Placement && piece.getGridRow() >= 0) {
+							continue;
+						}
+						
 						m_selectedPiece = &piece;
 						m_isDragging = true;
 						m_dragOffset = piece.getPosition() - mousePos;
@@ -592,7 +651,27 @@ void Game::processGameEvents(const sf::Event& event)
 ////////////////////////////////////////////////////////////
 void Game::update(double dt)
 {
-	if (m_isAIGame && !m_isPlayer1Turn && m_gamePhase == GamePhase::Movement && !m_aiThinking) {
+	if (m_menu.getState() != Menu::State::Hidden) {
+		auto mousePos = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+		m_menu.update(mousePos);
+	}
+
+	// Handle AI vs AI mode - both players are AI
+	if (m_isAIvsAI && m_gamePhase == GamePhase::Placement) {
+		if (m_isPlayer1Turn) {
+			executeAIMove();
+		} else {
+			executeAIMove();
+		}
+		return;
+	}
+
+	if (m_isAIvsAI && m_gamePhase == GamePhase::Movement && !m_aiThinking) {
+		m_aiThinking = true;
+		m_aiThinkTime = 0.0;
+	}
+
+	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && m_gamePhase == GamePhase::Movement && !m_aiThinking) {
 		m_aiThinking = true;
 		m_aiThinkTime = 0.0;
 	}
@@ -605,7 +684,7 @@ void Game::update(double dt)
 		}
 	}
 
-	if (m_isAIGame && !m_isPlayer1Turn && m_gamePhase == GamePhase::Placement) {
+	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && m_gamePhase == GamePhase::Placement) {
 		executeAIMove();
 	}
 }
@@ -626,41 +705,25 @@ void Game::render()
 	for (const auto& indicator : m_validMoveIndicators)
 		m_window.draw(indicator);
 
-	if (m_showAIAnalyzer && m_isAIGame && !m_showMenu && m_aiHasMoved) {
-		m_window.draw(m_aiMoveFromIndicator);
-		m_window.draw(m_aiMoveToIndicator);
-	}
-
 	for (const auto& piece : m_p1Pieces)
 		piece.draw(m_window);
 	for (const auto& piece : m_p2Pieces)
 		piece.draw(m_window);
 
-	if (m_gamePhase == GamePhase::GameOver) {
-		sf::RectangleShape overlay({ static_cast<float>(ScreenSize::s_width), static_cast<float>(ScreenSize::s_height) });
-		overlay.setFillColor(sf::Color(0, 0, 0, 180));
-		m_window.draw(overlay);
+	if (m_gamePhase != GamePhase::GameOver) {
+		m_window.draw(m_statusText);
+		m_window.draw(m_instructionText);
 	}
-
-	m_window.draw(m_statusText);
-	m_window.draw(m_instructionText);
-
 #ifdef TEST_FPS
 	m_window.draw(x_updateFPS);
 	m_window.draw(x_drawFPS);
 #endif
 
-	if (m_showMenu) {
-		sf::RectangleShape menuOverlay({ static_cast<float>(ScreenSize::s_width), static_cast<float>(ScreenSize::s_height) });
-		menuOverlay.setFillColor(sf::Color(0, 0, 0, 200));
-		m_window.draw(menuOverlay);
-		m_window.draw(m_btnPvP);
-		m_window.draw(m_btnPvAI);
-		m_window.draw(m_btnPvPText);
-		m_window.draw(m_btnPvAIText);
+	if (m_menu.getState() != Menu::State::Hidden) {
+		m_menu.render(m_window);
 	}
 
-	if (m_showAIAnalyzer && m_isAIGame && !m_showMenu) {
+	if (m_showAIAnalyzer && m_isAIGame && m_menu.getState() == Menu::State::Hidden) {
 		if (m_aiHasMoved) {
 			m_window.draw(m_aiMoveFromIndicator);
 			m_window.draw(m_aiMoveToIndicator);
@@ -686,13 +749,33 @@ void Game::executeAIMove()
 	// Start timing the AI calculation
 	m_aiCalculationClock.restart();
 
-	Move aiMove = m_ai.findBestMove(m_board, m_p2Pieces, m_p1Pieces, m_gridRows, 
-		m_gamePhase == GamePhase::Placement);
+	int searchDepth = 3;
+	switch (m_difficulty) {
+		case Difficulty::Easy:
+			searchDepth = 2;
+			break;
+		case Difficulty::Medium:
+			searchDepth = 3;
+			break;
+		case Difficulty::Hard:
+			searchDepth = 3;
+			break;
+	}
+
+	// In AI vs AI mode, use random placement for variety during placement phase
+	bool useRandomPlacement = m_isAIvsAI && m_gamePhase == GamePhase::Placement;
+	
+	// Determine which pieces to use based on current player
+	vector<Piece>& currentPlayerPieces = m_isPlayer1Turn ? m_p1Pieces : m_p2Pieces;
+	vector<Piece>& opponentPieces = m_isPlayer1Turn ? m_p2Pieces : m_p1Pieces;
+
+	Move aiMove = m_ai.findBestMove(m_board, currentPlayerPieces, opponentPieces, m_gridRows, 
+		m_gamePhase == GamePhase::Placement, searchDepth, useRandomPlacement, m_lastMove);
 
 	// Record calculation time
 	m_lastAICalculationTime = m_aiCalculationClock.getElapsedTime().asMilliseconds();
 
-	if (aiMove.pieceIndex >= 0 && aiMove.pieceIndex < m_p2Pieces.size()) {
+	if (aiMove.pieceIndex >= 0 && aiMove.pieceIndex < currentPlayerPieces.size()) {
 		m_aiHasMoved = true;
 		
 		std::ostringstream oss;
@@ -714,7 +797,7 @@ void Game::executeAIMove()
 		m_aiScoreText.setString(oss.str());
 
 		oss.str("");
-		oss << "Search Depth: 3 levels";
+		oss << "Search Depth: " << searchDepth << " levels";
 		m_aiDepthText.setString(oss.str());
 
 		oss.str("");
@@ -749,7 +832,8 @@ void Game::executeAIMove()
 
 void Game::applyAIMove(const Move& move)
 {
-	Piece* piece = &m_p2Pieces[move.pieceIndex];
+	vector<Piece>& currentPlayerPieces = m_isPlayer1Turn ? m_p1Pieces : m_p2Pieces;
+	Piece* piece = &currentPlayerPieces[move.pieceIndex];
 
 	if (m_gamePhase == GamePhase::Placement) {
 		if (placePiece(piece, move.toRow, move.toCol)) {
@@ -763,6 +847,7 @@ void Game::applyAIMove(const Move& move)
 			y0 + static_cast<float>(move.toRow * cellSizeXY)
 			};
 			piece->setPosition(cellPos);
+			m_lastMove = move;
 			endTurn();
 		}
 	} else if (m_gamePhase == GamePhase::Movement) {
@@ -778,6 +863,7 @@ void Game::applyAIMove(const Move& move)
 			};
 			piece->setPosition(cellPos);
 			updateBoard();
+			m_lastMove = move;
 			endTurn();
 		}
 	}
@@ -838,6 +924,18 @@ void Game::snapToGrid(Vector2f mousePos)
 
 	if (!foundValidCell) {
 		m_selectedPiece->restoreOriginalPosition();
+	}
+}
+
+void Game::configureDifficulty()
+{
+	if (m_difficulty == Difficulty::Hard) {
+		m_gridRows = 7;
+		m_gridCols = 7;
+	}
+	else {
+		m_gridRows = 5;
+		m_gridCols = 5;
 	}
 }
 
