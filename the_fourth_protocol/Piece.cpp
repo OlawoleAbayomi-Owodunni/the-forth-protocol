@@ -135,30 +135,30 @@ bool Piece::canJump(int targetRow, int targetCol, const vector<vector<Piece*>>& 
 	if (targetCol > m_gridCol) colDir = 1;
 	else if (targetCol < m_gridCol) colDir = -1;
 	
-	int curRow = m_gridRow + rowDir;
-	int curCol = m_gridCol + colDir;
+	// Check if there's at least one piece DIRECTLY in one of the 8 surrounding cells
+	int adjacentRow = m_gridRow + rowDir;
+	int adjacentCol = m_gridCol + colDir;
 	
-	int lastPieceRow = -1;
-	int lastPieceCol = -1;
-	bool foundAnyPiece = false;
+	// There must be a piece directly next to the frog to start the jump
+	if (adjacentRow < 0 || adjacentRow >= gridSize || adjacentCol < 0 || adjacentCol >= gridSize) return false;
+	if (board[adjacentRow][adjacentCol] == nullptr) return false;
 	
-	while (curRow != targetRow || curCol != targetCol) {
+	int curRow = adjacentRow;
+	int curCol = adjacentCol;
+	int piecesJumped = 0;
+	
+	while (curRow >= 0 && curRow < gridSize && curCol >= 0 && curCol < gridSize) {
 		if (board[curRow][curCol] != nullptr) {
-			lastPieceRow = curRow;
-			lastPieceCol = curCol;
-			foundAnyPiece = true;
-		} else if (foundAnyPiece) {
-			return (curRow == targetRow && curCol == targetCol);
+			piecesJumped++;
+			curRow += rowDir;
+			curCol += colDir;
+		} else {
+			break;
 		}
-		curRow += rowDir;
-		curCol += colDir;
 	}
 	
-	if (foundAnyPiece) {
-		return (targetRow == lastPieceRow + rowDir && targetCol == lastPieceCol + colDir);
-	}
-	
-	return false;
+	// The landing spot must be immediately after the consecutive pieces (no gaps allowed)
+	return (curRow == targetRow && curCol == targetCol && piecesJumped > 0);
 }
 
 bool Piece::isValidMove(int targetRow, int targetCol, const vector<vector<Piece*>>& board, int gridSize) {

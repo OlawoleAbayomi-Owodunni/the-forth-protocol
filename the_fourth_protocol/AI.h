@@ -1,7 +1,7 @@
 /**
  * @file AI.h
  * @brief Artificial Intelligence player for The Fourth Protocol
- * @author OA-O
+ * @author RCH and OA-O
  * @date November 2025
  * @version 1.0
  *
@@ -63,9 +63,12 @@ public:
 	/// @param gridSize Size of the game grid
 	/// @param isPlacementPhase True if in placement phase, false if in movement phase
 	/// @param depth Maximum search depth for the minimax algorithm
+	/// @param useRandomPlacement If true, selects random placement instead of strategic (for AI vs AI variety)
+	/// @param lastMove The last move made (to avoid immediately undoing it)
 	/// @return Move object representing the best move found
 	Move findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Pieces, 
-		vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth = 3);
+		vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth = 3, 
+		bool useRandomPlacement = false, const Move& lastMove = Move());
 
 	/// @brief Get the number of moves considered in the last decision
 	/// @return Number of possible moves evaluated

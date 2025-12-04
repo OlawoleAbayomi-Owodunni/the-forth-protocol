@@ -1,6 +1,7 @@
 #include "AI.h"
 #include <algorithm>
 #include <cmath>
+#include <random>
 using namespace sf;
 
 AI::AI()
@@ -8,9 +9,26 @@ AI::AI()
 }
 
 Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Pieces, 
-	vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth)
+	vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth, bool useRandomPlacement, const Move& lastMove)
 {
 	vector<vector<Piece*>> boardCopy = board;
+	
+	// In AI vs AI mode during placement, use random placement for variety
+	if (useRandomPlacement && isPlacementPhase) {
+		vector<Move> possibleMoves = generateMoves(boardCopy, p2Pieces, gridSize, isPlacementPhase);
+		
+		if (!possibleMoves.empty()) {
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_int_distribution<> dis(0, possibleMoves.size() - 1);
+			
+			int randomIndex = dis(gen);
+			m_selectedMove = possibleMoves[randomIndex];
+			m_movesConsidered = possibleMoves.size();
+			m_bestScore = 0;
+			return m_selectedMove;
+		}
+	}
 	
 	int bestScore = INT_MIN;
 	Move bestMove;
@@ -18,6 +36,27 @@ Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Piec
 	int beta = INT_MAX;
 
 	vector<Move> possibleMoves = generateMoves(boardCopy, p2Pieces, gridSize, isPlacementPhase);
+	
+	// Filter out moves that would immediately undo the last move
+	if (!isPlacementPhase && lastMove.pieceIndex >= 0) {
+		vector<Move> filteredMoves;
+		for (const auto& move : possibleMoves) {
+			bool isUndoMove = (move.pieceIndex == lastMove.pieceIndex && 
+							   move.toRow == lastMove.fromRow && 
+							   move.toCol == lastMove.fromCol &&
+							   move.fromRow == lastMove.toRow &&
+							   move.fromCol == lastMove.toCol);
+			
+			if (!isUndoMove) {
+				filteredMoves.push_back(move);
+			}
+		}
+		
+		// Only use filtered moves if we have alternatives
+		if (!filteredMoves.empty()) {
+			possibleMoves = filteredMoves;
+		}
+	}
 	
 	m_movesConsidered = possibleMoves.size();
 
@@ -119,48 +158,59 @@ int AI::minimax(vector<vector<Piece*>>& board, vector<Piece>& p2Pieces,
 int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase)
 {
 	int score = 0;
+	int gridSize = static_cast<int>(board.size());
 	
-	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col < 5; ++col) {
+	int centerMultiplier = isPlacementPhase ? 0 : 1;
+	
+	for (int row = 0; row < gridSize; ++row) {
+		for (int col = 0; col < gridSize; ++col) {
 			if (board[row][col]) {
 				int lineCount = 0;
 				if (!board[row][col]->isPlayer1())
 				{
-					score += scoreCloserToCenter(row, col, 5);
+					score += scoreCloserToCenter(row, col, gridSize) * centerMultiplier;
 					// Horizontal
 					lineCount = countInLine(board, row, col, 0, 1, false);
-					score += lineCount * lineCount * 10; // Quadratic scoring for longer lines
+					if (lineCount >= 3) score += lineCount * lineCount * 15; // Extra bonus for 3+
+					else score += lineCount * lineCount * 10;
 
 					// Vertical
 					lineCount = countInLine(board, row, col, 1, 0, false);
-					score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * 15;
+					else score += lineCount * lineCount * 10;
 
 					// Diagonal (\)
 					lineCount = countInLine(board, row, col, 1, 1, false);
-					score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * 15;
+					else score += lineCount * lineCount * 10;
 
 					// Diagonal (/)
 					lineCount = countInLine(board, row, col, 1, -1, false);
-					score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * 15;
+					else score += lineCount * lineCount * 10;
 				}
 				else
 				{
-					score -= scoreCloserToCenter(row, col, 5);
+					score -= scoreCloserToCenter(row, col, gridSize) * centerMultiplier;
 					// Horizontal
 					lineCount = countInLine(board, row, col, 0, 1, true);
-					score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * 20; // Block opponent threats!
+					else score -= lineCount * lineCount * 10;
 
 					// Vertical
 					lineCount = countInLine(board, row, col, 1, 0, true);
-					score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * 20;
+					else score -= lineCount * lineCount * 10;
 
 					// Diagonal (\)
 					lineCount = countInLine(board, row, col, 1, 1, true);
-					score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * 20;
+					else score -= lineCount * lineCount * 10;
 
 					// Diagonal (/)
 					lineCount = countInLine(board, row, col, 1, -1, true);
-					score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * 20;
+					else score -= lineCount * lineCount * 10;
 				}
 			}
 		}
@@ -172,11 +222,12 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 int AI::countInLine(const vector<vector<Piece*>>& board, int row, int col, int dRow, int dCol, bool isPlayer1)
 {
 	int count = 1;
+	int gridSize = static_cast<int>(board.size());
 
 	// Count in positive direction
 	int r = row + dRow;
 	int c = col + dCol;
-	while (r >= 0 && r < 5 && c >= 0 && c < 5 && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
+	while (r >= 0 && r < gridSize && c >= 0 && c < gridSize && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
 		count++;
 		r += dRow;
 		c += dCol;
@@ -185,7 +236,7 @@ int AI::countInLine(const vector<vector<Piece*>>& board, int row, int col, int d
 	// Count in negative direction
 	r = row - dRow;
 	c = col - dCol;
-	while (r >= 0 && r < 5 && c >= 0 && c < 5 && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
+	while (r >= 0 && r < gridSize && c >= 0 && c < gridSize && board[r][c] && board[r][c]->isPlayer1() == isPlayer1) {
 		count++;
 		r -= dRow;
 		c -= dCol;
@@ -313,7 +364,19 @@ vector<pair<int, int>> AI::getEmptyCells(const vector<vector<Piece*>>& board, in
 
 int AI::scoreCloserToCenter(int row, int col, int gridSize)
 {
-	int scoreRow = gridSize % (row + 1);
-	int scoreCol = gridSize % (col + 1);
-	return scoreRow + scoreCol;
+	// Calculate the center position (works for both odd and even grid sizes)
+	float centerRow = (gridSize - 1) / 2.0f;
+	float centerCol = (gridSize - 1) / 2.0f;
+	
+	// Calculate Manhattan distance from center
+	float distanceFromCenter = abs(row - centerRow) + abs(col - centerCol);
+	
+	// Max possible distance (from corner to center)
+	float maxDistance = centerRow + centerCol;
+	
+	// Score inversely proportional to distance (closer = higher score)
+	// Scale to 0-10 points
+	int score = static_cast<int>((1.0f - (distanceFromCenter / maxDistance)) * 10.0f);
+	
+	return score;
 }
