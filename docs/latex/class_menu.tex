@@ -1,0 +1,986 @@
+\doxysection{Menu Class Reference}
+\hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
+
+
+Main menu system for the game.  
+
+
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}} \{ \newline
+\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{Main}}
+, \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{Difficulty}}
+, \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{AIStrategy}}
+, \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{AI1\+Strategy}}
+, \newline
+\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{AI2\+Strategy}}
+, \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{Game\+Over}}
+, \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Hidden}}
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_menu}{Menu} state enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_menu_af8cc4ca711bc361cc2ac88ad11f21bee}{Menu}} (const sf\+::\+Font \&font, const sf\+::\+Vector2f \&window\+Size)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a74cc1712044665c81d263842657adf9b}{update}} (const sf\+::\+Vector2f \&mouse\+Pos)
+\begin{DoxyCompactList}\small\item\em Update menu state based on mouse position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_abc8a0fa77065d7e9faaa3961b5ba96f1}{handle\+Click}} (const sf\+::\+Vector2f \&mouse\+Pos)
+\begin{DoxyCompactList}\small\item\em Handle mouse click events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a69b0258bd7cbd111158570880984438a}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Draw the menu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}} \mbox{\hyperlink{class_menu_a1e884c956ec49e628601254d1e0ca447}{get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Get current menu state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a0ad0a870b4152efaee0803739b90a65c}{set\+State}} (\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}} state)
+\begin{DoxyCompactList}\small\item\em Set menu state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_a96a5d69e74789eb43bfdaa20b7428df1}{is\+Pv\+PSelected}} () const
+\begin{DoxyCompactList}\small\item\em Check if PvP mode was selected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_ad995560d8985a76f36dbcbdbd8ca91af}{is\+Pv\+AISelected}} () const
+\begin{DoxyCompactList}\small\item\em Check if Pv\+AI mode was selected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_a5c6b59792643b125da3953240b6824db}{is\+AIvs\+AISelected}} () const
+\begin{DoxyCompactList}\small\item\em Check if \doxylink{class_a_i}{AI} vs \doxylink{class_a_i}{AI} mode was selected. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}} \mbox{\hyperlink{class_menu_a81fc1e3d6664e9566dae65fc93d6394c}{get\+Difficulty}} () const
+\begin{DoxyCompactList}\small\item\em Get selected difficulty level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} \mbox{\hyperlink{class_menu_a79c41087674eac0d8ae458a6cc56432c}{get\+AIStrategy}} () const
+\begin{DoxyCompactList}\small\item\em Get selected \doxylink{class_a_i}{AI} strategy (for Pv\+AI mode). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} \mbox{\hyperlink{class_menu_a983f4ac456460f690d4ccd1e347ef0bb}{get\+AI1\+Strategy}} () const
+\begin{DoxyCompactList}\small\item\em Get selected \doxylink{class_a_i}{AI} 1 strategy (for AIvs\+AI mode). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} \mbox{\hyperlink{class_menu_a378194d92ffdddff99b271f335d0552c}{get\+AI2\+Strategy}} () const
+\begin{DoxyCompactList}\small\item\em Get selected \doxylink{class_a_i}{AI} 2 strategy (for AIvs\+AI mode). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_ace1416aa3e45da9468f191390854339f}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset menu to initial state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_a30622c27f001be67c39c56d3032398ed}{should\+Start\+Game}} () const
+\begin{DoxyCompactList}\small\item\em Check if game should start. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_aa01607179a3cc83e0b236eacbd18b705}{should\+Exit\+Game}} () const
+\begin{DoxyCompactList}\small\item\em Check if game should exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a003332969093b3207b525055ecf28ebd}{clear\+Start\+Flag}} ()
+\begin{DoxyCompactList}\small\item\em Clear start game flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_a3e4fa6686b86fa091e1d56925dcd1d95}{show\+Game\+Over}} (const std\+::string \&winner\+Text)
+\begin{DoxyCompactList}\small\item\em Show game over screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main menu system for the game. 
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00087}{87}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{class_menu_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2}\index{Menu@{Menu}!State@{State}}
+\index{State@{State}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{class_menu_a8269685e78203b028d5bd77c339898b2} 
+enum class \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{Menu\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{class_menu}{Menu} state enumeration. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Main@{Main}!Menu@{Menu}}\index{Menu@{Menu}!Main@{Main}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}\label{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de} 
+Main&Main menu showing game mode selection. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Difficulty@{Difficulty}!Menu@{Menu}}\index{Menu@{Menu}!Difficulty@{Difficulty}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}\label{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed} 
+Difficulty&\doxylink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty} selection for \doxylink{class_a_i}{AI} mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AIStrategy@{AIStrategy}!Menu@{Menu}}\index{Menu@{Menu}!AIStrategy@{AIStrategy}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}\label{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67} 
+AIStrategy&\doxylink{class_a_i}{AI} strategy selection (for Pv\+AI mode). \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AI1Strategy@{AI1Strategy}!Menu@{Menu}}\index{Menu@{Menu}!AI1Strategy@{AI1Strategy}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}\label{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87} 
+AI1\+Strategy&\doxylink{class_a_i}{AI} 1 strategy selection (for AIvs\+AI mode). \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AI2Strategy@{AI2Strategy}!Menu@{Menu}}\index{Menu@{Menu}!AI2Strategy@{AI2Strategy}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}\label{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f} 
+AI2\+Strategy&\doxylink{class_a_i}{AI} 2 strategy selection (for AIvs\+AI mode). \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GameOver@{GameOver}!Menu@{Menu}}\index{Menu@{Menu}!GameOver@{GameOver}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}\label{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3} 
+Game\+Over&\doxylink{class_game}{Game} over screen with restart/menu options. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hidden@{Hidden}!Menu@{Menu}}\index{Menu@{Menu}!Hidden@{Hidden}}}\Hypertarget{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}\label{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e} 
+Hidden&\doxylink{class_menu}{Menu} is hidden, game is running. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00090}{90}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ Main,\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}},\ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ AIStrategy,\ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ AI1Strategy,\ \ \ \ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ AI2Strategy,\ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ GameOver,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ Hidden\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{doc-constructors}
+\Hypertarget{class_menu_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_menu_af8cc4ca711bc361cc2ac88ad11f21bee}\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily \label{class_menu_af8cc4ca711bc361cc2ac88ad11f21bee} 
+Menu\+::\+Menu (\begin{DoxyParamCaption}\item[{const sf\+::\+Font \&}]{font}{, }\item[{const sf\+::\+Vector2f \&}]{window\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font} & Font to use for all menu text \\
+\hline
+{\em window\+Size} & Size of the game window \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00105}{105}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \ \ \ \ :\ m\_font(font)}
+\DoxyCodeLine{00107\ \ \ \ \ ,\ m\_windowSize(windowSize)}
+\DoxyCodeLine{00108\ \ \ \ \ ,\ m\_state(\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}})}
+\DoxyCodeLine{00109\ \ \ \ \ ,\ m\_pvpButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Player\ vs\ Player"{}},\ font)}
+\DoxyCodeLine{00110\ \ \ \ \ ,\ m\_pvaiButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Player\ vs\ AI"{}},\ font)}
+\DoxyCodeLine{00111\ \ \ \ \ ,\ m\_aivsaiButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}AI\ vs\ AI"{}},\ font,\ sf::Color(130,\ 70,\ 180),\ sf::Color(160,\ 100,\ 220))}
+\DoxyCodeLine{00112\ \ \ \ \ ,\ m\_exitButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Exit\ Game"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{00113\ \ \ \ \ ,\ m\_easyButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Easy"{}},\ font,\ sf::Color(70,\ 180,\ 70),\ sf::Color(100,\ 220,\ 100))}
+\DoxyCodeLine{00114\ \ \ \ \ ,\ m\_mediumButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Medium"{}},\ font,\ sf::Color(180,\ 140,\ 70),\ sf::Color(220,\ 180,\ 100))}
+\DoxyCodeLine{00115\ \ \ \ \ ,\ m\_hardButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Hard"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{00116\ \ \ \ \ ,\ m\_backButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Back"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{00117\ \ \ \ \ ,\ m\_balancedButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Balanced"{}},\ font)}
+\DoxyCodeLine{00118\ \ \ \ \ ,\ m\_centerButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Center"{}},\ font)}
+\DoxyCodeLine{00119\ \ \ \ \ ,\ m\_edgesButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Edges"{}},\ font)}
+\DoxyCodeLine{00120\ \ \ \ \ ,\ m\_diagonalButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Diagonal"{}},\ font)}
+\DoxyCodeLine{00121\ \ \ \ \ ,\ m\_aggressiveButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Aggressive"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{00122\ \ \ \ \ ,\ m\_defensiveButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Defensive"{}},\ font,\ sf::Color(70,\ 180,\ 70),\ sf::Color(100,\ 220,\ 100))}
+\DoxyCodeLine{00123\ \ \ \ \ ,\ m\_backFromStrategyButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Back"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{00124\ \ \ \ \ ,\ m\_restartButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Restart\ Game"{}},\ font)}
+\DoxyCodeLine{00125\ \ \ \ \ ,\ m\_mainMenuButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Main\ Menu"{}},\ font)}
+\DoxyCodeLine{00126\ \ \ \ \ ,\ m\_toggleMenuButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(180,\ 50),\ \textcolor{stringliteral}{"{}Hide\ Menu"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{00127\ \ \ \ \ ,\ m\_pvpSelected(\textcolor{keyword}{false})}
+\DoxyCodeLine{00128\ \ \ \ \ ,\ m\_pvaiSelected(\textcolor{keyword}{false})}
+\DoxyCodeLine{00129\ \ \ \ \ ,\ m\_aivsaiSelected(\textcolor{keyword}{false})}
+\DoxyCodeLine{00130\ \ \ \ \ ,\ m\_selectedDifficulty(\mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Difficulty::Medium}})}
+\DoxyCodeLine{00131\ \ \ \ \ ,\ m\_aiStrategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}})}
+\DoxyCodeLine{00132\ \ \ \ \ ,\ m\_ai1Strategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}})}
+\DoxyCodeLine{00133\ \ \ \ \ ,\ m\_ai2Strategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}})}
+\DoxyCodeLine{00134\ \ \ \ \ ,\ m\_startGame(\textcolor{keyword}{false})}
+\DoxyCodeLine{00135\ \ \ \ \ ,\ m\_exitGame(\textcolor{keyword}{false})}
+\DoxyCodeLine{00136\ \ \ \ \ ,\ m\_menuCollapsed(\textcolor{keyword}{false}) }
+\DoxyCodeLine{00137\ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ Setup\ background\ overlay}}
+\DoxyCodeLine{00139\ \ \ \ \ m\_background.setSize(windowSize);}
+\DoxyCodeLine{00140\ \ \ \ \ m\_background.setPosition(sf::Vector2f(0.0f,\ 0.0f));}
+\DoxyCodeLine{00141\ \ \ \ \ m\_background.setFillColor(sf::Color(0,\ 0,\ 0,\ 200));}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{comment}{//\ Setup\ menu\ panel}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{float}\ panelWidth\ =\ 600.0f;}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{float}\ panelHeight\ =\ 550.0f;}
+\DoxyCodeLine{00146\ \ \ \ \ m\_panel.setSize(sf::Vector2f(panelWidth,\ panelHeight));}
+\DoxyCodeLine{00147\ \ \ \ \ m\_panel.setPosition(sf::Vector2f((windowSize.x\ -\/\ panelWidth)\ /\ 2.0f,\ (windowSize.y\ -\/\ panelHeight)\ /\ 2.0f));}
+\DoxyCodeLine{00148\ \ \ \ \ m\_panel.setFillColor(sf::Color(30,\ 30,\ 50,\ 250));}
+\DoxyCodeLine{00149\ \ \ \ \ m\_panel.setOutlineThickness(5.0f);}
+\DoxyCodeLine{00150\ \ \ \ \ m\_panel.setOutlineColor(sf::Color(100,\ 149,\ 237));}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//\ Setup\ title\ text}}
+\DoxyCodeLine{00153\ \ \ \ \ m\_titleText.setCharacterSize(48);}
+\DoxyCodeLine{00154\ \ \ \ \ m\_titleText.setFillColor(sf::Color(100,\ 200,\ 255));}
+\DoxyCodeLine{00155\ \ \ \ \ m\_titleText.setString(\textcolor{stringliteral}{"{}The\ Fourth\ Protocol"{}});}
+\DoxyCodeLine{00156\ \ \ \ \ sf::FloatRect\ titleBounds\ =\ m\_titleText.getLocalBounds();}
+\DoxyCodeLine{00157\ \ \ \ \ m\_titleText.setOrigin(sf::Vector2f(titleBounds.position.x\ +\ titleBounds.size.x\ /\ 2.0f,\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ titleBounds.position.y\ +\ titleBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00159\ \ \ \ \ m\_titleText.setPosition(sf::Vector2f(windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 60.0f));}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ Setup\ subtitle\ text}}
+\DoxyCodeLine{00162\ \ \ \ \ m\_subtitleText.setCharacterSize(20);}
+\DoxyCodeLine{00163\ \ \ \ \ m\_subtitleText.setFillColor(sf::Color(180,\ 180,\ 180));}
+\DoxyCodeLine{00164\ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{00165\ \ \ \ \ sf::FloatRect\ subtitleBounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00166\ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(subtitleBounds.position.x\ +\ subtitleBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ subtitleBounds.position.y\ +\ subtitleBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00168\ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//\ Setup\ game\ over\ text}}
+\DoxyCodeLine{00171\ \ \ \ \ m\_gameOverText.setCharacterSize(35);}
+\DoxyCodeLine{00172\ \ \ \ \ m\_gameOverText.setFillColor(sf::Color(255,\ 215,\ 0));}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ initMainMenu();}
+\DoxyCodeLine{00175\ \ \ \ \ initDifficultyMenu();}
+\DoxyCodeLine{00176\ \ \ \ \ initStrategyMenu();}
+\DoxyCodeLine{00177\ \ \ \ \ initGameOverMenu();}
+\DoxyCodeLine{00178\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_menu_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_a003332969093b3207b525055ecf28ebd}\index{Menu@{Menu}!clearStartFlag@{clearStartFlag}}
+\index{clearStartFlag@{clearStartFlag}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{clearStartFlag()}{clearStartFlag()}}
+{\footnotesize\ttfamily \label{class_menu_a003332969093b3207b525055ecf28ebd} 
+void Menu\+::clear\+Start\+Flag (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clear start game flag. 
+
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00166}{166}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00166\ \{\ m\_startGame\ =\ \textcolor{keyword}{false};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a983f4ac456460f690d4ccd1e347ef0bb}\index{Menu@{Menu}!getAI1Strategy@{getAI1Strategy}}
+\index{getAI1Strategy@{getAI1Strategy}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getAI1Strategy()}{getAI1Strategy()}}
+{\footnotesize\ttfamily \label{class_menu_a983f4ac456460f690d4ccd1e347ef0bb} 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} Menu\+::get\+AI1\+Strategy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get selected \doxylink{class_a_i}{AI} 1 strategy (for AIvs\+AI mode). 
+
+\begin{DoxyReturn}{Returns}
+Selected \doxylink{class_a_i}{AI} 1 strategy 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00148}{148}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00148\ \{\ \textcolor{keywordflow}{return}\ m\_ai1Strategy;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a378194d92ffdddff99b271f335d0552c}\index{Menu@{Menu}!getAI2Strategy@{getAI2Strategy}}
+\index{getAI2Strategy@{getAI2Strategy}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getAI2Strategy()}{getAI2Strategy()}}
+{\footnotesize\ttfamily \label{class_menu_a378194d92ffdddff99b271f335d0552c} 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} Menu\+::get\+AI2\+Strategy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get selected \doxylink{class_a_i}{AI} 2 strategy (for AIvs\+AI mode). 
+
+\begin{DoxyReturn}{Returns}
+Selected \doxylink{class_a_i}{AI} 2 strategy 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00152}{152}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00152\ \{\ \textcolor{keywordflow}{return}\ m\_ai2Strategy;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a79c41087674eac0d8ae458a6cc56432c}\index{Menu@{Menu}!getAIStrategy@{getAIStrategy}}
+\index{getAIStrategy@{getAIStrategy}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getAIStrategy()}{getAIStrategy()}}
+{\footnotesize\ttfamily \label{class_menu_a79c41087674eac0d8ae458a6cc56432c} 
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} Menu\+::get\+AIStrategy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get selected \doxylink{class_a_i}{AI} strategy (for Pv\+AI mode). 
+
+\begin{DoxyReturn}{Returns}
+Selected \doxylink{class_a_i}{AI} strategy 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00144}{144}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00144\ \{\ \textcolor{keywordflow}{return}\ m\_aiStrategy;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a81fc1e3d6664e9566dae65fc93d6394c}\index{Menu@{Menu}!getDifficulty@{getDifficulty}}
+\index{getDifficulty@{getDifficulty}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getDifficulty()}{getDifficulty()}}
+{\footnotesize\ttfamily \label{class_menu_a81fc1e3d6664e9566dae65fc93d6394c} 
+\mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}} Menu\+::get\+Difficulty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get selected difficulty level. 
+
+\begin{DoxyReturn}{Returns}
+Selected difficulty 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00140}{140}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00140\ \{\ \textcolor{keywordflow}{return}\ m\_selectedDifficulty;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a1e884c956ec49e628601254d1e0ca447}\index{Menu@{Menu}!getState@{getState}}
+\index{getState@{getState}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \label{class_menu_a1e884c956ec49e628601254d1e0ca447} 
+\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}} Menu\+::get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current menu state. 
+
+\begin{DoxyReturn}{Returns}
+Current state 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00120}{120}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00120\ \{\ \textcolor{keywordflow}{return}\ m\_state;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_abc8a0fa77065d7e9faaa3961b5ba96f1}\index{Menu@{Menu}!handleClick@{handleClick}}
+\index{handleClick@{handleClick}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{handleClick()}{handleClick()}}
+{\footnotesize\ttfamily \label{class_menu_abc8a0fa77065d7e9faaa3961b5ba96f1} 
+bool Menu\+::handle\+Click (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{mouse\+Pos}{}\end{DoxyParamCaption})}
+
+
+
+Handle mouse click events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & Position where mouse was clicked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a menu action was triggered 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00281}{281}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00282\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_pvpButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_pvaiButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty"{}});}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aivsaiButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty\ (AI\ vs\ AI)"{}});}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_exitButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ m\_exitGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_easyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88}{Difficulty::Easy}};}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Determine\ which\ mode\ was\ selected\ based\ on\ subtitle}}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_mediumButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Difficulty::Medium}};}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_hardButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}{Difficulty::Hard}};}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}};}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ strategy\ selection\ for\ PvAI\ mode}}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty"{}});}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ start\ game}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ 1\ strategy\ selection\ for\ AIvsAI\ mode}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty\ (AI\ vs\ AI)"{}});}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ go\ to\ AI\ 2\ strategy}}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}};}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 2\ Strategy"{}});}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ 2\ strategy\ selection\ for\ AIvsAI\ mode}}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ start\ game}}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_toggleMenuButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ !m\_menuCollapsed;}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setText(m\_menuCollapsed\ ?\ \textcolor{stringliteral}{"{}Show\ Menu"{}}\ :\ \textcolor{stringliteral}{"{}Hide\ Menu"{}});}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setPosition(sf::Vector2f(20.0f,\ 20.0f));}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelRight\ =\ m\_panel.getPosition().x\ +\ m\_panel.getSize().x;}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelTop\ =\ m\_panel.getPosition().y;}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setPosition(sf::Vector2f(panelRight\ -\/\ 200.0f,\ panelTop\ +\ 15.0f));}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_menuCollapsed)\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_restartButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_winnerMessage.clear();}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_mainMenuButton.contains(mousePos))\ \{}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_ace1416aa3e45da9468f191390854339f}{reset}}();}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00496\ }
+\DoxyCodeLine{00497\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00499\ \ \ \ \ \}}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00501\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00502\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a5c6b59792643b125da3953240b6824db}\index{Menu@{Menu}!isAIvsAISelected@{isAIvsAISelected}}
+\index{isAIvsAISelected@{isAIvsAISelected}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{isAIvsAISelected()}{isAIvsAISelected()}}
+{\footnotesize\ttfamily \label{class_menu_a5c6b59792643b125da3953240b6824db} 
+bool Menu\+::is\+AIvs\+AISelected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if \doxylink{class_a_i}{AI} vs \doxylink{class_a_i}{AI} mode was selected. 
+
+\begin{DoxyReturn}{Returns}
+True if \doxylink{class_a_i}{AI} vs \doxylink{class_a_i}{AI} mode selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00136}{136}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00136\ \{\ \textcolor{keywordflow}{return}\ m\_aivsaiSelected;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_ad995560d8985a76f36dbcbdbd8ca91af}\index{Menu@{Menu}!isPvAISelected@{isPvAISelected}}
+\index{isPvAISelected@{isPvAISelected}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{isPvAISelected()}{isPvAISelected()}}
+{\footnotesize\ttfamily \label{class_menu_ad995560d8985a76f36dbcbdbd8ca91af} 
+bool Menu\+::is\+Pv\+AISelected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if Pv\+AI mode was selected. 
+
+\begin{DoxyReturn}{Returns}
+True if player vs \doxylink{class_a_i}{AI} mode selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00132}{132}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00132\ \{\ \textcolor{keywordflow}{return}\ m\_pvaiSelected;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a96a5d69e74789eb43bfdaa20b7428df1}\index{Menu@{Menu}!isPvPSelected@{isPvPSelected}}
+\index{isPvPSelected@{isPvPSelected}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{isPvPSelected()}{isPvPSelected()}}
+{\footnotesize\ttfamily \label{class_menu_a96a5d69e74789eb43bfdaa20b7428df1} 
+bool Menu\+::is\+Pv\+PSelected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if PvP mode was selected. 
+
+\begin{DoxyReturn}{Returns}
+True if player vs player mode selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00128}{128}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00128\ \{\ \textcolor{keywordflow}{return}\ m\_pvpSelected;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a69b0258bd7cbd111158570880984438a}\index{Menu@{Menu}!render@{render}}
+\index{render@{render}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_menu_a69b0258bd7cbd111158570880984438a} 
+void Menu\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Draw the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & Window to draw to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00504}{504}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00505\ \{}
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_state\ ==\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}})\ \{}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00508\ \ \ \ \ \}}
+\DoxyCodeLine{00509\ }
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ m\_pvpButton.draw(window);}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ m\_pvaiButton.draw(window);}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ m\_aivsaiButton.draw(window);}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ m\_exitButton.draw(window);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ m\_easyButton.draw(window);}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ m\_mediumButton.draw(window);}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ m\_hardButton.draw(window);}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ m\_backButton.draw(window);}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{00534\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{00535\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Temporarily\ enlarge\ panel\ for\ strategy\ selection}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ originalSize\ =\ m\_panel.getSize();}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ originalPos\ =\ m\_panel.getPosition();}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ largerHeight\ =\ 670.0f;}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setSize(sf::Vector2f(originalSize.x,\ largerHeight));}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ m\_balancedButton.draw(window);}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ m\_centerButton.draw(window);}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ m\_edgesButton.draw(window);}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ m\_diagonalButton.draw(window);}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aggressiveButton.draw(window);}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ m\_defensiveButton.draw(window);}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ m\_backFromStrategyButton.draw(window);}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Restore\ original\ size}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setSize(originalSize);}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setPosition(originalPos);}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.draw(window);}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_gameOverText);}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ m\_restartButton.draw(window);}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ m\_mainMenuButton.draw(window);}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.draw(window);}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00574\ }
+\DoxyCodeLine{00575\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00577\ \ \ \ \ \}}
+\DoxyCodeLine{00578\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_ace1416aa3e45da9468f191390854339f}\index{Menu@{Menu}!reset@{reset}}
+\index{reset@{reset}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{class_menu_ace1416aa3e45da9468f191390854339f} 
+void Menu\+::reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reset menu to initial state. 
+
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00580}{580}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00581\ \{}
+\DoxyCodeLine{00582\ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}};}
+\DoxyCodeLine{00583\ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00584\ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00585\ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00586\ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00587\ \ \ \ \ m\_exitGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00588\ \ \ \ \ m\_winnerMessage.clear();}
+\DoxyCodeLine{00589\ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{00590\ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{00591\ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00593\ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{00594\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a0ad0a870b4152efaee0803739b90a65c}\index{Menu@{Menu}!setState@{setState}}
+\index{setState@{setState}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily \label{class_menu_a0ad0a870b4152efaee0803739b90a65c} 
+void Menu\+::set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}}}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set menu state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & New state \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00124}{124}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00124\ \{\ m\_state\ =\ state;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_aa01607179a3cc83e0b236eacbd18b705}\index{Menu@{Menu}!shouldExitGame@{shouldExitGame}}
+\index{shouldExitGame@{shouldExitGame}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{shouldExitGame()}{shouldExitGame()}}
+{\footnotesize\ttfamily \label{class_menu_aa01607179a3cc83e0b236eacbd18b705} 
+bool Menu\+::should\+Exit\+Game (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if game should exit. 
+
+\begin{DoxyReturn}{Returns}
+True if exit was selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00163}{163}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00163\ \{\ \textcolor{keywordflow}{return}\ m\_exitGame;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a30622c27f001be67c39c56d3032398ed}\index{Menu@{Menu}!shouldStartGame@{shouldStartGame}}
+\index{shouldStartGame@{shouldStartGame}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{shouldStartGame()}{shouldStartGame()}}
+{\footnotesize\ttfamily \label{class_menu_a30622c27f001be67c39c56d3032398ed} 
+bool Menu\+::should\+Start\+Game (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if game should start. 
+
+\begin{DoxyReturn}{Returns}
+True if start game was selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00159}{159}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00159\ \{\ \textcolor{keywordflow}{return}\ m\_startGame;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a3e4fa6686b86fa091e1d56925dcd1d95}\index{Menu@{Menu}!showGameOver@{showGameOver}}
+\index{showGameOver@{showGameOver}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{showGameOver()}{showGameOver()}}
+{\footnotesize\ttfamily \label{class_menu_a3e4fa6686b86fa091e1d56925dcd1d95} 
+void Menu\+::show\+Game\+Over (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{winner\+Text}{}\end{DoxyParamCaption})}
+
+
+
+Show game over screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em winner\+Text} & Text to display for winner \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00596}{596}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00597\ \{}
+\DoxyCodeLine{00598\ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}};}
+\DoxyCodeLine{00599\ \ \ \ \ m\_winnerMessage\ =\ winnerText;}
+\DoxyCodeLine{00600\ \ \ \ \ m\_gameOverText.setString(winnerText);}
+\DoxyCodeLine{00601\ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00602\ \ \ \ \ m\_toggleMenuButton.setText(\textcolor{stringliteral}{"{}Hide\ Menu"{}});}
+\DoxyCodeLine{00603\ \ \ \ \ }
+\DoxyCodeLine{00604\ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_gameOverText.getLocalBounds();}
+\DoxyCodeLine{00605\ \ \ \ \ m\_gameOverText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00607\ \ \ \ \ m\_gameOverText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 100.0f));}
+\DoxyCodeLine{00608\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_a74cc1712044665c81d263842657adf9b}\index{Menu@{Menu}!update@{update}}
+\index{update@{update}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_menu_a74cc1712044665c81d263842657adf9b} 
+void Menu\+::update (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{mouse\+Pos}{}\end{DoxyParamCaption})}
+
+
+
+Update menu state based on mouse position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & Current mouse position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00237}{237}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00238\ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ m\_pvpButton.update(mousePos);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ m\_pvaiButton.update(mousePos);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ m\_aivsaiButton.update(mousePos);}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ m\_exitButton.update(mousePos);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ m\_easyButton.update(mousePos);}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ m\_mediumButton.update(mousePos);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ m\_hardButton.update(mousePos);}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ m\_backButton.update(mousePos);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ m\_balancedButton.update(mousePos);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ m\_centerButton.update(mousePos);}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ m\_edgesButton.update(mousePos);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ m\_diagonalButton.update(mousePos);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ m\_aggressiveButton.update(mousePos);}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ m\_defensiveButton.update(mousePos);}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ m\_backFromStrategyButton.update(mousePos);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.update(mousePos);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ m\_restartButton.update(mousePos);}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ m\_mainMenuButton.update(mousePos);}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.update(mousePos);}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00278\ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_menu_8h}{Menu.\+h}}\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_menu_8cpp}{Menu.\+cpp}}\end{DoxyCompactItemize}

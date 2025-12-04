@@ -1,0 +1,87 @@
+\doxysection{the\+\_\+fourth\+\_\+protocol/\+Menu.h File Reference}
+\hypertarget{_menu_8h}{}\label{_menu_8h}\index{the\_fourth\_protocol/Menu.h@{the\_fourth\_protocol/Menu.h}}
+
+
+\doxylink{class_menu}{Menu} system for The Fourth Protocol.  
+
+
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include "{}AI.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_menu_button}{Menu\+Button}}
+\begin{DoxyCompactList}\small\item\em Interactive button class with hover effects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_menu}{Menu}}
+\begin{DoxyCompactList}\small\item\em Main menu system for the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}} \{ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88}{Easy}}
+, \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Medium}}
+, \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}{Hard}}
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty} levels for \doxylink{class_a_i}{AI} opponent. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_menu}{Menu} system for The Fourth Protocol. 
+
+\begin{DoxyAuthor}{Author}
+RCH 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+December 2025 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+This file contains the \doxylink{class_menu}{Menu} class which manages the main menu, difficulty selection, and game mode options with interactive buttons. 
+
+Definition in file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{_menu_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}\index{Menu.h@{Menu.h}!Difficulty@{Difficulty}}
+\index{Difficulty@{Difficulty}!Menu.h@{Menu.h}}
+\doxysubsubsection{\texorpdfstring{Difficulty}{Difficulty}}
+{\footnotesize\ttfamily \label{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83} 
+enum class \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty} levels for \doxylink{class_a_i}{AI} opponent. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Easy@{Easy}!Menu.h@{Menu.h}}\index{Menu.h@{Menu.h}!Easy@{Easy}}}\Hypertarget{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88}\label{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88} 
+Easy&Easy difficulty -\/ \doxylink{class_a_i}{AI} searches 2 moves ahead. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Medium@{Medium}!Menu.h@{Menu.h}}\index{Menu.h@{Menu.h}!Medium@{Medium}}}\Hypertarget{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}\label{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5} 
+Medium&Medium difficulty -\/ \doxylink{class_a_i}{AI} searches 3 moves ahead. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hard@{Hard}!Menu.h@{Menu.h}}\index{Menu.h@{Menu.h}!Hard@{Hard}}}\Hypertarget{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}\label{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881} 
+Hard&Hard difficulty -\/ \doxylink{class_a_i}{AI} searches 3 moves ahead but grid is 7 x 7. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00021}{21}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88}{Easy}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Medium}},\ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}{Hard}}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \};}
+
+\end{DoxyCode}

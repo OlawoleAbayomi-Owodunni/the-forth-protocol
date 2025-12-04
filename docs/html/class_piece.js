@@ -3,7 +3,9 @@ var class_piece =
     [ "Type", "class_piece.html#abcd044975b3657962abfd2ded9194b09", [
       [ "Frog", "class_piece.html#abcd044975b3657962abfd2ded9194b09a239243b6cfcaef84a6d7004f21b7af6f", null ],
       [ "Snake", "class_piece.html#abcd044975b3657962abfd2ded9194b09adfa90f1b4eb3affbd3b46af34ed2477c", null ],
-      [ "Donkey", "class_piece.html#abcd044975b3657962abfd2ded9194b09a046d93852f6419ac27a74b4ebcaa32e4", null ]
+      [ "Donkey", "class_piece.html#abcd044975b3657962abfd2ded9194b09a046d93852f6419ac27a74b4ebcaa32e4", null ],
+      [ "Antelope", "class_piece.html#abcd044975b3657962abfd2ded9194b09a56dc0b630a4e824873a0ba9095f023dd", null ],
+      [ "Lion", "class_piece.html#abcd044975b3657962abfd2ded9194b09a60d28e7d879c0dc48b9a593468cf11e5", null ]
     ] ],
     [ "Piece", "class_piece.html#ad4d4365268b71e8588cb881ea1ff365d", null ],
     [ "contains", "class_piece.html#a9660de6decbb2de5094e5b8fc4cce2e2", null ],

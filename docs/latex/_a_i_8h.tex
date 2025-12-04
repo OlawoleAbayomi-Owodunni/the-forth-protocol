@@ -13,16 +13,29 @@ Artificial Intelligence player for The Fourth Protocol.
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_move}{Move}}
-\begin{DoxyCompactList}\small\item\em Represents a move in the game (piece index and target position) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Represents a move in the game (piece index and target position). \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_a_i}{AI}}
 \begin{DoxyCompactList}\small\item\em \doxylink{class_a_i}{AI} player implementation using minimax algorithm with alpha-\/beta pruning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} \{ \newline
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Balanced}}
+, \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Favor\+Diagonal}}
+, \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Favor\+Center}}
+, \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Favor\+Edges}}
+, \newline
+\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Aggressive}}
+, \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Defensive}}
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_a_i}{AI} evaluation strategy types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Artificial Intelligence player for The Fourth Protocol. 
 
 \begin{DoxyAuthor}{Author}
-OA-\/O 
+RCH and OA-\/O 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 November 2025 
@@ -34,3 +47,60 @@ This file contains the \doxylink{class_a_i}{AI} class that implements a computer
 
 Definition in file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
 
+
+
+\label{doc-enum-members}
+\Hypertarget{_a_i_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}\index{AI.h@{AI.h}!Strategy@{Strategy}}
+\index{Strategy@{Strategy}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{Strategy}{Strategy}}
+{\footnotesize\ttfamily \label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706} 
+enum class \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{class_a_i}{AI} evaluation strategy types. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Balanced@{Balanced}!AI.h@{AI.h}}\index{AI.h@{AI.h}!Balanced@{Balanced}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2} 
+Balanced&Balanced approach to all directions and positions. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FavorDiagonal@{FavorDiagonal}!AI.h@{AI.h}}\index{AI.h@{AI.h}!FavorDiagonal@{FavorDiagonal}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c} 
+Favor\+Diagonal&Prioritize diagonal alignments. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FavorCenter@{FavorCenter}!AI.h@{AI.h}}\index{AI.h@{AI.h}!FavorCenter@{FavorCenter}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b} 
+Favor\+Center&Prioritize center control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FavorEdges@{FavorEdges}!AI.h@{AI.h}}\index{AI.h@{AI.h}!FavorEdges@{FavorEdges}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69} 
+Favor\+Edges&Prioritize edge positions. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Aggressive@{Aggressive}!AI.h@{AI.h}}\index{AI.h@{AI.h}!Aggressive@{Aggressive}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae} 
+Aggressive&Focus on offense over defense. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Defensive@{Defensive}!AI.h@{AI.h}}\index{AI.h@{AI.h}!Defensive@{Defensive}}}\Hypertarget{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}\label{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2} 
+Defensive&Focus on blocking opponent. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00021}{21}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Balanced}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{FavorDiagonal}},\ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{FavorCenter}},\ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{FavorEdges}},\ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Aggressive}},\ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Defensive}}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \};}
+
+\end{DoxyCode}

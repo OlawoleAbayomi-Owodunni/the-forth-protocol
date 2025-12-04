@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gamephase_0',['GamePhase',['../class_game.html#a3e65d1349e1d51a51a38d43ba735c484',1,'Game']]]
+  ['difficulty_0',['Difficulty',['../_menu_8h.html#a43efb0a2e61815a66134dfa5ccea0a83',1,'Menu.h']]]
 ];
