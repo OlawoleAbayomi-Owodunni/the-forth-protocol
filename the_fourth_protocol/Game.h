@@ -321,7 +321,11 @@ private:
 	double m_aiThinkTime = 0.0;
 	/// @brief Duration for AI to "think" before making a move (for realism)
 	double m_aiThinkDuration = 1.0;  // 1 second think time for AI
-	/// @brief Last move made (to prevent immediate undo)
+	/// @brief Last move made by current player (to prevent immediate undo)
 	Move m_lastMove;
+	/// @brief Last move made by player 1
+	Move m_lastMoveP1;
+	/// @brief Last move made by player 2
+	Move m_lastMoveP2;
 };
 

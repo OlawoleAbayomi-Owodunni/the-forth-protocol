@@ -69,6 +69,8 @@ void Game::init()
 	m_aiThinking = false;
 	m_aiThinkTime = 0.0;
 	m_lastMove = Move();
+	m_lastMoveP1 = Move();
+	m_lastMoveP2 = Move();
 
 	const float cellSizeXY = 100.0f;
 	const int gridSizeXY = m_gridRows * cellSizeXY;
@@ -414,7 +416,9 @@ void Game::processGameEvents(const sf::Event& event)
 	if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
 	{
 		if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
-			m_window.close();
+			if (m_menu.getState() == Menu::State::Hidden)
+				m_window.close();
+
 			return;
 		}
 		if (keyPressed->scancode == sf::Keyboard::Scancode::A) {
@@ -769,8 +773,21 @@ void Game::executeAIMove()
 	vector<Piece>& currentPlayerPieces = m_isPlayer1Turn ? m_p1Pieces : m_p2Pieces;
 	vector<Piece>& opponentPieces = m_isPlayer1Turn ? m_p2Pieces : m_p1Pieces;
 
+	// Determine which strategy to use
+	Strategy currentStrategy = Strategy::Balanced;
+	if (m_isAIvsAI) {
+		// AI vs AI: use different strategies for each AI
+		currentStrategy = m_isPlayer1Turn ? m_menu.getAI1Strategy() : m_menu.getAI2Strategy();
+	} else {
+		// PvAI: always use AI strategy for player 2
+		currentStrategy = m_menu.getAIStrategy();
+	}
+
+	// Get the current player's last move (not the opponent's)
+	Move currentPlayerLastMove = m_isPlayer1Turn ? m_lastMoveP1 : m_lastMoveP2;
+
 	Move aiMove = m_ai.findBestMove(m_board, currentPlayerPieces, opponentPieces, m_gridRows, 
-		m_gamePhase == GamePhase::Placement, searchDepth, useRandomPlacement, m_lastMove);
+		m_gamePhase == GamePhase::Placement, searchDepth, useRandomPlacement, currentPlayerLastMove, currentStrategy);
 
 	// Record calculation time
 	m_lastAICalculationTime = m_aiCalculationClock.getElapsedTime().asMilliseconds();
@@ -848,6 +865,11 @@ void Game::applyAIMove(const Move& move)
 			};
 			piece->setPosition(cellPos);
 			m_lastMove = move;
+			if (m_isPlayer1Turn) {
+				m_lastMoveP1 = move;
+			} else {
+				m_lastMoveP2 = move;
+			}
 			endTurn();
 		}
 	} else if (m_gamePhase == GamePhase::Movement) {
@@ -864,6 +886,11 @@ void Game::applyAIMove(const Move& move)
 			piece->setPosition(cellPos);
 			updateBoard();
 			m_lastMove = move;
+			if (m_isPlayer1Turn) {
+				m_lastMoveP1 = move;
+			} else {
+				m_lastMoveP2 = move;
+			}
 			endTurn();
 		}
 	}

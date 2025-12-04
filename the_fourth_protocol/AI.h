@@ -17,6 +17,16 @@
 
 using namespace std;
 
+/// @brief AI evaluation strategy types
+enum class Strategy {
+	Balanced,        ///< Balanced approach to all directions and positions
+	FavorDiagonal,   ///< Prioritize diagonal alignments
+	FavorCenter,     ///< Prioritize center control
+	FavorEdges,      ///< Prioritize edge positions
+	Aggressive,      ///< Focus on offense over defense
+	Defensive        ///< Focus on blocking opponent
+};
+
 /// @brief Represents a move in the game (piece index and target position)
 ///
 /// This structure encapsulates all information needed to represent a single
@@ -65,10 +75,11 @@ public:
 	/// @param depth Maximum search depth for the minimax algorithm
 	/// @param useRandomPlacement If true, selects random placement instead of strategic (for AI vs AI variety)
 	/// @param lastMove The last move made (to avoid immediately undoing it)
+	/// @param strategy The evaluation strategy to use (default: Balanced)
 	/// @return Move object representing the best move found
 	Move findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Pieces, 
 		vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth = 3, 
-		bool useRandomPlacement = false, const Move& lastMove = Move());
+		bool useRandomPlacement = false, const Move& lastMove = Move(), Strategy strategy = Strategy::Balanced);
 
 	/// @brief Get the number of moves considered in the last decision
 	/// @return Number of possible moves evaluated
@@ -96,6 +107,8 @@ private:
 	int m_bestScore = 0;
 	/// @brief The selected move from last search
 	Move m_selectedMove;
+	/// @brief Current evaluation strategy
+	Strategy m_strategy = Strategy::Balanced;
 
 	/// @brief Minimax algorithm implementation with alpha-beta pruning
 	/// @param board Current board state (modified during search)

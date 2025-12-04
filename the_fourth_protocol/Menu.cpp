@@ -114,6 +114,13 @@ Menu::Menu(const sf::Font& font, const sf::Vector2f& windowSize)
 	, m_mediumButton(sf::Vector2f(0, 0), sf::Vector2f(280, 70), "Medium", font, sf::Color(180, 140, 70), sf::Color(220, 180, 100))
 	, m_hardButton(sf::Vector2f(0, 0), sf::Vector2f(280, 70), "Hard", font, sf::Color(180, 70, 70), sf::Color(220, 100, 100))
 	, m_backButton(sf::Vector2f(0, 0), sf::Vector2f(280, 70), "Back", font, sf::Color(100, 100, 100), sf::Color(140, 140, 140))
+	, m_balancedButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Balanced", font)
+	, m_centerButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Favor Center", font)
+	, m_edgesButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Favor Edges", font)
+	, m_diagonalButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Favor Diagonal", font)
+	, m_aggressiveButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Aggressive", font, sf::Color(180, 70, 70), sf::Color(220, 100, 100))
+	, m_defensiveButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Defensive", font, sf::Color(70, 180, 70), sf::Color(100, 220, 100))
+	, m_backFromStrategyButton(sf::Vector2f(0, 0), sf::Vector2f(280, 60), "Back", font, sf::Color(100, 100, 100), sf::Color(140, 140, 140))
 	, m_restartButton(sf::Vector2f(0, 0), sf::Vector2f(280, 70), "Restart Game", font)
 	, m_mainMenuButton(sf::Vector2f(0, 0), sf::Vector2f(280, 70), "Main Menu", font)
 	, m_toggleMenuButton(sf::Vector2f(0, 0), sf::Vector2f(180, 50), "Hide Menu", font, sf::Color(100, 100, 100), sf::Color(140, 140, 140))
@@ -121,6 +128,9 @@ Menu::Menu(const sf::Font& font, const sf::Vector2f& windowSize)
 	, m_pvaiSelected(false)
 	, m_aivsaiSelected(false)
 	, m_selectedDifficulty(Difficulty::Medium)
+	, m_aiStrategy(Strategy::Balanced)
+	, m_ai1Strategy(Strategy::Balanced)
+	, m_ai2Strategy(Strategy::Balanced)
 	, m_startGame(false)
 	, m_exitGame(false)
 	, m_menuCollapsed(false)
@@ -163,6 +173,7 @@ Menu::Menu(const sf::Font& font, const sf::Vector2f& windowSize)
 
 	initMainMenu();
 	initDifficultyMenu();
+	initStrategyMenu();
 	initGameOverMenu();
 }
 
@@ -190,6 +201,22 @@ void Menu::initDifficultyMenu()
 	m_mediumButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing));
 	m_hardButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 2));
 	m_backButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 3));
+}
+
+void Menu::initStrategyMenu()
+{
+	float centerX = m_windowSize.x / 2.0f;
+	float startY = m_panel.getPosition().y + 170.0f;
+	float buttonSpacing = 70.0f;
+
+	// Position strategy buttons (6 strategies + back button)
+	m_balancedButton.setPosition(sf::Vector2f(centerX - 140.0f, startY));
+	m_centerButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing));
+	m_edgesButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 2));
+	m_diagonalButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 3));
+	m_aggressiveButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 4));
+	m_defensiveButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 5));
+	m_backFromStrategyButton.setPosition(sf::Vector2f(centerX - 140.0f, startY + buttonSpacing * 6));
 }
 
 void Menu::initGameOverMenu()
@@ -222,6 +249,18 @@ void Menu::update(const sf::Vector2f& mousePos)
 		m_mediumButton.update(mousePos);
 		m_hardButton.update(mousePos);
 		m_backButton.update(mousePos);
+		break;
+
+	case State::AIStrategy:
+	case State::AI1Strategy:
+	case State::AI2Strategy:
+		m_balancedButton.update(mousePos);
+		m_centerButton.update(mousePos);
+		m_edgesButton.update(mousePos);
+		m_diagonalButton.update(mousePos);
+		m_aggressiveButton.update(mousePos);
+		m_defensiveButton.update(mousePos);
+		m_backFromStrategyButton.update(mousePos);
 		break;
 
 	case State::GameOver:
@@ -284,47 +323,54 @@ bool Menu::handleClick(const sf::Vector2f& mousePos)
 	case State::Difficulty:
 		if (m_easyButton.contains(mousePos)) {
 			m_selectedDifficulty = Difficulty::Easy;
-			if (m_state == State::Difficulty && !m_pvpSelected) {
-				if (!m_pvaiSelected && !m_aivsaiSelected) {
-					if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
-						m_aivsaiSelected = true;
-					} else {
-						m_pvaiSelected = true;
-					}
-				}
+			// Determine which mode was selected based on subtitle
+			if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
+				m_aivsaiSelected = true;
+				m_state = State::AI1Strategy;
+				m_subtitleText.setString("Select AI 1 Strategy");
+			} else {
+				m_pvaiSelected = true;
+				m_state = State::AIStrategy;
+				m_subtitleText.setString("Select AI Strategy");
 			}
-			m_startGame = true;
-			m_state = State::Hidden;
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
 			return true;
 		}
 		else if (m_mediumButton.contains(mousePos)) {
 			m_selectedDifficulty = Difficulty::Medium;
-			if (m_state == State::Difficulty && !m_pvpSelected) {
-				if (!m_pvaiSelected && !m_aivsaiSelected) {
-					if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
-						m_aivsaiSelected = true;
-					} else {
-						m_pvaiSelected = true;
-					}
-				}
+			if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
+				m_aivsaiSelected = true;
+				m_state = State::AI1Strategy;
+				m_subtitleText.setString("Select AI 1 Strategy");
+			} else {
+				m_pvaiSelected = true;
+				m_state = State::AIStrategy;
+				m_subtitleText.setString("Select AI Strategy");
 			}
-			m_startGame = true;
-			m_state = State::Hidden;
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
 			return true;
 		}
 		else if (m_hardButton.contains(mousePos)) {
 			m_selectedDifficulty = Difficulty::Hard;
-			if (m_state == State::Difficulty && !m_pvpSelected) {
-				if (!m_pvaiSelected && !m_aivsaiSelected) {
-					if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
-						m_aivsaiSelected = true;
-					} else {
-						m_pvaiSelected = true;
-					}
-				}
+			if (m_subtitleText.getString().find("AI vs AI") != std::string::npos) {
+				m_aivsaiSelected = true;
+				m_state = State::AI1Strategy;
+				m_subtitleText.setString("Select AI 1 Strategy");
+			} else {
+				m_pvaiSelected = true;
+				m_state = State::AIStrategy;
+				m_subtitleText.setString("Select AI Strategy");
 			}
-			m_startGame = true;
-			m_state = State::Hidden;
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
 			return true;
 		}
 		else if (m_backButton.contains(mousePos)) {
@@ -334,6 +380,88 @@ bool Menu::handleClick(const sf::Vector2f& mousePos)
 			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
 				bounds.position.y + bounds.size.y / 2.0f));
 			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
+			return true;
+		}
+		break;
+
+	case State::AIStrategy:
+		// Handle AI strategy selection for PvAI mode
+		if (m_balancedButton.contains(mousePos)) m_aiStrategy = Strategy::Balanced;
+		else if (m_centerButton.contains(mousePos)) m_aiStrategy = Strategy::FavorCenter;
+		else if (m_edgesButton.contains(mousePos)) m_aiStrategy = Strategy::FavorEdges;
+		else if (m_diagonalButton.contains(mousePos)) m_aiStrategy = Strategy::FavorDiagonal;
+		else if (m_aggressiveButton.contains(mousePos)) m_aiStrategy = Strategy::Aggressive;
+		else if (m_defensiveButton.contains(mousePos)) m_aiStrategy = Strategy::Defensive;
+		else if (m_backFromStrategyButton.contains(mousePos)) {
+			m_state = State::Difficulty;
+			m_subtitleText.setString("Select Difficulty");
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
+			return true;
+		}
+		
+		// If a strategy was selected (not back button), start game
+		if (!m_backFromStrategyButton.contains(mousePos)) {
+			m_startGame = true;
+			m_state = State::Hidden;
+			return true;
+		}
+		break;
+
+	case State::AI1Strategy:
+		// Handle AI 1 strategy selection for AIvsAI mode
+		if (m_balancedButton.contains(mousePos)) m_ai1Strategy = Strategy::Balanced;
+		else if (m_centerButton.contains(mousePos)) m_ai1Strategy = Strategy::FavorCenter;
+		else if (m_edgesButton.contains(mousePos)) m_ai1Strategy = Strategy::FavorEdges;
+		else if (m_diagonalButton.contains(mousePos)) m_ai1Strategy = Strategy::FavorDiagonal;
+		else if (m_aggressiveButton.contains(mousePos)) m_ai1Strategy = Strategy::Aggressive;
+		else if (m_defensiveButton.contains(mousePos)) m_ai1Strategy = Strategy::Defensive;
+		else if (m_backFromStrategyButton.contains(mousePos)) {
+			m_state = State::Difficulty;
+			m_subtitleText.setString("Select Difficulty (AI vs AI)");
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
+			return true;
+		}
+		
+		// If a strategy was selected (not back button), go to AI 2 strategy
+		if (!m_backFromStrategyButton.contains(mousePos)) {
+			m_state = State::AI2Strategy;
+			m_subtitleText.setString("Select AI 2 Strategy");
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
+			return true;
+		}
+		break;
+
+	case State::AI2Strategy:
+		// Handle AI 2 strategy selection for AIvsAI mode
+		if (m_balancedButton.contains(mousePos)) m_ai2Strategy = Strategy::Balanced;
+		else if (m_centerButton.contains(mousePos)) m_ai2Strategy = Strategy::FavorCenter;
+		else if (m_edgesButton.contains(mousePos)) m_ai2Strategy = Strategy::FavorEdges;
+		else if (m_diagonalButton.contains(mousePos)) m_ai2Strategy = Strategy::FavorDiagonal;
+		else if (m_aggressiveButton.contains(mousePos)) m_ai2Strategy = Strategy::Aggressive;
+		else if (m_defensiveButton.contains(mousePos)) m_ai2Strategy = Strategy::Defensive;
+		else if (m_backFromStrategyButton.contains(mousePos)) {
+			m_state = State::AI1Strategy;
+			m_subtitleText.setString("Select AI 1 Strategy");
+			sf::FloatRect bounds = m_subtitleText.getLocalBounds();
+			m_subtitleText.setOrigin(sf::Vector2f(bounds.position.x + bounds.size.x / 2.0f,
+				bounds.position.y + bounds.size.y / 2.0f));
+			m_subtitleText.setPosition(sf::Vector2f(m_windowSize.x / 2.0f, m_panel.getPosition().y + 120.0f));
+			return true;
+		}
+		
+		// If a strategy was selected (not back button), start game
+		if (!m_backFromStrategyButton.contains(mousePos)) {
+			m_startGame = true;
+			m_state = State::Hidden;
 			return true;
 		}
 		break;
@@ -400,6 +528,35 @@ void Menu::render(sf::RenderWindow& window)
 		m_mediumButton.draw(window);
 		m_hardButton.draw(window);
 		m_backButton.draw(window);
+		break;
+
+	case State::AIStrategy:
+	case State::AI1Strategy:
+	case State::AI2Strategy:
+		{
+			// Temporarily enlarge panel for strategy selection
+			sf::Vector2f originalSize = m_panel.getSize();
+			sf::Vector2f originalPos = m_panel.getPosition();
+			
+			float largerHeight = 670.0f;
+			m_panel.setSize(sf::Vector2f(originalSize.x, largerHeight));
+			
+			window.draw(m_background);
+			window.draw(m_panel);
+			window.draw(m_titleText);
+			window.draw(m_subtitleText);
+			m_balancedButton.draw(window);
+			m_centerButton.draw(window);
+			m_edgesButton.draw(window);
+			m_diagonalButton.draw(window);
+			m_aggressiveButton.draw(window);
+			m_defensiveButton.draw(window);
+			m_backFromStrategyButton.draw(window);
+			
+			// Restore original size
+			m_panel.setSize(originalSize);
+			m_panel.setPosition(originalPos);
+		}
 		break;
 
 	case State::GameOver:
