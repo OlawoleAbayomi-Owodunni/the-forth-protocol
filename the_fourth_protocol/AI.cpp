@@ -9,8 +9,9 @@ AI::AI()
 }
 
 Move AI::findBestMove(const vector<vector<Piece*>>& board, vector<Piece>& p2Pieces, 
-	vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth, bool useRandomPlacement, const Move& lastMove)
+	vector<Piece>& p1Pieces, int gridSize, bool isPlacementPhase, int depth, bool useRandomPlacement, const Move& lastMove, Strategy strategy)
 {
+	m_strategy = strategy;
 	vector<vector<Piece*>> boardCopy = board;
 	
 	// In AI vs AI mode during placement, use random placement for variety
@@ -160,57 +161,102 @@ int AI::evaluateBoard(const vector<vector<Piece*>>& board, bool isPlacementPhase
 	int score = 0;
 	int gridSize = static_cast<int>(board.size());
 	
-	int centerMultiplier = isPlacementPhase ? 0 : 1;
+	// Strategy-based multipliers
+	int centerMultiplier = 1;
+	int edgeMultiplier = 0;
+	int horizontalMultiplier = 10;
+	int verticalMultiplier = 10;
+	int diagonalMultiplier = 10;
+	int offenseMultiplier = 1;
+	int defenseMultiplier = 1;
+	
+	// Adjust multipliers based on strategy
+	switch (m_strategy) {
+		case Strategy::FavorCenter:
+			centerMultiplier = isPlacementPhase ? 8 : 3;
+			break;
+		case Strategy::FavorEdges:
+			centerMultiplier = 0;
+			edgeMultiplier = isPlacementPhase ? 8 : 2;
+			break;
+		case Strategy::FavorDiagonal:
+			diagonalMultiplier = 20;
+			horizontalMultiplier = 8;
+			verticalMultiplier = 8;
+			break;
+		case Strategy::Aggressive:
+			offenseMultiplier = 2;
+			defenseMultiplier = 1;
+			centerMultiplier = isPlacementPhase ? 3 : 1;
+			break;
+		case Strategy::Defensive:
+			offenseMultiplier = 1;
+			defenseMultiplier = 2;
+			centerMultiplier = isPlacementPhase ? 2 : 1;
+			break;
+		case Strategy::Balanced:
+		default:
+			centerMultiplier = isPlacementPhase ? 3 : 1;
+			break;
+	}
 	
 	for (int row = 0; row < gridSize; ++row) {
 		for (int col = 0; col < gridSize; ++col) {
 			if (board[row][col]) {
 				int lineCount = 0;
+				bool isEdge = (row == 0 || row == gridSize - 1 || col == 0 || col == gridSize - 1);
+				
 				if (!board[row][col]->isPlayer1())
 				{
+					// Position scoring
 					score += scoreCloserToCenter(row, col, gridSize) * centerMultiplier;
+					if (isEdge) score += 5 * edgeMultiplier;
+					
 					// Horizontal
 					lineCount = countInLine(board, row, col, 0, 1, false);
-					if (lineCount >= 3) score += lineCount * lineCount * 15; // Extra bonus for 3+
-					else score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * horizontalMultiplier * 15 / 10 * offenseMultiplier;
+					else score += lineCount * lineCount * horizontalMultiplier * offenseMultiplier;
 
 					// Vertical
 					lineCount = countInLine(board, row, col, 1, 0, false);
-					if (lineCount >= 3) score += lineCount * lineCount * 15;
-					else score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * verticalMultiplier * 15 / 10 * offenseMultiplier;
+					else score += lineCount * lineCount * verticalMultiplier * offenseMultiplier;
 
 					// Diagonal (\)
 					lineCount = countInLine(board, row, col, 1, 1, false);
-					if (lineCount >= 3) score += lineCount * lineCount * 15;
-					else score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * diagonalMultiplier * 15 / 10 * offenseMultiplier;
+					else score += lineCount * lineCount * diagonalMultiplier * offenseMultiplier;
 
 					// Diagonal (/)
 					lineCount = countInLine(board, row, col, 1, -1, false);
-					if (lineCount >= 3) score += lineCount * lineCount * 15;
-					else score += lineCount * lineCount * 10;
+					if (lineCount >= 3) score += lineCount * lineCount * diagonalMultiplier * 15 / 10 * offenseMultiplier;
+					else score += lineCount * lineCount * diagonalMultiplier * offenseMultiplier;
 				}
 				else
 				{
+					// Position scoring
 					score -= scoreCloserToCenter(row, col, gridSize) * centerMultiplier;
+					if (isEdge) score -= 5 * edgeMultiplier;
+					
 					// Horizontal
 					lineCount = countInLine(board, row, col, 0, 1, true);
-					if (lineCount >= 3) score -= lineCount * lineCount * 20; // Block opponent threats!
-					else score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * horizontalMultiplier * 2 * defenseMultiplier;
+					else score -= lineCount * lineCount * horizontalMultiplier * defenseMultiplier;
 
 					// Vertical
 					lineCount = countInLine(board, row, col, 1, 0, true);
-					if (lineCount >= 3) score -= lineCount * lineCount * 20;
-					else score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * verticalMultiplier * 2 * defenseMultiplier;
+					else score -= lineCount * lineCount * verticalMultiplier * defenseMultiplier;
 
 					// Diagonal (\)
 					lineCount = countInLine(board, row, col, 1, 1, true);
-					if (lineCount >= 3) score -= lineCount * lineCount * 20;
-					else score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * diagonalMultiplier * 2 * defenseMultiplier;
+					else score -= lineCount * lineCount * diagonalMultiplier * defenseMultiplier;
 
 					// Diagonal (/)
 					lineCount = countInLine(board, row, col, 1, -1, true);
-					if (lineCount >= 3) score -= lineCount * lineCount * 20;
-					else score -= lineCount * lineCount * 10;
+					if (lineCount >= 3) score -= lineCount * lineCount * diagonalMultiplier * 2 * defenseMultiplier;
+					else score -= lineCount * lineCount * diagonalMultiplier * defenseMultiplier;
 				}
 			}
 		}

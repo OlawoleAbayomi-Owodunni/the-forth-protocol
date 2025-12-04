@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include "AI.h"
 
 /// @brief Difficulty levels for AI opponent
 enum class Difficulty {
@@ -89,6 +90,9 @@ public:
 	enum class State {
 		Main,			///< Main menu showing game mode selection
 		Difficulty,		///< Difficulty selection for AI mode
+		AIStrategy,		///< AI strategy selection (for PvAI mode)
+		AI1Strategy,	///< AI 1 strategy selection (for AIvsAI mode)
+		AI2Strategy,	///< AI 2 strategy selection (for AIvsAI mode)
 		GameOver,		///< Game over screen with restart/menu options
 		Hidden			///< Menu is hidden, game is running
 	};
@@ -135,6 +139,18 @@ public:
 	/// @return Selected difficulty
 	Difficulty getDifficulty() const { return m_selectedDifficulty; }
 
+	/// @brief Get selected AI strategy (for PvAI mode)
+	/// @return Selected AI strategy
+	Strategy getAIStrategy() const { return m_aiStrategy; }
+
+	/// @brief Get selected AI 1 strategy (for AIvsAI mode)
+	/// @return Selected AI 1 strategy
+	Strategy getAI1Strategy() const { return m_ai1Strategy; }
+
+	/// @brief Get selected AI 2 strategy (for AIvsAI mode)
+	/// @return Selected AI 2 strategy
+	Strategy getAI2Strategy() const { return m_ai2Strategy; }
+
 	/// @brief Reset menu to initial state
 	void reset();
 
@@ -159,6 +175,9 @@ private:
 
 	/// @brief Initialize difficulty selection buttons
 	void initDifficultyMenu();
+
+	/// @brief Initialize strategy selection buttons
+	void initStrategyMenu();
 
 	/// @brief Initialize game over menu
 	void initGameOverMenu();
@@ -187,6 +206,15 @@ private:
 	MenuButton m_hardButton;			///< Hard difficulty button
 	MenuButton m_backButton;			///< Back to main menu button
 
+	// Strategy menu buttons
+	MenuButton m_balancedButton;		///< Balanced strategy button
+	MenuButton m_centerButton;			///< Favor center strategy button
+	MenuButton m_edgesButton;			///< Favor edges strategy button
+	MenuButton m_diagonalButton;		///< Favor diagonal strategy button
+	MenuButton m_aggressiveButton;		///< Aggressive strategy button
+	MenuButton m_defensiveButton;		///< Defensive strategy button
+	MenuButton m_backFromStrategyButton;///< Back button from strategy menu
+
 	// Game over menu
 	MenuButton m_restartButton;			///< Restart game button
 	MenuButton m_mainMenuButton;		///< Return to main menu button
@@ -199,6 +227,9 @@ private:
 	bool m_pvaiSelected;				///< PvAI mode selected flag
 	bool m_aivsaiSelected;				///< AI vs AI mode selected flag
 	Difficulty m_selectedDifficulty;	///< Selected difficulty level
+	Strategy m_aiStrategy;				///< Selected AI strategy (PvAI)
+	Strategy m_ai1Strategy;				///< Selected AI 1 strategy (AIvsAI)
+	Strategy m_ai2Strategy;				///< Selected AI 2 strategy (AIvsAI)
 	bool m_startGame;					///< Start game flag
 	bool m_exitGame;					///< Exit game flag
 	std::string m_winnerMessage;		///< Winner message for game over
