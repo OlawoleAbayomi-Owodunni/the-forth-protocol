@@ -1,0 +1,610 @@
+\doxysection{Menu.\+cpp}
+\hypertarget{_menu_8cpp_source}{}\label{_menu_8cpp_source}\index{the\_fourth\_protocol/Menu.cpp@{the\_fourth\_protocol/Menu.cpp}}
+\mbox{\hyperlink{_menu_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_menu_8h}{Menu.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00005}00005\ \textcolor{comment}{//\ MenuButton\ Implementation}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00008}\mbox{\hyperlink{class_menu_button_a9354ec0aa64843402827325b38737523}{00008}}\ \mbox{\hyperlink{class_menu_button_a9354ec0aa64843402827325b38737523}{MenuButton::MenuButton}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ position,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ size,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ text,\ \textcolor{keyword}{const}\ sf::Font\&\ font,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{const}\ sf::Color\&\ normalColor,\ \textcolor{keyword}{const}\ sf::Color\&\ hoverColor)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00011}00011\ \ \ \ \ :\ m\_font(font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00012}00012\ \ \ \ \ ,\ m\_normalColor(normalColor)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00013}00013\ \ \ \ \ ,\ m\_hoverColor(hoverColor)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00014}00014\ \ \ \ \ ,\ m\_disabledColor(sf::Color(80,\ 80,\ 80))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00015}00015\ \ \ \ \ ,\ m\_isHovered(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00016}00016\ \ \ \ \ ,\ m\_enabled(true)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{comment}{//\ Setup\ button\ shape}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00019}00019\ \ \ \ \ m\_shape.setSize(size);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00020}00020\ \ \ \ \ m\_shape.setPosition(position);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00021}00021\ \ \ \ \ m\_shape.setFillColor(normalColor);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00022}00022\ \ \ \ \ m\_shape.setOutlineThickness(3.0f);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00023}00023\ \ \ \ \ m\_shape.setOutlineColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{comment}{//\ Setup\ text}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00026}00026\ \ \ \ \ m\_text.setString(text);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00027}00027\ \ \ \ \ m\_text.setCharacterSize(22);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00028}00028\ \ \ \ \ m\_text.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ Center\ text\ in\ button}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00031}00031\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00032}00032\ \ \ \ \ m\_text.setOrigin(sf::Vector2f(textBounds.position.x\ +\ textBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ textBounds.position.y\ +\ textBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00034}00034\ \ \ \ \ m\_text.setPosition(sf::Vector2f(position.x\ +\ size.x\ /\ 2.0f,\ position.y\ +\ size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00037}\mbox{\hyperlink{class_menu_button_ad36269aaf72956795f537ef3d4283982}{00037}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_button_ad36269aaf72956795f537ef3d4283982}{MenuButton::update}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ mousePos)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ m\_isHovered\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00044}00044\ \ \ \ \ m\_isHovered\ =\ \mbox{\hyperlink{class_menu_button_a93db91e7632863c488b7059686a8bdf0}{contains}}(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isHovered)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_hoverColor);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ m\_shape.setOutlineThickness(4.0f);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ m\_shape.setOutlineColor(sf::Color(255,\ 255,\ 100));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_normalColor);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ m\_shape.setOutlineThickness(3.0f);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ m\_shape.setOutlineColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00058}\mbox{\hyperlink{class_menu_button_aedf2be4a866a70e62d3078eac5a8b22e}{00058}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_button_aedf2be4a866a70e62d3078eac5a8b22e}{MenuButton::draw}}(sf::RenderWindow\&\ window)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00060}00060\ \ \ \ \ window.draw(m\_shape);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00061}00061\ \ \ \ \ window.draw(m\_text);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00064}\mbox{\hyperlink{class_menu_button_a93db91e7632863c488b7059686a8bdf0}{00064}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_button_a93db91e7632863c488b7059686a8bdf0}{MenuButton::contains}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ point)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00065}00065\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_shape.getGlobalBounds().contains(point);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00069}\mbox{\hyperlink{class_menu_button_a25ca18573771e6d9a2abb3f1dc1e632b}{00069}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_button_a25ca18573771e6d9a2abb3f1dc1e632b}{MenuButton::setEnabled}}(\textcolor{keywordtype}{bool}\ enabled)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00070}00070\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00071}00071\ \ \ \ \ m\_enabled\ =\ enabled;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (!enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_disabledColor);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ m\_text.setFillColor(sf::Color(150,\ 150,\ 150));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_normalColor);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ m\_text.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00082}\mbox{\hyperlink{class_menu_button_a3fda196d0eb3a5490a420fcfeb6a8a5c}{00082}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_button_a3fda196d0eb3a5490a420fcfeb6a8a5c}{MenuButton::setText}}(\textcolor{keyword}{const}\ std::string\&\ text)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00083}00083\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00084}00084\ \ \ \ \ m\_text.setString(text);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00085}00085\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00086}00086\ \ \ \ \ sf::Vector2f\ buttonPos\ =\ m\_shape.getPosition();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00087}00087\ \ \ \ \ sf::Vector2f\ buttonSize\ =\ m\_shape.getSize();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00088}00088\ \ \ \ \ m\_text.setOrigin(sf::Vector2f(textBounds.position.x\ +\ textBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ textBounds.position.y\ +\ textBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00090}00090\ \ \ \ \ m\_text.setPosition(sf::Vector2f(buttonPos.x\ +\ buttonSize.x\ /\ 2.0f,\ buttonPos.y\ +\ buttonSize.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00093}\mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{00093}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{MenuButton::setPosition}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ position)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00095}00095\ \ \ \ \ m\_shape.setPosition(position);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00096}00096\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00097}00097\ \ \ \ \ sf::Vector2f\ buttonSize\ =\ m\_shape.getSize();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00098}00098\ \ \ \ \ m\_text.setPosition(sf::Vector2f(position.x\ +\ buttonSize.x\ /\ 2.0f,\ position.y\ +\ buttonSize.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00099}00099\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00102}00102\ \textcolor{comment}{//\ Menu\ Implementation}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00105}\mbox{\hyperlink{class_menu_af8cc4ca711bc361cc2ac88ad11f21bee}{00105}}\ \mbox{\hyperlink{class_menu_af8cc4ca711bc361cc2ac88ad11f21bee}{Menu::Menu}}(\textcolor{keyword}{const}\ sf::Font\&\ font,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ windowSize)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00106}00106\ \ \ \ \ :\ m\_font(font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00107}00107\ \ \ \ \ ,\ m\_windowSize(windowSize)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00108}00108\ \ \ \ \ ,\ m\_state(\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2}{State}}::Main)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00109}00109\ \ \ \ \ ,\ m\_pvpButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Player\ vs\ Player"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00110}00110\ \ \ \ \ ,\ m\_pvaiButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Player\ vs\ AI"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00111}00111\ \ \ \ \ ,\ m\_aivsaiButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}AI\ vs\ AI"{}},\ font,\ sf::Color(130,\ 70,\ 180),\ sf::Color(160,\ 100,\ 220))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00112}00112\ \ \ \ \ ,\ m\_exitButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Exit\ Game"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00113}00113\ \ \ \ \ ,\ m\_easyButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Easy"{}},\ font,\ sf::Color(70,\ 180,\ 70),\ sf::Color(100,\ 220,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00114}00114\ \ \ \ \ ,\ m\_mediumButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Medium"{}},\ font,\ sf::Color(180,\ 140,\ 70),\ sf::Color(220,\ 180,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00115}00115\ \ \ \ \ ,\ m\_hardButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Hard"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00116}00116\ \ \ \ \ ,\ m\_backButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Back"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00117}00117\ \ \ \ \ ,\ m\_balancedButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Balanced"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00118}00118\ \ \ \ \ ,\ m\_centerButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Center"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00119}00119\ \ \ \ \ ,\ m\_edgesButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Edges"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00120}00120\ \ \ \ \ ,\ m\_diagonalButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Favor\ Diagonal"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00121}00121\ \ \ \ \ ,\ m\_aggressiveButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Aggressive"{}},\ font,\ sf::Color(180,\ 70,\ 70),\ sf::Color(220,\ 100,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00122}00122\ \ \ \ \ ,\ m\_defensiveButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Defensive"{}},\ font,\ sf::Color(70,\ 180,\ 70),\ sf::Color(100,\ 220,\ 100))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00123}00123\ \ \ \ \ ,\ m\_backFromStrategyButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 60),\ \textcolor{stringliteral}{"{}Back"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00124}00124\ \ \ \ \ ,\ m\_restartButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Restart\ Game"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00125}00125\ \ \ \ \ ,\ m\_mainMenuButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(280,\ 70),\ \textcolor{stringliteral}{"{}Main\ Menu"{}},\ font)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00126}00126\ \ \ \ \ ,\ m\_toggleMenuButton(sf::Vector2f(0,\ 0),\ sf::Vector2f(180,\ 50),\ \textcolor{stringliteral}{"{}Hide\ Menu"{}},\ font,\ sf::Color(100,\ 100,\ 100),\ sf::Color(140,\ 140,\ 140))}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00127}00127\ \ \ \ \ ,\ m\_pvpSelected(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00128}00128\ \ \ \ \ ,\ m\_pvaiSelected(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00129}00129\ \ \ \ \ ,\ m\_aivsaiSelected(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00130}00130\ \ \ \ \ ,\ m\_selectedDifficulty(\mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}}::\mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Medium}})}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00131}00131\ \ \ \ \ ,\ m\_aiStrategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}}::\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Balanced}})}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00132}00132\ \ \ \ \ ,\ m\_ai1Strategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}}::\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Balanced}})}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00133}00133\ \ \ \ \ ,\ m\_ai2Strategy(\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}}::\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Balanced}})}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00134}00134\ \ \ \ \ ,\ m\_startGame(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00135}00135\ \ \ \ \ ,\ m\_exitGame(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00136}00136\ \ \ \ \ ,\ m\_menuCollapsed(false)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00137}00137\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{comment}{//\ Setup\ background\ overlay}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00139}00139\ \ \ \ \ m\_background.setSize(windowSize);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00140}00140\ \ \ \ \ m\_background.setPosition(sf::Vector2f(0.0f,\ 0.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00141}00141\ \ \ \ \ m\_background.setFillColor(sf::Color(0,\ 0,\ 0,\ 200));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{comment}{//\ Setup\ menu\ panel}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordtype}{float}\ panelWidth\ =\ 600.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keywordtype}{float}\ panelHeight\ =\ 550.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00146}00146\ \ \ \ \ m\_panel.setSize(sf::Vector2f(panelWidth,\ panelHeight));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00147}00147\ \ \ \ \ m\_panel.setPosition(sf::Vector2f((windowSize.x\ -\/\ panelWidth)\ /\ 2.0f,\ (windowSize.y\ -\/\ panelHeight)\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00148}00148\ \ \ \ \ m\_panel.setFillColor(sf::Color(30,\ 30,\ 50,\ 250));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00149}00149\ \ \ \ \ m\_panel.setOutlineThickness(5.0f);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00150}00150\ \ \ \ \ m\_panel.setOutlineColor(sf::Color(100,\ 149,\ 237));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{comment}{//\ Setup\ title\ text}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00153}00153\ \ \ \ \ m\_titleText.setCharacterSize(48);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00154}00154\ \ \ \ \ m\_titleText.setFillColor(sf::Color(100,\ 200,\ 255));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00155}00155\ \ \ \ \ m\_titleText.setString(\textcolor{stringliteral}{"{}The\ Fourth\ Protocol"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00156}00156\ \ \ \ \ sf::FloatRect\ titleBounds\ =\ m\_titleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00157}00157\ \ \ \ \ m\_titleText.setOrigin(sf::Vector2f(titleBounds.position.x\ +\ titleBounds.size.x\ /\ 2.0f,\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ titleBounds.position.y\ +\ titleBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00159}00159\ \ \ \ \ m\_titleText.setPosition(sf::Vector2f(windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 60.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00161}00161\ \ \ \ \ \textcolor{comment}{//\ Setup\ subtitle\ text}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00162}00162\ \ \ \ \ m\_subtitleText.setCharacterSize(20);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00163}00163\ \ \ \ \ m\_subtitleText.setFillColor(sf::Color(180,\ 180,\ 180));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00164}00164\ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00165}00165\ \ \ \ \ sf::FloatRect\ subtitleBounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00166}00166\ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(subtitleBounds.position.x\ +\ subtitleBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ subtitleBounds.position.y\ +\ subtitleBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00168}00168\ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00170}00170\ \ \ \ \ \textcolor{comment}{//\ Setup\ game\ over\ text}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00171}00171\ \ \ \ \ m\_gameOverText.setCharacterSize(35);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00172}00172\ \ \ \ \ m\_gameOverText.setFillColor(sf::Color(255,\ 215,\ 0));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00174}00174\ \ \ \ \ initMainMenu();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00175}00175\ \ \ \ \ initDifficultyMenu();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00176}00176\ \ \ \ \ initStrategyMenu();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00177}00177\ \ \ \ \ initGameOverMenu();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00178}00178\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00180}00180\ \textcolor{keywordtype}{void}\ Menu::initMainMenu()}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00181}00181\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00182}00182\ \ \ \ \ \textcolor{keywordtype}{float}\ centerX\ =\ m\_windowSize.x\ /\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ m\_panel.getPosition().y\ +\ 180.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00184}00184\ \ \ \ \ \textcolor{keywordtype}{float}\ buttonSpacing\ =\ 90.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00186}00186\ \ \ \ \ \textcolor{comment}{//\ Position\ main\ menu\ buttons}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00187}00187\ \ \ \ \ m\_pvpButton.\mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{setPosition}}(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00188}00188\ \ \ \ \ m\_pvaiButton.\mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{setPosition}}(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00189}00189\ \ \ \ \ m\_aivsaiButton.\mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{setPosition}}(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 2));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00190}00190\ \ \ \ \ m\_exitButton.\mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{setPosition}}(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 3));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00191}00191\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00193}00193\ \textcolor{keywordtype}{void}\ Menu::initDifficultyMenu()}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00194}00194\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00195}00195\ \ \ \ \ \textcolor{keywordtype}{float}\ centerX\ =\ m\_windowSize.x\ /\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00196}00196\ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ m\_panel.getPosition().y\ +\ 180.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00197}00197\ \ \ \ \ \textcolor{keywordtype}{float}\ buttonSpacing\ =\ 90.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{comment}{//\ Position\ difficulty\ buttons}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00200}00200\ \ \ \ \ m\_easyButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00201}00201\ \ \ \ \ m\_mediumButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00202}00202\ \ \ \ \ m\_hardButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 2));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00203}00203\ \ \ \ \ m\_backButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 3));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00204}00204\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00206}00206\ \textcolor{keywordtype}{void}\ Menu::initStrategyMenu()}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00207}00207\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{keywordtype}{float}\ centerX\ =\ m\_windowSize.x\ /\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ m\_panel.getPosition().y\ +\ 170.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00210}00210\ \ \ \ \ \textcolor{keywordtype}{float}\ buttonSpacing\ =\ 70.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00212}00212\ \ \ \ \ \textcolor{comment}{//\ Position\ strategy\ buttons\ (6\ strategies\ +\ back\ button)}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00213}00213\ \ \ \ \ m\_balancedButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00214}00214\ \ \ \ \ m\_centerButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00215}00215\ \ \ \ \ m\_edgesButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 2));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00216}00216\ \ \ \ \ m\_diagonalButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 3));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00217}00217\ \ \ \ \ m\_aggressiveButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 4));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00218}00218\ \ \ \ \ m\_defensiveButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 5));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00219}00219\ \ \ \ \ m\_backFromStrategyButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing\ *\ 6));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00220}00220\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00222}00222\ \textcolor{keywordtype}{void}\ Menu::initGameOverMenu()}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00223}00223\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{float}\ centerX\ =\ m\_windowSize.x\ /\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00225}00225\ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ m\_panel.getPosition().y\ +\ 220.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00226}00226\ \ \ \ \ \textcolor{keywordtype}{float}\ buttonSpacing\ =\ 90.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00228}00228\ \ \ \ \ \textcolor{comment}{//\ Position\ game\ over\ buttons}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00229}00229\ \ \ \ \ m\_restartButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00230}00230\ \ \ \ \ m\_mainMenuButton.setPosition(sf::Vector2f(centerX\ -\/\ 140.0f,\ startY\ +\ buttonSpacing));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00231}00231\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00232}00232\ \ \ \ \ \textcolor{keywordtype}{float}\ panelRight\ =\ m\_panel.getPosition().x\ +\ m\_panel.getSize().x;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00233}00233\ \ \ \ \ \textcolor{keywordtype}{float}\ panelTop\ =\ m\_panel.getPosition().y;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00234}00234\ \ \ \ \ m\_toggleMenuButton.setPosition(sf::Vector2f(panelRight\ -\/\ 200.0f,\ panelTop\ +\ 15.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00235}00235\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00237}\mbox{\hyperlink{class_menu_a74cc1712044665c81d263842657adf9b}{00237}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a74cc1712044665c81d263842657adf9b}{Menu::update}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ mousePos)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00238}00238\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00239}00239\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ m\_pvpButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ m\_pvaiButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00243}00243\ \ \ \ \ \ \ \ \ m\_aivsaiButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00244}00244\ \ \ \ \ \ \ \ \ m\_exitButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00248}00248\ \ \ \ \ \ \ \ \ m\_easyButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ m\_mediumButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00250}00250\ \ \ \ \ \ \ \ \ m\_hardButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00251}00251\ \ \ \ \ \ \ \ \ m\_backButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00254}00254\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00255}00255\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00256}00256\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ m\_balancedButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ m\_centerButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ m\_edgesButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ m\_diagonalButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00261}00261\ \ \ \ \ \ \ \ \ m\_aggressiveButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ m\_defensiveButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ m\_backFromStrategyButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00266}00266\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ m\_restartButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ m\_mainMenuButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.update(mousePos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00276}00276\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00278}00278\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00279}00279\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00281}\mbox{\hyperlink{class_menu_abc8a0fa77065d7e9faaa3961b5ba96f1}{00281}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_abc8a0fa77065d7e9faaa3961b5ba96f1}{Menu::handleClick}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ mousePos)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00282}00282\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00283}00283\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_pvpButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_pvaiButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aivsaiButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty\ (AI\ vs\ AI)"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_exitButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ m\_exitGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00323}00323\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_easyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a7f943921724d63dc0ac9c6febf99fa88}{Difficulty::Easy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Determine\ which\ mode\ was\ selected\ based\ on\ subtitle}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00341}00341\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_mediumButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a87f8a6ab85c9ced3702b4ea641ad4bb5}{Difficulty::Medium}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00358}00358\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00359}00359\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_hardButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedDifficulty\ =\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}{Difficulty::Hard}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_subtitleText.getString().find(\textcolor{stringliteral}{"{}AI\ vs\ AI"{}})\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00375}00375\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00384}00384\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00385}00385\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00387}00387\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ strategy\ selection\ for\ PvAI\ mode}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00389}00389\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00390}00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00391}00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00394}00394\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_aiStrategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00395}00395\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00403}00403\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00404}00404\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00405}00405\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ start\ game}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00406}00406\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00410}00410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00411}00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00413}00413\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ 1\ strategy\ selection\ for\ AIvsAI\ mode}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00415}00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00416}00416\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00420}00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_ai1Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Difficulty\ (AI\ vs\ AI)"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00429}00429\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00430}00430\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ go\ to\ AI\ 2\ strategy}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00432}00432\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 2\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00440}00440\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00441}00441\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00443}00443\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00444}00444\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ 2\ strategy\ selection\ for\ AIvsAI\ mode}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00445}00445\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_balancedButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy::Balanced}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00446}00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_centerButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706abc7f0e329be17f4c3887209959ed1b4b}{Strategy::FavorCenter}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00447}00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_edgesButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a994fe6c5e60cf1b059527b92202f2b69}{Strategy::FavorEdges}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_diagonalButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a826ef52c7a81ff6a39528d5d59de016c}{Strategy::FavorDiagonal}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00449}00449\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_aggressiveButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a389a96d0d9b3feb46b8c9d941566a4ae}{Strategy::Aggressive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00450}00450\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_defensiveButton.contains(mousePos))\ m\_ai2Strategy\ =\ \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706a3727b4d2311005c88de3b4a52f3de3a2}{Strategy::Defensive}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00451}00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ AI\ 1\ Strategy"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00459}00459\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00460}00460\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00461}00461\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ strategy\ was\ selected\ (not\ back\ button),\ start\ game}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00462}00462\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_backFromStrategyButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00467}00467\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00469}00469\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00470}00470\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_toggleMenuButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ !m\_menuCollapsed;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setText(m\_menuCollapsed\ ?\ \textcolor{stringliteral}{"{}Show\ Menu"{}}\ :\ \textcolor{stringliteral}{"{}Hide\ Menu"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setPosition(sf::Vector2f(20.0f,\ 20.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelRight\ =\ m\_panel.getPosition().x\ +\ m\_panel.getSize().x;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelTop\ =\ m\_panel.getPosition().y;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.setPosition(sf::Vector2f(panelRight\ -\/\ 200.0f,\ panelTop\ +\ 15.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00481}00481\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00482}00482\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_menuCollapsed)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_restartButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_winnerMessage.clear();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_mainMenuButton.contains(mousePos))\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_menu_ace1416aa3e45da9468f191390854339f}{reset}}();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00494}00494\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00495}00495\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00497}00497\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00498}00498\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00499}00499\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00501}00501\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00502}00502\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00504}\mbox{\hyperlink{class_menu_a69b0258bd7cbd111158570880984438a}{00504}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a69b0258bd7cbd111158570880984438a}{Menu::render}}(sf::RenderWindow\&\ window)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00505}00505\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00506}00506\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_state\ ==\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}})\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00507}00507\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00508}00508\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00510}00510\ \ \ \ \ \textcolor{keywordflow}{switch}\ (m\_state)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00511}00511\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00512}00512\ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00513}00513\ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00514}00514\ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00515}00515\ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00516}00516\ \ \ \ \ \ \ \ \ m\_pvpButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00517}00517\ \ \ \ \ \ \ \ \ m\_pvaiButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00518}00518\ \ \ \ \ \ \ \ \ m\_aivsaiButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00519}00519\ \ \ \ \ \ \ \ \ m\_exitButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00520}00520\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7b29ca96ada2afa3aadbcf55cd61a1ed}{State::Difficulty}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00523}00523\ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00524}00524\ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00525}00525\ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00526}00526\ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00527}00527\ \ \ \ \ \ \ \ \ m\_easyButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00528}00528\ \ \ \ \ \ \ \ \ m\_mediumButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00529}00529\ \ \ \ \ \ \ \ \ m\_hardButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00530}00530\ \ \ \ \ \ \ \ \ m\_backButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00531}00531\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00533}00533\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8c05a83d6fd86f16cd284cafad996c67}{State::AIStrategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00534}00534\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a2169878fbe29de4fc64551914c774a87}{State::AI1Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00535}00535\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa579f3568d05e96c8e946a9cc8901c5f}{State::AI2Strategy}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00536}00536\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Temporarily\ enlarge\ panel\ for\ strategy\ selection}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ originalSize\ =\ m\_panel.getSize();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ originalPos\ =\ m\_panel.getPosition();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ largerHeight\ =\ 670.0f;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setSize(sf::Vector2f(originalSize.x,\ largerHeight));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_titleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_subtitleText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ m\_balancedButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ m\_centerButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ m\_edgesButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ m\_diagonalButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aggressiveButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ m\_defensiveButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ m\_backFromStrategyButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Restore\ original\ size}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setSize(originalSize);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ m\_panel.setPosition(originalPos);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00559}00559\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00560}00560\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00562}00562\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00563}00563\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menuCollapsed)\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00565}00565\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_background);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_panel);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(m\_gameOverText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ m\_restartButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ m\_mainMenuButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ m\_toggleMenuButton.draw(window);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00572}00572\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00573}00573\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00575}00575\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{State::Hidden}}:}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00576}00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00577}00577\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00578}00578\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00579}00579\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00580}\mbox{\hyperlink{class_menu_ace1416aa3e45da9468f191390854339f}{00580}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ace1416aa3e45da9468f191390854339f}{Menu::reset}}()}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00581}00581\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00582}00582\ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2aa02c83a7dbd96295beaefb72c2bee2de}{State::Main}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00583}00583\ \ \ \ \ m\_pvpSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00584}00584\ \ \ \ \ m\_pvaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00585}00585\ \ \ \ \ m\_aivsaiSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00586}00586\ \ \ \ \ m\_startGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00587}00587\ \ \ \ \ m\_exitGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00588}00588\ \ \ \ \ m\_winnerMessage.clear();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00589}00589\ \ \ \ \ m\_subtitleText.setString(\textcolor{stringliteral}{"{}Select\ Game\ Mode"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00590}00590\ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_subtitleText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00591}00591\ \ \ \ \ m\_subtitleText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00592}00592\ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00593}00593\ \ \ \ \ m\_subtitleText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 120.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00594}00594\ \}}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00595}00595\ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00596}\mbox{\hyperlink{class_menu_a3e4fa6686b86fa091e1d56925dcd1d95}{00596}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a3e4fa6686b86fa091e1d56925dcd1d95}{Menu::showGameOver}}(\textcolor{keyword}{const}\ std::string\&\ winnerText)}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00597}00597\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00598}00598\ \ \ \ \ m\_state\ =\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3}{State::GameOver}};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00599}00599\ \ \ \ \ m\_winnerMessage\ =\ winnerText;}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00600}00600\ \ \ \ \ m\_gameOverText.setString(winnerText);}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00601}00601\ \ \ \ \ m\_menuCollapsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00602}00602\ \ \ \ \ m\_toggleMenuButton.setText(\textcolor{stringliteral}{"{}Hide\ Menu"{}});}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00603}00603\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00604}00604\ \ \ \ \ sf::FloatRect\ bounds\ =\ m\_gameOverText.getLocalBounds();}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00605}00605\ \ \ \ \ m\_gameOverText.setOrigin(sf::Vector2f(bounds.position.x\ +\ bounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00606}00606\ \ \ \ \ \ \ \ \ bounds.position.y\ +\ bounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00607}00607\ \ \ \ \ m\_gameOverText.setPosition(sf::Vector2f(m\_windowSize.x\ /\ 2.0f,\ m\_panel.getPosition().y\ +\ 100.0f));}
+\DoxyCodeLine{\Hypertarget{_menu_8cpp_source_l00608}00608\ \}}
+
+\end{DoxyCode}

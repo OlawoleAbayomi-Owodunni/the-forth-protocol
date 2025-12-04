@@ -1,9 +1,22 @@
 var searchData=
 [
-  ['m_5farialfont_0',['m_arialFont',['../class_game.html#a2ffae4348d0f1f9ff76754a036557244',1,'Game']]],
-  ['m_5fwindow_1',['m_window',['../class_game.html#a22a61b5ea27c609be8cf2724c33d7ae5',1,'Game']]],
-  ['main_2',['main',['../main_8cpp.html#a97b0fa62b7b0972875f5f589322c4c24',1,'main.cpp']]],
-  ['main_2ecpp_3',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['move_4',['Move',['../struct_move.html',1,'Move'],['../struct_move.html#a4b1acc3a67d30c385ad9a6000526393a',1,'Move::Move()'],['../struct_move.html#ae8ebc1332a54bb2437f5f08c6a77ec65',1,'Move::Move(int pi, int fr, int fc, int tr, int tc)']]],
-  ['movement_5',['Movement',['../class_game.html#a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a',1,'Game']]]
+  ['game_0',['Game',['../class_game.html',1,'Game'],['../class_game.html#ad59df6562a58a614fda24622d3715b65',1,'Game::Game()']]],
+  ['game_2ecpp_1',['Game.cpp',['../_game_8cpp.html',1,'']]],
+  ['game_2eh_2',['Game.h',['../_game_8h.html',1,'']]],
+  ['gameover_3',['GameOver',['../class_game.html#a3e65d1349e1d51a51a38d43ba735c484a8f347bc7cebca9fa6d97e70c6bc29eb3',1,'Game::GameOver'],['../class_menu.html#a8269685e78203b028d5bd77c339898b2a8f347bc7cebca9fa6d97e70c6bc29eb3',1,'Menu::GameOver']]],
+  ['gamephase_4',['GamePhase',['../class_game.html#a3e65d1349e1d51a51a38d43ba735c484',1,'Game']]],
+  ['getai1strategy_5',['getAI1Strategy',['../class_menu.html#a983f4ac456460f690d4ccd1e347ef0bb',1,'Menu']]],
+  ['getai2strategy_6',['getAI2Strategy',['../class_menu.html#a378194d92ffdddff99b271f335d0552c',1,'Menu']]],
+  ['getaistrategy_7',['getAIStrategy',['../class_menu.html#a79c41087674eac0d8ae458a6cc56432c',1,'Menu']]],
+  ['getbestscore_8',['getBestScore',['../class_a_i.html#af8398cc12581489be199e2a7bb5e577d',1,'AI']]],
+  ['getbounds_9',['getBounds',['../class_piece.html#a7406a95fecad9397318ee5f4a9ed1a16',1,'Piece']]],
+  ['getdifficulty_10',['getDifficulty',['../class_menu.html#a81fc1e3d6664e9566dae65fc93d6394c',1,'Menu']]],
+  ['getgridcol_11',['getGridCol',['../class_piece.html#a881c71c4c1c6d989eb3f0c8adbf275da',1,'Piece']]],
+  ['getgridrow_12',['getGridRow',['../class_piece.html#a527f078de68fe17ed4aa99fb75c483c1',1,'Piece']]],
+  ['getmovesconsidered_13',['getMovesConsidered',['../class_a_i.html#a1d24e29389c34e2f351799356e23d0f1',1,'AI']]],
+  ['getposition_14',['getPosition',['../class_piece.html#a4912040f1bd8e5e3650880153b8fadb0',1,'Piece']]],
+  ['getselectedmove_15',['getSelectedMove',['../class_a_i.html#a4b0bdeacae404236681fba1f48afbefb',1,'AI']]],
+  ['getstate_16',['getState',['../class_menu.html#a1e884c956ec49e628601254d1e0ca447',1,'Menu']]],
+  ['gettype_17',['getType',['../class_piece.html#a45677eed127a69d2940fafdaa16fb782',1,'Piece']]],
+  ['getvalidmoves_18',['getValidMoves',['../class_piece.html#a11018e7df702fd17f3547f6ee87a27cd',1,'Piece']]]
 ];

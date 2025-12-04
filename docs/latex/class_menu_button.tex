@@ -1,0 +1,350 @@
+\doxysection{Menu\+Button Class Reference}
+\hypertarget{class_menu_button}{}\label{class_menu_button}\index{MenuButton@{MenuButton}}
+
+
+Interactive button class with hover effects.  
+
+
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_menu_button_a9354ec0aa64843402827325b38737523}{Menu\+Button}} (const sf\+::\+Vector2f \&position, const sf\+::\+Vector2f \&size, const std\+::string \&text, const sf\+::\+Font \&font, const sf\+::\+Color \&normal\+Color=sf\+::\+Color(70, 130, 180), const sf\+::\+Color \&hover\+Color=sf\+::\+Color(100, 149, 237))
+\begin{DoxyCompactList}\small\item\em Constructor for menu button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_button_ad36269aaf72956795f537ef3d4283982}{update}} (const sf\+::\+Vector2f \&mouse\+Pos)
+\begin{DoxyCompactList}\small\item\em Update button hover state based on mouse position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_button_aedf2be4a866a70e62d3078eac5a8b22e}{draw}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Draw the button to the render window. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_button_a93db91e7632863c488b7059686a8bdf0}{contains}} (const sf\+::\+Vector2f \&point) const
+\begin{DoxyCompactList}\small\item\em Check if button contains a point. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_button_a7059f60b197a49eb82ad5f5c661add01}{is\+Hovered}} () const
+\begin{DoxyCompactList}\small\item\em Check if button is currently being hovered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_button_a25ca18573771e6d9a2abb3f1dc1e632b}{set\+Enabled}} (bool enabled)
+\begin{DoxyCompactList}\small\item\em Set button enabled/disabled state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_menu_button_abf6c83a7c8f9007ae16b7c0d469f9d30}{is\+Enabled}} () const
+\begin{DoxyCompactList}\small\item\em Check if button is enabled. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_button_a3fda196d0eb3a5490a420fcfeb6a8a5c}{set\+Text}} (const std\+::string \&text)
+\begin{DoxyCompactList}\small\item\em Set button text. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}{set\+Position}} (const sf\+::\+Vector2f \&position)
+\begin{DoxyCompactList}\small\item\em Set button position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interactive button class with hover effects. 
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00028}{28}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_menu_button_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_menu_button_a9354ec0aa64843402827325b38737523}\index{MenuButton@{MenuButton}!MenuButton@{MenuButton}}
+\index{MenuButton@{MenuButton}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{MenuButton()}{MenuButton()}}
+{\footnotesize\ttfamily \label{class_menu_button_a9354ec0aa64843402827325b38737523} 
+Menu\+Button\+::\+Menu\+Button (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{position}{, }\item[{const sf\+::\+Vector2f \&}]{size}{, }\item[{const std\+::string \&}]{text}{, }\item[{const sf\+::\+Font \&}]{font}{, }\item[{const sf\+::\+Color \&}]{normal\+Color}{ = {\ttfamily sf\+:\+:Color(70,~130,~180)}, }\item[{const sf\+::\+Color \&}]{hover\+Color}{ = {\ttfamily sf\+:\+:Color(100,~149,~237)}}\end{DoxyParamCaption})}
+
+
+
+Constructor for menu button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of the button \\
+\hline
+{\em size} & Size of the button \\
+\hline
+{\em text} & Text to display on button \\
+\hline
+{\em font} & Font to use for text \\
+\hline
+{\em normal\+Color} & Button color when not hovered \\
+\hline
+{\em hover\+Color} & Button color when hovered \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00008}{8}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \ \ \ \ :\ m\_font(font)}
+\DoxyCodeLine{00012\ \ \ \ \ ,\ m\_normalColor(normalColor)}
+\DoxyCodeLine{00013\ \ \ \ \ ,\ m\_hoverColor(hoverColor)}
+\DoxyCodeLine{00014\ \ \ \ \ ,\ m\_disabledColor(sf::Color(80,\ 80,\ 80))}
+\DoxyCodeLine{00015\ \ \ \ \ ,\ m\_isHovered(\textcolor{keyword}{false})}
+\DoxyCodeLine{00016\ \ \ \ \ ,\ m\_enabled(\textcolor{keyword}{true}) }
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Setup\ button\ shape}}
+\DoxyCodeLine{00019\ \ \ \ \ m\_shape.setSize(size);}
+\DoxyCodeLine{00020\ \ \ \ \ m\_shape.setPosition(position);}
+\DoxyCodeLine{00021\ \ \ \ \ m\_shape.setFillColor(normalColor);}
+\DoxyCodeLine{00022\ \ \ \ \ m\_shape.setOutlineThickness(3.0f);}
+\DoxyCodeLine{00023\ \ \ \ \ m\_shape.setOutlineColor(sf::Color::White);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Setup\ text}}
+\DoxyCodeLine{00026\ \ \ \ \ m\_text.setString(text);}
+\DoxyCodeLine{00027\ \ \ \ \ m\_text.setCharacterSize(22);}
+\DoxyCodeLine{00028\ \ \ \ \ m\_text.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Center\ text\ in\ button}}
+\DoxyCodeLine{00031\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{00032\ \ \ \ \ m\_text.setOrigin(sf::Vector2f(textBounds.position.x\ +\ textBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ textBounds.position.y\ +\ textBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00034\ \ \ \ \ m\_text.setPosition(sf::Vector2f(position.x\ +\ size.x\ /\ 2.0f,\ position.y\ +\ size.y\ /\ 2.0f));}
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_menu_button_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_button_a93db91e7632863c488b7059686a8bdf0}\index{MenuButton@{MenuButton}!contains@{contains}}
+\index{contains@{contains}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily \label{class_menu_button_a93db91e7632863c488b7059686a8bdf0} 
+bool Menu\+Button\+::contains (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if button contains a point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if point is inside button bounds 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00064}{64}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_shape.getGlobalBounds().contains(point);}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_aedf2be4a866a70e62d3078eac5a8b22e}\index{MenuButton@{MenuButton}!draw@{draw}}
+\index{draw@{draw}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_menu_button_aedf2be4a866a70e62d3078eac5a8b22e} 
+void Menu\+Button\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Draw the button to the render window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & Window to draw to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00058}{58}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ window.draw(m\_shape);}
+\DoxyCodeLine{00061\ \ \ \ \ window.draw(m\_text);}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_abf6c83a7c8f9007ae16b7c0d469f9d30}\index{MenuButton@{MenuButton}!isEnabled@{isEnabled}}
+\index{isEnabled@{isEnabled}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{isEnabled()}{isEnabled()}}
+{\footnotesize\ttfamily \label{class_menu_button_abf6c83a7c8f9007ae16b7c0d469f9d30} 
+bool Menu\+Button\+::is\+Enabled (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if button is enabled. 
+
+\begin{DoxyReturn}{Returns}
+True if button is enabled 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00065}{65}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \{\ \textcolor{keywordflow}{return}\ m\_enabled;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_a7059f60b197a49eb82ad5f5c661add01}\index{MenuButton@{MenuButton}!isHovered@{isHovered}}
+\index{isHovered@{isHovered}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{isHovered()}{isHovered()}}
+{\footnotesize\ttfamily \label{class_menu_button_a7059f60b197a49eb82ad5f5c661add01} 
+bool Menu\+Button\+::is\+Hovered (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if button is currently being hovered. 
+
+\begin{DoxyReturn}{Returns}
+True if mouse is over button 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_menu_8h_source_l00057}{57}} of file \mbox{\hyperlink{_menu_8h_source}{Menu.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00057\ \{\ \textcolor{keywordflow}{return}\ m\_isHovered;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_a25ca18573771e6d9a2abb3f1dc1e632b}\index{MenuButton@{MenuButton}!setEnabled@{setEnabled}}
+\index{setEnabled@{setEnabled}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{setEnabled()}{setEnabled()}}
+{\footnotesize\ttfamily \label{class_menu_button_a25ca18573771e6d9a2abb3f1dc1e632b} 
+void Menu\+Button\+::set\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled}{}\end{DoxyParamCaption})}
+
+
+
+Set button enabled/disabled state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled} & True to enable, false to disable \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00069}{69}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ m\_enabled\ =\ enabled;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (!enabled)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_disabledColor);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ m\_text.setFillColor(sf::Color(150,\ 150,\ 150));}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_normalColor);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ m\_text.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_aedd493e391ce21f188ba49bfa3869d05}\index{MenuButton@{MenuButton}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily \label{class_menu_button_aedd493e391ce21f188ba49bfa3869d05} 
+void Menu\+Button\+::set\+Position (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Set button position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & New position for button \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00093}{93}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00094\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ m\_shape.setPosition(position);}
+\DoxyCodeLine{00096\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{00097\ \ \ \ \ sf::Vector2f\ buttonSize\ =\ m\_shape.getSize();}
+\DoxyCodeLine{00098\ \ \ \ \ m\_text.setPosition(sf::Vector2f(position.x\ +\ buttonSize.x\ /\ 2.0f,\ position.y\ +\ buttonSize.y\ /\ 2.0f));}
+\DoxyCodeLine{00099\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_a3fda196d0eb3a5490a420fcfeb6a8a5c}\index{MenuButton@{MenuButton}!setText@{setText}}
+\index{setText@{setText}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{setText()}{setText()}}
+{\footnotesize\ttfamily \label{class_menu_button_a3fda196d0eb3a5490a420fcfeb6a8a5c} 
+void Menu\+Button\+::set\+Text (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text}{}\end{DoxyParamCaption})}
+
+
+
+Set button text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & New text for button \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00082}{82}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00083\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ m\_text.setString(text);}
+\DoxyCodeLine{00085\ \ \ \ \ sf::FloatRect\ textBounds\ =\ m\_text.getLocalBounds();}
+\DoxyCodeLine{00086\ \ \ \ \ sf::Vector2f\ buttonPos\ =\ m\_shape.getPosition();}
+\DoxyCodeLine{00087\ \ \ \ \ sf::Vector2f\ buttonSize\ =\ m\_shape.getSize();}
+\DoxyCodeLine{00088\ \ \ \ \ m\_text.setOrigin(sf::Vector2f(textBounds.position.x\ +\ textBounds.size.x\ /\ 2.0f,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ textBounds.position.y\ +\ textBounds.size.y\ /\ 2.0f));}
+\DoxyCodeLine{00090\ \ \ \ \ m\_text.setPosition(sf::Vector2f(buttonPos.x\ +\ buttonSize.x\ /\ 2.0f,\ buttonPos.y\ +\ buttonSize.y\ /\ 2.0f));}
+\DoxyCodeLine{00091\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_menu_button_ad36269aaf72956795f537ef3d4283982}\index{MenuButton@{MenuButton}!update@{update}}
+\index{update@{update}!MenuButton@{MenuButton}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_menu_button_ad36269aaf72956795f537ef3d4283982} 
+void Menu\+Button\+::update (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{mouse\+Pos}{}\end{DoxyParamCaption})}
+
+
+
+Update button hover state based on mouse position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & Current mouse position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_menu_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_menu_8cpp_source}{Menu.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_enabled)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ m\_isHovered\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ m\_isHovered\ =\ \mbox{\hyperlink{class_menu_button_a93db91e7632863c488b7059686a8bdf0}{contains}}(mousePos);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isHovered)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_hoverColor);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ m\_shape.setOutlineThickness(4.0f);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ m\_shape.setOutlineColor(sf::Color(255,\ 255,\ 100));}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ m\_shape.setFillColor(m\_normalColor);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ m\_shape.setOutlineThickness(3.0f);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ m\_shape.setOutlineColor(sf::Color::White);}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_menu_8h}{Menu.\+h}}\item 
+the\+\_\+fourth\+\_\+protocol/\mbox{\hyperlink{_menu_8cpp}{Menu.\+cpp}}\end{DoxyCompactItemize}

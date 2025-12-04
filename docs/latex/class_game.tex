@@ -44,7 +44,7 @@ sf\+::\+Render\+Window \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d
 \doxysubsection{Detailed Description}
 
 
-Definition at line \mbox{\hyperlink{_game_8h_source_l00058}{58}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+Definition at line \mbox{\hyperlink{_game_8h_source_l00059}{59}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
 
 
 
@@ -77,15 +77,15 @@ Game\+Over&\doxylink{class_game}{Game} has finished with a winner. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{_game_8h_source_l00062}{62}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+Definition at line \mbox{\hyperlink{_game_8h_source_l00063}{63}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ Placement,\ \ \ \ \ \ }
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Movement,\ \ \ \ \ \ \ }
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ GameOver\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00066\ \ \ \ \ \};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Placement,\ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ Movement,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ GameOver\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00067\ \ \ \ \ \};}
 
 \end{DoxyCode}
 
@@ -105,14 +105,15 @@ Default constructor that initialises the SFML window, and sets vertical sync ena
 
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00009}{9}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00010\ \ \ \ \ :\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}(sf::VideoMode(sf::Vector2u(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}},\ \mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}}),\ 32),\ \textcolor{stringliteral}{"{}The\ Fourth\ Protocol"{}},\ sf::Style::Default) }
-\DoxyCodeLine{00011\ \{}
-\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();}
-\DoxyCodeLine{00013\ \}}
+\DoxyCodeLine{00011\ \ \ \ \ :\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}(sf::VideoMode(sf::Vector2u(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}},\ \mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}}),\ 32),\ \textcolor{stringliteral}{"{}The\ Fourth\ Protocol"{}},\ sf::Style::Default),}
+\DoxyCodeLine{00012\ \ \ \ \ m\_menu(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}},\ sf::Vector2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}}),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}}))) }
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();}
+\DoxyCodeLine{00015\ \}}
 
 \end{DoxyCode}
 
@@ -132,116 +133,158 @@ Once-\/off game initialisation code.
 
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00017\ \{}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#pragma\ region\ NOT\ GOING\ TO\ NEED\ TO\ SEE\ THESE }}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Really\ only\ necessary\ is\ our\ target\ FPS\ is\ greater\ than\ 60.}}
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.setVerticalSyncEnabled(\textcolor{keyword}{true});}
-\DoxyCodeLine{00022\ \ \ \ \ }
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}}.openFromFile(\textcolor{stringliteral}{"{}ASSETS/FONTS/ariblk.ttf"{}}))}
-\DoxyCodeLine{00024\ \ \ \ \ \{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error\ loading\ font\ file"{}};}
-\DoxyCodeLine{00026\ \ \ \ \ \}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
-\DoxyCodeLine{00029\ \ \ \ \ x\_updateFPS.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00030\ \ \ \ \ x\_updateFPS.setPosition(sf::Vector2f(20,\ 300));}
-\DoxyCodeLine{00031\ \ \ \ \ x\_updateFPS.setCharacterSize(24);}
-\DoxyCodeLine{00032\ \ \ \ \ x\_updateFPS.setFillColor(sf::Color::White);}
-\DoxyCodeLine{00033\ \ \ \ \ x\_drawFPS.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00034\ \ \ \ \ x\_drawFPS.setPosition(sf::Vector2f(20,\ 350));}
-\DoxyCodeLine{00035\ \ \ \ \ x\_drawFPS.setCharacterSize(24);}
-\DoxyCodeLine{00036\ \ \ \ \ x\_drawFPS.setFillColor(sf::Color::White);}
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif }}
-\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#pragma\ endregion }}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ m\_board.resize(m\_gridRows);}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ m\_gridRows;\ ++i)\ \{}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ m\_board[i].resize(m\_gridCols,\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#pragma\ region\ NOT\ GOING\ TO\ NEED\ TO\ SEE\ THESE }}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Really\ only\ necessary\ is\ our\ target\ FPS\ is\ greater\ than\ 60.}}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.setVerticalSyncEnabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{00024\ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}}.getInfo().family.size())\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ only\ try\ to\ open\ if\ font\ is\ not\ already\ loaded}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}}.openFromFile(\textcolor{stringliteral}{"{}ASSETS/FONTS/ariblk.ttf"{}}))}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error\ loading\ font\ file"{}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
+\DoxyCodeLine{00034\ \ \ \ \ x\_updateFPS.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
+\DoxyCodeLine{00035\ \ \ \ \ x\_updateFPS.setPosition(sf::Vector2f(20,\ 300));}
+\DoxyCodeLine{00036\ \ \ \ \ x\_updateFPS.setCharacterSize(24);}
+\DoxyCodeLine{00037\ \ \ \ \ x\_updateFPS.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00038\ \ \ \ \ x\_drawFPS.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
+\DoxyCodeLine{00039\ \ \ \ \ x\_drawFPS.setPosition(sf::Vector2f(20,\ 350));}
+\DoxyCodeLine{00040\ \ \ \ \ x\_drawFPS.setCharacterSize(24);}
+\DoxyCodeLine{00041\ \ \ \ \ x\_drawFPS.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#pragma\ endregion }}
 \DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ cellSizeXY\ =\ 100.0f;}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ gridSizeXY\ =\ m\_gridRows\ *\ cellSizeXY;}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ x0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}})\ -\/\ gridSizeXY);\ \textcolor{comment}{//\ grid\ x\ origin\ pos}}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ y0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ -\/\ gridSizeXY);\ \textcolor{comment}{//\ grid\ y\ origin\ pos}}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ m\_grid.resize(m\_gridRows\ *\ m\_gridCols);}
-\DoxyCodeLine{00051\ \ \ \ \ m\_p1Grid.resize(5);}
-\DoxyCodeLine{00052\ \ \ \ \ m\_p2Grid.resize(m\_gridRows\ *\ 1);}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ m\_gridRows;\ ++row)\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ please\ remember\ that\ this\ is\ only\ being\ done\ here\ becuase\ there's\ only\ 1\ column\ per\ player.\ If\ this\ increases\ for\ any\ reason,\ create\ a\ new\ nested\ loop}}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ setupGrid(m\_p1Grid,\ row,\ 0,\ 1,\ cellSizeXY,\ x0\ -\/\ cellSizeXY\ -\/\ 75.0f,\ y0,\ Color::Red);}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ setupPieces(m\_p1Pieces,\ row,\ cellSizeXY,\ m\_p1Grid[row].getPosition(),\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ setupGrid(m\_p2Grid,\ row,\ 0,\ 1,\ cellSizeXY,\ x0\ +\ gridSizeXY\ +\ 75.0f,\ y0,\ Color::Blue);}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ setupPieces(m\_p2Pieces,\ row,\ cellSizeXY,\ m\_p2Grid[row].getPosition(),\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ m\_gridCols;\ ++col)\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ setupGrid(m\_grid,\ row,\ col,\ m\_gridCols,\ cellSizeXY,\ x0,\ y0,\ Color::White);}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00064\ \ \ \ \ \}}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#pragma\ region\ text\ and\ button\ setup }}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ m\_statusText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00070\ \ \ \ \ m\_statusText.setCharacterSize(28);}
-\DoxyCodeLine{00071\ \ \ \ \ m\_statusText.setFillColor(sf::Color::White);}
-\DoxyCodeLine{00072\ \ \ \ \ m\_statusText.setPosition(\{\ 20.0f,\ 20.0f\ \});}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \ \ \ \ m\_instructionText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00075\ \ \ \ \ m\_instructionText.setCharacterSize(18);}
-\DoxyCodeLine{00076\ \ \ \ \ m\_instructionText.setFillColor(sf::Color::Cyan);}
-\DoxyCodeLine{00077\ \ \ \ \ m\_instructionText.setPosition(\{\ 20.0f,\ 60.0f\ \});}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ m\_statusText.setString(\textcolor{stringliteral}{"{}Player\ 1\ -\/\ PLACEMENT\ PHASE"{}});}
-\DoxyCodeLine{00080\ \ \ \ \ m\_instructionText.setString(\textcolor{stringliteral}{"{}Click\ and\ drag\ pieces\ to\ place\ them\ on\ the\ board"{}});}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ Setup\ main\ menu\ buttons\ (positioned\ relative\ to\ grid\ origin)}}
-\DoxyCodeLine{00083\ \ \ \ \ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ btnW\ =\ 220.0f;}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ btnH\ =\ 64.0f;}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ centerX\ =\ x0\ +\ 0.5f\ *\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(gridSizeXY);}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ btnY\ =\ y0\ -\/\ 120.0f;}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ m\_btnPvP.setSize(\{\ btnW,\ btnH\ \});}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ m\_btnPvAI.setSize(\{\ btnW,\ btnH\ \});}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ m\_btnPvP.setPosition(\{\ centerX\ -\/\ btnW\ -\/\ 10.0f,\ btnY\ \});}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ m\_btnPvAI.setPosition(\{\ centerX\ +\ 10.0f,\ btnY\ \});}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ m\_btnPvP.setFillColor(sf::Color(100,\ 149,\ 237));}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ m\_btnPvAI.setFillColor(sf::Color(70,\ 130,\ 180));}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ m\_btnPvP.setOutlineThickness(2.0f);}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ m\_btnPvAI.setOutlineThickness(2.0f);}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ m\_btnPvP.setOutlineColor(sf::Color::White);}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ m\_btnPvAI.setOutlineColor(sf::Color::White);}
+\DoxyCodeLine{00045\ \ \ \ \ configureDifficulty();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ reset\ board\ and\ state}}
+\DoxyCodeLine{00048\ \ \ \ \ m\_board.clear();}
+\DoxyCodeLine{00049\ \ \ \ \ m\_board.resize(m\_gridRows);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ m\_gridRows;\ ++i)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ m\_board[i].resize(m\_gridCols,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ m\_grid.clear();}
+\DoxyCodeLine{00055\ \ \ \ \ m\_p1Grid.clear();}
+\DoxyCodeLine{00056\ \ \ \ \ m\_p2Grid.clear();}
+\DoxyCodeLine{00057\ \ \ \ \ m\_p1Pieces.clear();}
+\DoxyCodeLine{00058\ \ \ \ \ m\_p2Pieces.clear();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Reset\ game\ state\ variables}}
+\DoxyCodeLine{00061\ \ \ \ \ m\_gamePhase\ =\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}};}
+\DoxyCodeLine{00062\ \ \ \ \ m\_isPlayer1Turn\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00063\ \ \ \ \ m\_p1PiecesPlaced\ =\ 0;}
+\DoxyCodeLine{00064\ \ \ \ \ m\_p2PiecesPlaced\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ m\_winner\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00066\ \ \ \ \ m\_selectedPiece\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00067\ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00068\ \ \ \ \ m\_validMoveIndicators.clear();}
+\DoxyCodeLine{00069\ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00070\ \ \ \ \ m\_aiThinkTime\ =\ 0.0;}
+\DoxyCodeLine{00071\ \ \ \ \ m\_lastMove\ =\ Move();}
+\DoxyCodeLine{00072\ \ \ \ \ m\_lastMoveP1\ =\ Move();}
+\DoxyCodeLine{00073\ \ \ \ \ m\_lastMoveP2\ =\ Move();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ cellSizeXY\ =\ 100.0f;}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ gridSizeXY\ =\ m\_gridRows\ *\ cellSizeXY;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ x0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}})\ -\/\ gridSizeXY);\ \textcolor{comment}{//\ grid\ x\ origin\ pos}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ y0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ -\/\ gridSizeXY);\ \textcolor{comment}{//\ grid\ y\ origin\ pos}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ m\_grid.resize(m\_gridRows\ *\ m\_gridCols);}
+\DoxyCodeLine{00081\ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ numPieces\ =\ (m\_difficulty\ ==\ \mbox{\hyperlink{_menu_8h_a43efb0a2e61815a66134dfa5ccea0a83a3656183169810334a96b91129dc9d881}{Difficulty::Hard}})\ ?\ 7\ :\ 5;}
+\DoxyCodeLine{00083\ \ \ \ \ m\_p1Grid.resize(numPieces);}
+\DoxyCodeLine{00084\ \ \ \ \ m\_p2Grid.resize(numPieces);}
+\DoxyCodeLine{00085\ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ m\_gridRows;\ ++row)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ <\ numPieces)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ setupGrid(m\_p1Grid,\ row,\ 0,\ 1,\ cellSizeXY,\ x0\ -\/\ cellSizeXY\ -\/\ 75.0f,\ y0,\ Color::Red);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ setupPieces(m\_p1Pieces,\ row,\ cellSizeXY,\ m\_p1Grid[row].getPosition(),\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ setupGrid(m\_p2Grid,\ row,\ 0,\ 1,\ cellSizeXY,\ x0\ +\ gridSizeXY\ +\ 75.0f,\ y0,\ Color::Blue);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ setupPieces(m\_p2Pieces,\ row,\ cellSizeXY,\ m\_p2Grid[row].getPosition(),\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ m\_gridCols;\ ++col)\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ setupGrid(m\_grid,\ row,\ col,\ m\_gridCols,\ cellSizeXY,\ x0,\ y0,\ Color::White);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
 \DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ m\_btnPvPText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ m\_btnPvAIText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ m\_btnPvPText.setCharacterSize(20);}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ m\_btnPvAIText.setCharacterSize(20);}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ m\_btnPvPText.setFillColor(sf::Color::White);}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ m\_btnPvAIText.setFillColor(sf::Color::White);}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ m\_btnPvPText.setString(\textcolor{stringliteral}{"{}Player"{}});}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ m\_btnPvAIText.setString(\textcolor{stringliteral}{"{}AI"{}});}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ center\ texts\ inside\ buttons}}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pb\ =\ m\_btnPvPText.getLocalBounds();}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pa\ =\ m\_btnPvAIText.getLocalBounds();}
-\DoxyCodeLine{00112\ \ \ \ \ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{auto}\ posP\ =\ m\_btnPvP.getPosition();}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ posA\ =\ m\_btnPvAI.getPosition();}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ m\_btnPvPText.setPosition(\{\ posP.x\ +\ (btnW\ -\/\ pb.size.x)\ /\ 2.0f\ -\/\ pb.position.x,\ posP.y\ +\ (btnH\ -\/\ pb.size.y)\ /\ 2.0f\ -\/\ pb.position.y\ \});}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ m\_btnPvAIText.setPosition(\{\ posA.x\ +\ (btnW\ -\/\ pa.size.x)\ /\ 2.0f\ -\/\ pa.position.x,\ posA.y\ +\ (btnH\ -\/\ pa.size.y)\ /\ 2.0f\ -\/\ pa.position.y\ \});}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ m\_showMenu\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00119\ \ \ \ \ \}}
-\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#pragma\ endregion }}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#pragma\ region\ text\ and\ button\ setup }}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ m\_statusText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
+\DoxyCodeLine{00104\ \ \ \ \ m\_statusText.setCharacterSize(28);}
+\DoxyCodeLine{00105\ \ \ \ \ m\_statusText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00106\ \ \ \ \ m\_statusText.setPosition(\{\ 20.0f,\ 20.0f\ \});}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ m\_instructionText.setFont(\mbox{\hyperlink{class_game_a2ffae4348d0f1f9ff76754a036557244}{m\_arialFont}});}
+\DoxyCodeLine{00109\ \ \ \ \ m\_instructionText.setCharacterSize(18);}
+\DoxyCodeLine{00110\ \ \ \ \ m\_instructionText.setFillColor(sf::Color::Cyan);}
+\DoxyCodeLine{00111\ \ \ \ \ m\_instructionText.setPosition(\{\ 20.0f,\ 60.0f\ \});}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ m\_statusText.setString(\textcolor{stringliteral}{"{}Player\ 1\ -\/\ PLACEMENT\ PHASE"{}});}
+\DoxyCodeLine{00114\ \ \ \ \ m\_instructionText.setString(\textcolor{stringliteral}{"{}Click\ and\ drag\ pieces\ to\ place\ them\ on\ the\ board"{}});}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelWidth\ =\ 500.0f;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelHeight\ =\ 320.0f;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelX\ =\ \mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}}\ -\/\ panelWidth\ -\/\ 20.0f;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ panelY\ =\ 20.0f;}
 \DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ m\_aiAnalyzerPanel.setSize(\{\ panelWidth,\ panelHeight\ \});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ m\_aiAnalyzerPanel.setPosition(\{\ panelX,\ panelY\ \});}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ m\_aiAnalyzerPanel.setFillColor(sf::Color(30,\ 30,\ 30,\ 220));}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ m\_aiAnalyzerPanel.setOutlineThickness(3.0f);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ m\_aiAnalyzerPanel.setOutlineColor(sf::Color(100,\ 200,\ 255));}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ m\_aiAnalyzerTitle.setCharacterSize(22);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ m\_aiAnalyzerTitle.setFillColor(sf::Color(100,\ 200,\ 255));}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ m\_aiAnalyzerTitle.setString(\textcolor{stringliteral}{"{}AI\ Decision\ Analyzer\ (Press\ A\ to\ toggle)"{}});}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ m\_aiAnalyzerTitle.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 15.0f\ \});}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ m\_aiMovesConsideredText.setCharacterSize(18);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ m\_aiMovesConsideredText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ m\_aiMovesConsideredText.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 60.0f\ \});}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ m\_aiBestMoveText.setCharacterSize(18);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ m\_aiBestMoveText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ m\_aiBestMoveText.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 110.0f\ \});}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ m\_aiScoreText.setCharacterSize(18);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ m\_aiScoreText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ m\_aiScoreText.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 180.0f\ \});}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ m\_aiDepthText.setCharacterSize(18);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ m\_aiDepthText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ m\_aiDepthText.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 230.0f\ \});}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ m\_aiTimeText.setCharacterSize(18);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ m\_aiTimeText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ m\_aiTimeText.setPosition(\{\ panelX\ +\ 15.0f,\ panelY\ +\ 280.0f\ \});}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ m\_aiMoveFromIndicator.setSize(\{\ cellSizeXY,\ cellSizeXY\ \});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ m\_aiMoveFromIndicator.setFillColor(sf::Color::Transparent);}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ m\_aiMoveFromIndicator.setOutlineThickness(4.0f);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ m\_aiMoveFromIndicator.setOutlineColor(sf::Color(255,\ 165,\ 0,\ 200));}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ m\_aiMoveFromIndicator.setPosition(\{\ -\/1000.0f,\ -\/1000.0f\ \});}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ m\_aiMoveToIndicator.setSize(\{\ cellSizeXY,\ cellSizeXY\ \});}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ m\_aiMoveToIndicator.setFillColor(sf::Color::Transparent);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ m\_aiMoveToIndicator.setOutlineThickness(4.0f);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ m\_aiMoveToIndicator.setOutlineColor(sf::Color(0,\ 255,\ 0,\ 200));}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ m\_aiMoveToIndicator.setPosition(\{\ -\/1000.0f,\ -\/1000.0f\ \});}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \}}
 
 \end{DoxyCode}
 \Hypertarget{class_game_a79f698dda206dd7a9bed28b3f88bdc38}\index{Game@{Game}!processEvents@{processEvents}}
@@ -256,20 +299,20 @@ Checks for events. Allows window to function and exit. Events are passed on to t
 
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00321}{321}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00399}{399}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00322\ \{}
-\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{const}\ std::optional\ event\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.pollEvent())}
-\DoxyCodeLine{00324\ \ \ \ \ \{}
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event-\/>is<sf::Event::Closed>())}
-\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.close();}
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_afe177e8f9aa87442f100289984d27bb8}{processGameEvents}}(*event);}
-\DoxyCodeLine{00330\ \ \ \ \ \}}
-\DoxyCodeLine{00331\ \}}
+\DoxyCodeLine{00400\ \{}
+\DoxyCodeLine{00401\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{const}\ std::optional\ event\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.pollEvent())}
+\DoxyCodeLine{00402\ \ \ \ \ \{}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event-\/>is<sf::Event::Closed>())}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.close();}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_afe177e8f9aa87442f100289984d27bb8}{processGameEvents}}(*event);}
+\DoxyCodeLine{00408\ \ \ \ \ \}}
+\DoxyCodeLine{00409\ \}}
 
 \end{DoxyCode}
 \Hypertarget{class_game_afe177e8f9aa87442f100289984d27bb8}\index{Game@{Game}!processGameEvents@{processGameEvents}}
@@ -289,132 +332,248 @@ Handles all user input.
 \end{DoxyParams}
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00335}{335}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00413}{413}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00336\ \{}
-\DoxyCodeLine{00337\ \ \ \ \ \textcolor{comment}{//\ Always\ allow\ Escape\ to\ close\ the\ window}}
-\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ keyPressed\ =\ event.getIf<sf::Event::KeyPressed>())}
-\DoxyCodeLine{00339\ \ \ \ \ \{}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyPressed-\/>scancode\ ==\ sf::Keyboard::Scancode::Escape)\ \{}
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.close();}
-\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00344\ \ \ \ \ \}}
-\DoxyCodeLine{00345\ }
-\DoxyCodeLine{00346\ \ \ \ \ \textcolor{comment}{//\ If\ the\ main\ menu\ is\ visible,\ handle\ menu\ clicks\ and\ ignore\ other\ game\ events}}
-\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_showMenu)}
-\DoxyCodeLine{00348\ \ \ \ \ \{}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mousePressed\ =\ event.getIf<sf::Event::MouseButtonPressed>())}
-\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mousePressed-\/>button\ ==\ sf::Mouse::Button::Left)}
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mousePressed-\/>position.x,\ mousePressed-\/>position.y)}
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_btnPvAI.getGlobalBounds().contains(mousePos))\ \{}
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIGame\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_showMenu\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_statusText.setString(\textcolor{stringliteral}{"{}Player\ 1\ -\/\ PLACEMENT\ PHASE"{}});}
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_instructionText.setString(\textcolor{stringliteral}{"{}Click\ and\ drag\ pieces\ to\ place\ them\ on\ the\ board"{}});}
-\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_btnPvP.getGlobalBounds().contains(mousePos))\ \{}
-\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIGame\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_showMenu\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_statusText.setString(\textcolor{stringliteral}{"{}Player\ 1\ -\/\ PLACEMENT\ PHASE"{}});}
-\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_instructionText.setString(\textcolor{stringliteral}{"{}Click\ and\ drag\ pieces\ to\ place\ them\ on\ the\ board"{}});}
-\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ ignore\ other\ events\ while\ in\ menu}}
-\DoxyCodeLine{00373\ \ \ \ \ \}}
-\DoxyCodeLine{00374\ }
-\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a8f347bc7cebca9fa6d97e70c6bc29eb3}{GamePhase::GameOver}})\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00376\ }
-\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isPlayer1Turn\ \&\&\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}}\ ||\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}))\ \{}
-\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00379\ \ \ \ \ \}}
-\DoxyCodeLine{00380\ }
-\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ keyPressed2\ =\ event.getIf<sf::Event::KeyPressed>())}
-\DoxyCodeLine{00382\ \ \ \ \ \{}
-\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (keyPressed2-\/>scancode)}
-\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Scancode::Space:}
-\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_isAIGame\ ||\ m\_isPlayer1Turn)\ \{}
-\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ endTurn();}
-\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00393\ \ \ \ \ \}}
-\DoxyCodeLine{00394\ }
-\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mousePressed\ =\ event.getIf<sf::Event::MouseButtonPressed>())}
-\DoxyCodeLine{00396\ \ \ \ \ \{}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mousePressed-\/>button\ ==\ sf::Mouse::Button::Left)}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mousePressed-\/>position.x,\ mousePressed-\/>position.y)}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{00402\ }
-\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isPlayer1Turn)\ \{}
-\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ piece\ :\ m\_p1Pieces)\ \{}
-\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piece.contains(mousePos))\ \{}
-\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \&piece;}
-\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_dragOffset\ =\ piece.getPosition()\ -\/\ mousePos;}
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.setSelected(\textcolor{keyword}{true});}
-\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.saveOriginalPosition();}
-\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!m\_isAIGame)\ \{}
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ piece\ :\ m\_p2Pieces)\ \{}
-\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piece.contains(mousePos))\ \{}
-\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \&piece;}
-\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_dragOffset\ =\ piece.getPosition()\ -\/\ mousePos;}
-\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.setSelected(\textcolor{keyword}{true});}
-\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.saveOriginalPosition();}
-\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00427\ \ \ \ \ \}}
-\DoxyCodeLine{00428\ }
-\DoxyCodeLine{00429\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mouseReleased\ =\ event.getIf<sf::Event::MouseButtonReleased>())}
-\DoxyCodeLine{00430\ \ \ \ \ \{}
-\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mouseReleased-\/>button\ ==\ sf::Mouse::Button::Left\ \&\&\ m\_isDragging)}
-\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
-\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mouseReleased-\/>position.x,\ mouseReleased-\/>position.y)}
-\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{00436\ }
-\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ snapToGrid(mousePos);}
-\DoxyCodeLine{00438\ }
-\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_selectedPiece)\ \{}
-\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece-\/>setSelected(\textcolor{keyword}{false});}
-\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00445\ \ \ \ \ \}}
-\DoxyCodeLine{00446\ }
-\DoxyCodeLine{00447\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mouseMoved\ =\ event.getIf<sf::Event::MouseMoved>())}
-\DoxyCodeLine{00448\ \ \ \ \ \{}
-\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isDragging\ \&\&\ m\_selectedPiece)}
-\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
-\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mouseMoved-\/>position.x,\ mouseMoved-\/>position.y)}
-\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece-\/>setPosition(mousePos\ +\ m\_dragOffset);}
-\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00456\ \ \ \ \ \}}
-\DoxyCodeLine{00457\ \}}
+\DoxyCodeLine{00414\ \{}
+\DoxyCodeLine{00415\ \ \ \ \ \textcolor{comment}{//\ Always\ allow\ Escape\ to\ close\ the\ window}}
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ keyPressed\ =\ event.getIf<sf::Event::KeyPressed>())}
+\DoxyCodeLine{00417\ \ \ \ \ \{}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyPressed-\/>scancode\ ==\ sf::Keyboard::Scancode::Escape)\ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.getState()\ ==\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}})}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.close();}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyPressed-\/>scancode\ ==\ sf::Keyboard::Scancode::A)\ \{}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ m\_showAIAnalyzer\ =\ !m\_showAIAnalyzer;}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00428\ \ \ \ \ \}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \ \ \ \ \textcolor{comment}{//\ If\ the\ main\ menu\ is\ visible,\ handle\ menu\ clicks\ and\ ignore\ other\ game\ events}}
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.getState()\ !=\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}})}
+\DoxyCodeLine{00432\ \ \ \ \ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mousePressed\ =\ event.getIf<sf::Event::MouseButtonPressed>())}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mousePressed-\/>button\ ==\ sf::Mouse::Button::Left)}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mousePressed-\/>position.x,\ mousePressed-\/>position.y)}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.handleClick(mousePos))\ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.shouldStartGame())\ \{}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.clearStartFlag();}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.setState(\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}});}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.isPvAISelected())\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIvsAI\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_difficulty\ =\ m\_menu.getDifficulty();}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_menu.isAIvsAISelected())\ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIGame\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIvsAI\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_difficulty\ =\ m\_menu.getDifficulty();}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (m\_menu.isPvPSelected())\ \{}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isAIvsAI\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_aiHasMoved\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.shouldExitGame())\ \{}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.close();}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ ignore\ other\ events\ while\ in\ menu}}
+\DoxyCodeLine{00470\ \ \ \ \ \}}
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{comment}{//\ Restart\ game\ when\ R\ pressed\ after\ GameOver}}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a8f347bc7cebca9fa6d97e70c6bc29eb3}{GamePhase::GameOver}})\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ game\ over\ menu\ button\ clicks}}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mousePressed\ =\ event.getIf<sf::Event::MouseButtonPressed>())\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mousePressed-\/>button\ ==\ sf::Mouse::Button::Left)\ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mousePressed-\/>position.x,\ mousePressed-\/>position.y)}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.handleClick(mousePos))\ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.shouldStartGame())\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.clearStartFlag();}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();\ \textcolor{comment}{//\ restart\ game}}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.setState(\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}});}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Also\ allow\ keyboard\ shortcuts}}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ keyPressedR\ =\ event.getIf<sf::Event::KeyPressed>())\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyPressedR-\/>scancode\ ==\ sf::Keyboard::Scancode::R)\ \{}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();\ \textcolor{comment}{//\ restart\ without\ showing\ menu}}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.setState(\mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}});}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyPressedR-\/>scancode\ ==\ sf::Keyboard::Scancode::M)\ \{}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init}}();}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_menu.reset();}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00506\ \ \ \ \ \}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIvsAI\ \&\&\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}}\ ||\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}))\ \{}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ In\ AI\ vs\ AI\ mode,\ block\ all\ player\ input\ during\ game}}
+\DoxyCodeLine{00510\ \ \ \ \ \}}
+\DoxyCodeLine{00511\ \ \ \ \ }
+\DoxyCodeLine{00512\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isAIvsAI\ \&\&\ !m\_isPlayer1Turn\ \&\&\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}}\ ||\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}))\ \{}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ In\ PvAI\ mode,\ block\ input\ during\ AI\ turn}}
+\DoxyCodeLine{00514\ \ \ \ \ \}}
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00516\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ keyPressed2\ =\ event.getIf<sf::Event::KeyPressed>())}
+\DoxyCodeLine{00517\ \ \ \ \ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (keyPressed2-\/>scancode)}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Scancode::Space:}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_isAIGame\ ||\ m\_isPlayer1Turn)\ \{}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ endTurn();}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00528\ \ \ \ \ \}}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mousePressed\ =\ event.getIf<sf::Event::MouseButtonPressed>())}
+\DoxyCodeLine{00531\ \ \ \ \ \{}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mousePressed-\/>button\ ==\ sf::Mouse::Button::Left)}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mousePressed-\/>position.x,\ mousePressed-\/>position.y)}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isPlayer1Turn)\ \{}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ piece\ :\ m\_p1Pieces)\ \{}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piece.contains(mousePos))\ \{}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ placement\ phase,\ only\ allow\ dragging\ pieces\ not\ yet\ on\ the\ board}}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}}\ \&\&\ piece.getGridRow()\ >=\ 0)\ \{}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \&piece;}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_dragOffset\ =\ piece.getPosition()\ -\/\ mousePos;}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.setSelected(\textcolor{keyword}{true});}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.saveOriginalPosition();}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ valid\ move\ previews\ if\ in\ movement\ phase\ and\ piece\ is\ on\ board}}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}\ \&\&\ piece.getGridRow()\ >=\ 0)\ \{}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ validMoves\ =\ piece.getValidMoves(m\_board,\ m\_gridRows);}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_validMoveIndicators.clear();}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ cellSizeXY\ =\ 100.0f;}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ gridSizeXY\ =\ m\_gridRows\ *\ cellSizeXY;}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ x0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}})\ -\/\ gridSizeXY);}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ y0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ -\/\ gridSizeXY);}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ validMoves)\ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RectangleShape\ indicator;}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setSize(\{\ cellSizeXY,\ cellSizeXY\ \});}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setFillColor(sf::Color(0,\ 255,\ 0,\ 80));}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setOutlineThickness(2.0f);}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setOutlineColor(sf::Color(0,\ 255,\ 0,\ 150));}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setPosition(\{}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x0\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(move.second\ *\ cellSizeXY),}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y0\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(move.first\ *\ cellSizeXY)}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_validMoveIndicators.push\_back(indicator);}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!m\_isAIGame)\ \{}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ piece\ :\ m\_p2Pieces)\ \{}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piece.contains(mousePos))\ \{}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ placement\ phase,\ only\ allow\ dragging\ pieces\ not\ yet\ on\ the\ board}}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}}\ \&\&\ piece.getGridRow()\ >=\ 0)\ \{}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \&piece;}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_dragOffset\ =\ piece.getPosition()\ -\/\ mousePos;}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.setSelected(\textcolor{keyword}{true});}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ piece.saveOriginalPosition();}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ valid\ move\ previews\ if\ in\ movement\ phase\ and\ piece\ is\ on\ board}}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}\ \&\&\ piece.getGridRow()\ >=\ 0)\ \{}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ validMoves\ =\ piece.getValidMoves(m\_board,\ m\_gridRows);}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_validMoveIndicators.clear();}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ cellSizeXY\ =\ 100.0f;}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ gridSizeXY\ =\ m\_gridRows\ *\ cellSizeXY;}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ x0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}})\ -\/\ gridSizeXY);}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ y0\ =\ 0.5f\ *\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ -\/\ gridSizeXY);}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ validMoves)\ \{}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RectangleShape\ indicator;}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setSize(\{\ cellSizeXY,\ cellSizeXY\ \});}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setFillColor(sf::Color(0,\ 255,\ 0,\ 80));}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setOutlineThickness(2.0f);}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setOutlineColor(sf::Color(0,\ 255,\ 0,\ 150));}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicator.setPosition(\{}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x0\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(move.second\ *\ cellSizeXY),}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y0\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(move.first\ *\ cellSizeXY)}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_validMoveIndicators.push\_back(indicator);}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00620\ \ \ \ \ \}}
+\DoxyCodeLine{00621\ }
+\DoxyCodeLine{00622\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mouseReleased\ =\ event.getIf<sf::Event::MouseButtonReleased>())}
+\DoxyCodeLine{00623\ \ \ \ \ \{}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mouseReleased-\/>button\ ==\ sf::Mouse::Button::Left\ \&\&\ m\_isDragging)}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mouseReleased-\/>position.x,\ mouseReleased-\/>position.y)}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ snapToGrid(mousePos);}
+\DoxyCodeLine{00631\ }
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_selectedPiece)\ \{}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece-\/>setSelected(\textcolor{keyword}{false});}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ m\_isDragging\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ m\_validMoveIndicators.clear();}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00639\ \ \ \ \ \}}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}*\ mouseMoved\ =\ event.getIf<sf::Event::MouseMoved>())}
+\DoxyCodeLine{00642\ \ \ \ \ \{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isDragging\ \&\&\ m\_selectedPiece)}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector2i(mouseMoved-\/>position.x,\ mouseMoved-\/>position.y)}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedPiece-\/>setPosition(mousePos\ +\ m\_dragOffset);}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ \ \ \ \ \}}
+\DoxyCodeLine{00651\ \}}
 
 \end{DoxyCode}
 \Hypertarget{class_game_a15ddd769261d923827a3cdf41499c843}\index{Game@{Game}!render@{render}}
@@ -429,51 +588,59 @@ Draws the background and foreground game objects in the SFML window. The render 
 
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00483}{483}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00697}{697}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00484\ \{}
-\DoxyCodeLine{00485\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.clear(sf::Color(0,\ 0,\ 0,\ 0));}
-\DoxyCodeLine{00486\ }
-\DoxyCodeLine{00487\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_grid)}
-\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
-\DoxyCodeLine{00489\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_p1Grid)}
-\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
-\DoxyCodeLine{00491\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_p2Grid)}
-\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
-\DoxyCodeLine{00493\ }
-\DoxyCodeLine{00494\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ piece\ :\ m\_p1Pieces)}
-\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ piece.draw(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}});}
-\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ piece\ :\ m\_p2Pieces)}
-\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ piece.draw(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}});}
-\DoxyCodeLine{00498\ }
-\DoxyCodeLine{00499\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a8f347bc7cebca9fa6d97e70c6bc29eb3}{GamePhase::GameOver}})\ \{}
-\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ sf::RectangleShape\ overlay(\{\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}}),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ \});}
-\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ overlay.setFillColor(sf::Color(0,\ 0,\ 0,\ 180));}
-\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(overlay);}
-\DoxyCodeLine{00503\ \ \ \ \ \}}
-\DoxyCodeLine{00504\ }
-\DoxyCodeLine{00505\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_statusText);}
-\DoxyCodeLine{00506\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_instructionText);}
-\DoxyCodeLine{00507\ }
-\DoxyCodeLine{00508\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
-\DoxyCodeLine{00509\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(x\_updateFPS);}
-\DoxyCodeLine{00510\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(x\_drawFPS);}
-\DoxyCodeLine{00511\ \textcolor{preprocessor}{\#endif }}
-\DoxyCodeLine{00512\ }
-\DoxyCodeLine{00513\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_showMenu)\ \{}
-\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ sf::RectangleShape\ menuOverlay(\{\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_a549ca8d1d47fea56db4c245824ac6dd4}{ScreenSize::s\_width}}),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_screen_size_ad2264d92c67210fdb6bde78ebd97bdab}{ScreenSize::s\_height}})\ \});}
-\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ menuOverlay.setFillColor(sf::Color(0,\ 0,\ 0,\ 200));}
-\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(menuOverlay);}
-\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_btnPvP);}
-\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_btnPvAI);}
-\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_btnPvPText);}
-\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_btnPvAIText);}
-\DoxyCodeLine{00521\ \ \ \ \ \}}
-\DoxyCodeLine{00522\ }
-\DoxyCodeLine{00523\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.display();}
-\DoxyCodeLine{00524\ \}}
+\DoxyCodeLine{00698\ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.clear(sf::Color(0,\ 0,\ 0,\ 0));}
+\DoxyCodeLine{00700\ }
+\DoxyCodeLine{00701\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_grid)}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
+\DoxyCodeLine{00703\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_p1Grid)}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
+\DoxyCodeLine{00705\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ cell\ :\ m\_p2Grid)}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(cell);}
+\DoxyCodeLine{00707\ }
+\DoxyCodeLine{00708\ \ \ \ \ \textcolor{comment}{//\ Draw\ valid\ move\ indicators}}
+\DoxyCodeLine{00709\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ indicator\ :\ m\_validMoveIndicators)}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(indicator);}
+\DoxyCodeLine{00711\ }
+\DoxyCodeLine{00712\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ piece\ :\ m\_p1Pieces)}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ piece.draw(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}});}
+\DoxyCodeLine{00714\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ piece\ :\ m\_p2Pieces)}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ piece.draw(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}});}
+\DoxyCodeLine{00716\ }
+\DoxyCodeLine{00717\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_gamePhase\ !=\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a8f347bc7cebca9fa6d97e70c6bc29eb3}{GamePhase::GameOver}})\ \{}
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_statusText);}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_instructionText);}
+\DoxyCodeLine{00720\ \ \ \ \ \}}
+\DoxyCodeLine{00721\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
+\DoxyCodeLine{00722\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(x\_updateFPS);}
+\DoxyCodeLine{00723\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(x\_drawFPS);}
+\DoxyCodeLine{00724\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00725\ }
+\DoxyCodeLine{00726\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.getState()\ !=\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}})\ \{}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ m\_menu.render(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}});}
+\DoxyCodeLine{00728\ \ \ \ \ \}}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00730\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_showAIAnalyzer\ \&\&\ m\_isAIGame\ \&\&\ m\_menu.getState()\ ==\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}})\ \{}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_aiHasMoved)\ \{}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiMoveFromIndicator);}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiMoveToIndicator);}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiAnalyzerPanel);}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiAnalyzerTitle);}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiMovesConsideredText);}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiBestMoveText);}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiScoreText);}
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiDepthText);}
+\DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.draw(m\_aiTimeText);}
+\DoxyCodeLine{00743\ \ \ \ \ \}}
+\DoxyCodeLine{00744\ }
+\DoxyCodeLine{00745\ \ \ \ \ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.display();}
+\DoxyCodeLine{00746\ \}}
 
 \end{DoxyCode}
 \Hypertarget{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}\index{Game@{Game}!run@{run}}
@@ -488,45 +655,45 @@ the main game loop.
 
 A complete loop involves processing SFML events, updating and drawing all game objects. The actual elapsed time for a single game loop is calculated. If this value is greater than the target time for one loop (1 / 60), then (and only then) is an update operation performed. The target is at least one update and one render cycle per game loop, but typically more render than update operations will be performed as we expect our game loop to complete in less than the target time. 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00283}{283}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00361}{361}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00284\ \{}
-\DoxyCodeLine{00285\ \ \ \ \ sf::Clock\ clock;}
-\DoxyCodeLine{00286\ \ \ \ \ sf::Time\ timeSinceLastUpdate\ =\ sf::Time::Zero;}
-\DoxyCodeLine{00287\ \ \ \ \ }
-\DoxyCodeLine{00288\ \ \ \ \ sf::Time\ timePerFrame\ =\ sf::seconds(1.0f\ /\ FPS);\ \textcolor{comment}{//\ 60\ fps}}
-\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.isOpen())}
-\DoxyCodeLine{00290\ \ \ \ \ \{}
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a79f698dda206dd7a9bed28b3f88bdc38}{processEvents}}();\ \textcolor{comment}{//\ as\ many\ as\ possible}}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ timeSinceLastUpdate\ +=\ clock.restart();}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (timeSinceLastUpdate\ >\ timePerFrame)}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ timeSinceLastUpdate\ -\/=\ timePerFrame;}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a79f698dda206dd7a9bed28b3f88bdc38}{processEvents}}();\ \textcolor{comment}{//\ at\ least\ 60\ fps}}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_aa8c8ca9efb596230614be2f2f9e61b86}{update}}(timePerFrame.asMilliseconds());\ \textcolor{comment}{//60\ fps}}
-\DoxyCodeLine{00298\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ x\_secondTime\ +=\ timePerFrame;}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFrameCount++;}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_secondTime.asSeconds()\ >\ 1)}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ updatesPS\ =\ \textcolor{stringliteral}{"{}UPS\ "{}}\ +\ std::to\_string(x\_updateFrameCount\ -\/\ 1);}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFPS.setString(updatesPS);}
-\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ drawsPS\ =\ \textcolor{stringliteral}{"{}DPS\ "{}}\ +\ std::to\_string(x\_drawFrameCount);}
-\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_drawFPS.setString(drawsPS);}
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFrameCount\ =\ 0;}
-\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_drawFrameCount\ =\ 0;}
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_secondTime\ =\ sf::Time::Zero;}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00311\ \textcolor{preprocessor}{\#endif }}
-\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a15ddd769261d923827a3cdf41499c843}{render}}();\ \textcolor{comment}{//\ as\ many\ as\ possible}}
-\DoxyCodeLine{00314\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ x\_drawFrameCount++;}
-\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#endif }}
-\DoxyCodeLine{00317\ \ \ \ \ \}}
-\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00362\ \{}
+\DoxyCodeLine{00363\ \ \ \ \ sf::Clock\ clock;}
+\DoxyCodeLine{00364\ \ \ \ \ sf::Time\ timeSinceLastUpdate\ =\ sf::Time::Zero;}
+\DoxyCodeLine{00365\ \ \ \ \ }
+\DoxyCodeLine{00366\ \ \ \ \ sf::Time\ timePerFrame\ =\ sf::seconds(1.0f\ /\ FPS);\ \textcolor{comment}{//\ 60\ fps}}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.isOpen())}
+\DoxyCodeLine{00368\ \ \ \ \ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a79f698dda206dd7a9bed28b3f88bdc38}{processEvents}}();\ \textcolor{comment}{//\ as\ many\ as\ possible}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ timeSinceLastUpdate\ +=\ clock.restart();}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (timeSinceLastUpdate\ >\ timePerFrame)}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ timeSinceLastUpdate\ -\/=\ timePerFrame;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a79f698dda206dd7a9bed28b3f88bdc38}{processEvents}}();\ \textcolor{comment}{//\ at\ least\ 60\ fps}}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_aa8c8ca9efb596230614be2f2f9e61b86}{update}}(timePerFrame.asMilliseconds());\ \textcolor{comment}{//60\ fps}}
+\DoxyCodeLine{00376\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ x\_secondTime\ +=\ timePerFrame;}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFrameCount++;}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_secondTime.asSeconds()\ >\ 1)}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ updatesPS\ =\ \textcolor{stringliteral}{"{}UPS\ "{}}\ +\ std::to\_string(x\_updateFrameCount\ -\/\ 1);}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFPS.setString(updatesPS);}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ drawsPS\ =\ \textcolor{stringliteral}{"{}DPS\ "{}}\ +\ std::to\_string(x\_drawFrameCount);}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_drawFPS.setString(drawsPS);}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_updateFrameCount\ =\ 0;}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_drawFrameCount\ =\ 0;}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\_secondTime\ =\ sf::Time::Zero;}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00389\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a15ddd769261d923827a3cdf41499c843}{render}}();\ \textcolor{comment}{//\ as\ many\ as\ possible}}
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#ifdef\ TEST\_FPS }}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ x\_drawFrameCount++;}
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00395\ \ \ \ \ \}}
+\DoxyCodeLine{00396\ \}}
 
 \end{DoxyCode}
 \Hypertarget{class_game_aa8c8ca9efb596230614be2f2f9e61b86}\index{Game@{Game}!update@{update}}
@@ -546,28 +713,48 @@ Placeholder to perform updates to all game objects.
 \end{DoxyParams}
 
 
-Definition at line \mbox{\hyperlink{_game_8cpp_source_l00462}{462}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00656}{656}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00463\ \{}
-\DoxyCodeLine{00464\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isPlayer1Turn\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}\ \&\&\ !m\_aiThinking)\ \{}
-\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ m\_aiThinkTime\ =\ 0.0;}
-\DoxyCodeLine{00467\ \ \ \ \ \}}
-\DoxyCodeLine{00468\ }
-\DoxyCodeLine{00469\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_aiThinking)\ \{}
-\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ m\_aiThinkTime\ +=\ dt;}
-\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_aiThinkTime\ >=\ m\_aiThinkDuration)\ \{}
-\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ executeAIMove();}
-\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00475\ \ \ \ \ \}}
-\DoxyCodeLine{00476\ }
-\DoxyCodeLine{00477\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isPlayer1Turn\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}})\ \{}
-\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ executeAIMove();}
-\DoxyCodeLine{00479\ \ \ \ \ \}}
-\DoxyCodeLine{00480\ \}}
+\DoxyCodeLine{00657\ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_menu.getState()\ !=\ \mbox{\hyperlink{class_menu_a8269685e78203b028d5bd77c339898b2a7acdf85c69cc3c5305456a293524386e}{Menu::State::Hidden}})\ \{}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ mousePos\ =\ \mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}.mapPixelToCoords(sf::Mouse::getPosition(\mbox{\hyperlink{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}{m\_window}}));}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ m\_menu.update(mousePos);}
+\DoxyCodeLine{00661\ \ \ \ \ \}}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00663\ \ \ \ \ \textcolor{comment}{//\ Handle\ AI\ vs\ AI\ mode\ -\/\ both\ players\ are\ AI}}
+\DoxyCodeLine{00664\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIvsAI\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}})\ \{}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isPlayer1Turn)\ \{}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ executeAIMove();}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ executeAIMove();}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00671\ \ \ \ \ \}}
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIvsAI\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}\ \&\&\ !m\_aiThinking)\ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ m\_aiThinkTime\ =\ 0.0;}
+\DoxyCodeLine{00676\ \ \ \ \ \}}
+\DoxyCodeLine{00677\ }
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isAIvsAI\ \&\&\ !m\_isPlayer1Turn\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484a4642e767f9251fa40afadbc963f80b7a}{GamePhase::Movement}}\ \&\&\ !m\_aiThinking)\ \{}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ m\_aiThinkTime\ =\ 0.0;}
+\DoxyCodeLine{00681\ \ \ \ \ \}}
+\DoxyCodeLine{00682\ }
+\DoxyCodeLine{00683\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_aiThinking)\ \{}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ m\_aiThinkTime\ +=\ dt;}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_aiThinkTime\ >=\ m\_aiThinkDuration)\ \{}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ executeAIMove();}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \ \ \ \ m\_aiThinking\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00689\ \ \ \ \ \}}
+\DoxyCodeLine{00690\ }
+\DoxyCodeLine{00691\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_isAIGame\ \&\&\ !m\_isAIvsAI\ \&\&\ !m\_isPlayer1Turn\ \&\&\ m\_gamePhase\ ==\ \mbox{\hyperlink{class_game_a3e65d1349e1d51a51a38d43ba735c484aae13e51f99f3be623a6d44d7439d9bb5}{GamePhase::Placement}})\ \{}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ executeAIMove();}
+\DoxyCodeLine{00693\ \ \ \ \ \}}
+\DoxyCodeLine{00694\ \}}
 
 \end{DoxyCode}
 
@@ -587,11 +774,11 @@ Font used for all text rendering in the game.
 
 
 
-Definition at line \mbox{\hyperlink{_game_8h_source_l00120}{120}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+Definition at line \mbox{\hyperlink{_game_8h_source_l00121}{121}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00120\ \{\ \textcolor{stringliteral}{"{}ASSETS/FONTS/ariblk.ttf"{}}\ \};}
+\DoxyCodeLine{00121\ \{\ \textcolor{stringliteral}{"{}ASSETS/FONTS/ariblk.ttf"{}}\ \};}
 
 \end{DoxyCode}
 \Hypertarget{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}\index{Game@{Game}!m\_window@{m\_window}}
@@ -606,7 +793,7 @@ Main SFML render window for the game.
 
 
 
-Definition at line \mbox{\hyperlink{_game_8h_source_l00122}{122}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+Definition at line \mbox{\hyperlink{_game_8h_source_l00123}{123}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
 
 
 

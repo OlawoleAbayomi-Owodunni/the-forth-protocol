@@ -14,8 +14,14 @@
 \item 
 \mbox{\hyperlink{class_a_i_a64ec60281e9eb8496f16525615db54b7}{AI}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_a_i}{AI} player. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{struct_move}{Move}} \mbox{\hyperlink{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc}{find\+Best\+Move}} (const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&board, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p2\+Pieces, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p1\+Pieces, int grid\+Size, bool is\+Placement\+Phase, int depth=3)
-\begin{DoxyCompactList}\small\item\em Find the best move for Player 2 (\doxylink{class_a_i}{AI}) using minimax algorithm with alpha-\/beta pruning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{struct_move}{Move}} \mbox{\hyperlink{class_a_i_ac681a1f254639088fa79a20409e251f0}{find\+Best\+Move}} (const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&board, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p2\+Pieces, vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&p1\+Pieces, int grid\+Size, bool is\+Placement\+Phase, int depth=3, bool use\+Random\+Placement=false, const \mbox{\hyperlink{struct_move}{Move}} \&last\+Move=\mbox{\hyperlink{struct_move}{Move}}(), \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}} strategy=\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy\+::\+Balanced}})
+\begin{DoxyCompactList}\small\item\em Find the best move for Player 2 (\doxylink{class_a_i}{AI}) using minimax algorithm with alpha-\/beta pruning. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_a_i_a1d24e29389c34e2f351799356e23d0f1}{get\+Moves\+Considered}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of moves considered in the last decision. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_a_i_af8398cc12581489be199e2a7bb5e577d}{get\+Best\+Score}} () const
+\begin{DoxyCompactList}\small\item\em Get the score of the best move found. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_move}{Move}} \mbox{\hyperlink{class_a_i_a4b0bdeacae404236681fba1f48afbefb}{get\+Selected\+Move}} () const
+\begin{DoxyCompactList}\small\item\em Get the best move from the last search. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -23,7 +29,7 @@
 
 This class provides artificial intelligence for The Fourth Protocol game, using game tree search to find optimal moves for the computer player. 
 
-Definition at line \mbox{\hyperlink{_a_i_8h_source_l00053}{53}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00063}{63}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
 
 
 
@@ -42,12 +48,12 @@ Default constructor for \doxylink{class_a_i}{AI} player.
 
 
 
-Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
+Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00007\ \{}
-\DoxyCodeLine{00008\ \}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
 
 \end{DoxyCode}
 
@@ -55,11 +61,11 @@ Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00006}{6}} of file \mbox{\
 \label{doc-func-members}
 \Hypertarget{class_a_i_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc}\index{AI@{AI}!findBestMove@{findBestMove}}
+\Hypertarget{class_a_i_ac681a1f254639088fa79a20409e251f0}\index{AI@{AI}!findBestMove@{findBestMove}}
 \index{findBestMove@{findBestMove}!AI@{AI}}
 \doxysubsubsection{\texorpdfstring{findBestMove()}{findBestMove()}}
-{\footnotesize\ttfamily \label{class_a_i_a4da4156cf21197cf6cecb994c5e2b5fc} 
-\mbox{\hyperlink{struct_move}{Move}} AI\+::find\+Best\+Move (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{board}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p2\+Pieces}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p1\+Pieces}{, }\item[{int}]{grid\+Size}{, }\item[{bool}]{is\+Placement\+Phase}{, }\item[{int}]{depth}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_a_i_ac681a1f254639088fa79a20409e251f0} 
+\mbox{\hyperlink{struct_move}{Move}} AI\+::find\+Best\+Move (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ \mbox{\hyperlink{class_piece}{Piece}} \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{board}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p2\+Pieces}{, }\item[{vector$<$ \mbox{\hyperlink{class_piece}{Piece}} $>$ \&}]{p1\+Pieces}{, }\item[{int}]{grid\+Size}{, }\item[{bool}]{is\+Placement\+Phase}{, }\item[{int}]{depth}{ = {\ttfamily 3}, }\item[{bool}]{use\+Random\+Placement}{ = {\ttfamily false}, }\item[{const \mbox{\hyperlink{struct_move}{Move}} \&}]{last\+Move}{ = {\ttfamily \mbox{\hyperlink{struct_move}{Move}}()}, }\item[{\mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706}{Strategy}}}]{strategy}{ = {\ttfamily \mbox{\hyperlink{_a_i_8h_acf7192c608527efb8f8dedf0a3f2e706ac6589f5236c0c434d0c63dc5f9a856f2}{Strategy\+::\+Balanced}}}}\end{DoxyParamCaption})}
 
 
 
@@ -79,51 +85,168 @@ Find the best move for Player 2 (\doxylink{class_a_i}{AI}) using minimax algorit
 \hline
 {\em depth} & Maximum search depth for the minimax algorithm \\
 \hline
+{\em use\+Random\+Placement} & If true, selects random placement instead of strategic (for \doxylink{class_a_i}{AI} vs \doxylink{class_a_i}{AI} variety) \\
+\hline
+{\em last\+Move} & The last move made (to avoid immediately undoing it) \\
+\hline
+{\em strategy} & The evaluation strategy to use (default\+: Balanced) \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 \doxylink{struct_move}{Move} object representing the best move found 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
+Definition at line \mbox{\hyperlink{_a_i_8cpp_source_l00011}{11}} of file \mbox{\hyperlink{_a_i_8cpp_source}{AI.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00012\ \{}
-\DoxyCodeLine{00013\ \ \ \ \ vector<vector<Piece*>>\ boardCopy\ =\ board;}
-\DoxyCodeLine{00014\ \ \ \ \ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ bestScore\ =\ INT\_MIN;}
-\DoxyCodeLine{00016\ \ \ \ \ Move\ bestMove;}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ alpha\ =\ INT\_MIN;}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ beta\ =\ INT\_MAX;}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ vector<Move>\ possibleMoves\ =\ generateMoves(boardCopy,\ p2Pieces,\ gridSize,\ isPlacementPhase);}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ possibleMoves)\ \{}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Piece*\ piece\ =\ \&p2Pieces[move.pieceIndex];}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ applyMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ this\ move\ wins\ immediately}}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hasWon(boardCopy,\ \textcolor{keyword}{false}))\ \{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ m\_strategy\ =\ strategy;}
+\DoxyCodeLine{00015\ \ \ \ \ vector<vector<Piece*>>\ boardCopy\ =\ board;}
+\DoxyCodeLine{00016\ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ In\ AI\ vs\ AI\ mode\ during\ placement,\ use\ random\ placement\ for\ variety}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{if}\ (useRandomPlacement\ \&\&\ isPlacementPhase)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ vector<Move>\ possibleMoves\ =\ generateMoves(boardCopy,\ p2Pieces,\ gridSize,\ isPlacementPhase);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!possibleMoves.empty())\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ std::mt19937\ gen(rd());}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ std::uniform\_int\_distribution<>\ dis(0,\ possibleMoves.size()\ -\/\ 1);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ randomIndex\ =\ dis(gen);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ m\_selectedMove\ =\ possibleMoves[randomIndex];}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ m\_movesConsidered\ =\ possibleMoves.size();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ m\_bestScore\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_selectedMove;}
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ score\ =\ minimax(boardCopy,\ p2Pieces,\ p1Pieces,\ gridSize,\ depth\ -\/\ 1,\ \textcolor{keyword}{false},\ isPlacementPhase,\ alpha,\ beta);}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Undo\ the\ move}}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ >\ bestScore)\ \{}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ bestScore\ =\ score;}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ alpha\ =\ max(alpha,\ bestScore);}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00043\ \ \ \ \ \}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ bestMove;}
-\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ bestScore\ =\ INT\_MIN;}
+\DoxyCodeLine{00035\ \ \ \ \ Move\ bestMove;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ alpha\ =\ INT\_MIN;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ beta\ =\ INT\_MAX;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ vector<Move>\ possibleMoves\ =\ generateMoves(boardCopy,\ p2Pieces,\ gridSize,\ isPlacementPhase);}
+\DoxyCodeLine{00040\ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Filter\ out\ moves\ that\ would\ immediately\ undo\ the\ last\ move}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (!isPlacementPhase\ \&\&\ lastMove.\mbox{\hyperlink{struct_move_ab26bb348fb25d87a71fb5c39984e9634}{pieceIndex}}\ >=\ 0)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ vector<Move>\ filteredMoves;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ possibleMoves)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isUndoMove\ =\ (move.pieceIndex\ ==\ lastMove.\mbox{\hyperlink{struct_move_ab26bb348fb25d87a71fb5c39984e9634}{pieceIndex}}\ \&\&\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ move.toRow\ ==\ lastMove.\mbox{\hyperlink{struct_move_a97ae514386969281ce185e3388039762}{fromRow}}\ \&\&\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ move.toCol\ ==\ lastMove.\mbox{\hyperlink{struct_move_a498108ed17d7bb8eebdaa6fce7870d72}{fromCol}}\ \&\&}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ move.fromRow\ ==\ lastMove.\mbox{\hyperlink{struct_move_a4fc5440750d884293f660012dd00d8c5}{toRow}}\ \&\&}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ move.fromCol\ ==\ lastMove.\mbox{\hyperlink{struct_move_a426434326fddb8bdda8d165f774d2b8d}{toCol}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isUndoMove)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ filteredMoves.push\_back(move);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ use\ filtered\ moves\ if\ we\ have\ alternatives}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!filteredMoves.empty())\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ possibleMoves\ =\ filteredMoves;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ m\_movesConsidered\ =\ possibleMoves.size();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ move\ :\ possibleMoves)\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ Piece*\ piece\ =\ \&p2Pieces[move.pieceIndex];}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ applyMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ this\ move\ wins\ immediately}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hasWon(boardCopy,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ bestScore\ =\ WINNING\_SCORE;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ score\ =\ minimax(boardCopy,\ p2Pieces,\ p1Pieces,\ gridSize,\ depth\ -\/\ 1,\ \textcolor{keyword}{false},\ isPlacementPhase,\ alpha,\ beta);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Undo\ the\ move}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ undoMove(boardCopy,\ piece,\ move.fromRow,\ move.fromCol,\ move.toRow,\ move.toCol);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ >\ bestScore)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ bestScore\ =\ score;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ bestMove\ =\ move;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ alpha\ =\ max(alpha,\ bestScore);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ m\_bestScore\ =\ bestScore;}
+\DoxyCodeLine{00089\ \ \ \ \ m\_selectedMove\ =\ bestMove;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ bestMove;}
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_a_i_af8398cc12581489be199e2a7bb5e577d}\index{AI@{AI}!getBestScore@{getBestScore}}
+\index{getBestScore@{getBestScore}!AI@{AI}}
+\doxysubsubsection{\texorpdfstring{getBestScore()}{getBestScore()}}
+{\footnotesize\ttfamily \label{class_a_i_af8398cc12581489be199e2a7bb5e577d} 
+int AI\+::get\+Best\+Score (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the score of the best move found. 
+
+\begin{DoxyReturn}{Returns}
+Evaluation score of the selected move 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00090}{90}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \{\ \textcolor{keywordflow}{return}\ m\_bestScore;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_a_i_a1d24e29389c34e2f351799356e23d0f1}\index{AI@{AI}!getMovesConsidered@{getMovesConsidered}}
+\index{getMovesConsidered@{getMovesConsidered}!AI@{AI}}
+\doxysubsubsection{\texorpdfstring{getMovesConsidered()}{getMovesConsidered()}}
+{\footnotesize\ttfamily \label{class_a_i_a1d24e29389c34e2f351799356e23d0f1} 
+int AI\+::get\+Moves\+Considered (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of moves considered in the last decision. 
+
+\begin{DoxyReturn}{Returns}
+Number of possible moves evaluated 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00086}{86}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \{\ \textcolor{keywordflow}{return}\ m\_movesConsidered;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_a_i_a4b0bdeacae404236681fba1f48afbefb}\index{AI@{AI}!getSelectedMove@{getSelectedMove}}
+\index{getSelectedMove@{getSelectedMove}!AI@{AI}}
+\doxysubsubsection{\texorpdfstring{getSelectedMove()}{getSelectedMove()}}
+{\footnotesize\ttfamily \label{class_a_i_a4b0bdeacae404236681fba1f48afbefb} 
+\mbox{\hyperlink{struct_move}{Move}} AI\+::get\+Selected\+Move (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the best move from the last search. 
+
+\begin{DoxyReturn}{Returns}
+The \doxylink{struct_move}{Move} object that was selected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_i_8h_source_l00094}{94}} of file \mbox{\hyperlink{_a_i_8h_source}{AI.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00094\ \{\ \textcolor{keywordflow}{return}\ m\_selectedMove;\ \}}
 
 \end{DoxyCode}
 
