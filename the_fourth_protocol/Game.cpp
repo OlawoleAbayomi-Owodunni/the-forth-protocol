@@ -425,6 +425,10 @@ void Game::processGameEvents(const sf::Event& event)
 			m_showAIAnalyzer = !m_showAIAnalyzer;
 			return;
 		}
+		if (keyPressed->scancode == sf::Keyboard::Scancode::D) {
+			m_aiDelayEnabled = !m_aiDelayEnabled;
+			return;
+		}
 	}
 
 	// If the main menu is visible, handle menu clicks and ignore other game events
@@ -661,13 +665,9 @@ void Game::update(double dt)
 	}
 
 	// Handle AI vs AI mode - both players are AI
-	if (m_isAIvsAI && m_gamePhase == GamePhase::Placement) {
-		if (m_isPlayer1Turn) {
-			executeAIMove();
-		} else {
-			executeAIMove();
-		}
-		return;
+	if (m_isAIvsAI && m_gamePhase == GamePhase::Placement && !m_aiThinking) {
+		m_aiThinking = true;
+		m_aiThinkTime = 0.0;
 	}
 
 	if (m_isAIvsAI && m_gamePhase == GamePhase::Movement && !m_aiThinking) {
@@ -680,16 +680,18 @@ void Game::update(double dt)
 		m_aiThinkTime = 0.0;
 	}
 
+	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && m_gamePhase == GamePhase::Placement && !m_aiThinking) {
+		m_aiThinking = true;
+		m_aiThinkTime = 0.0;
+	}
+
 	if (m_aiThinking) {
 		m_aiThinkTime += dt;
-		if (m_aiThinkTime >= m_aiThinkDuration) {
+		double effectiveDelay = m_aiDelayEnabled ? m_aiThinkDuration : 0.0;
+		if (m_aiThinkTime >= effectiveDelay) {
 			executeAIMove();
 			m_aiThinking = false;
 		}
-	}
-
-	if (m_isAIGame && !m_isAIvsAI && !m_isPlayer1Turn && m_gamePhase == GamePhase::Placement) {
-		executeAIMove();
 	}
 }
 
